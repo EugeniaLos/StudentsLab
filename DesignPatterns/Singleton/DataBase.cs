@@ -12,7 +12,7 @@ namespace Singleton
 
         }
 
-        public DataBase getInstance()
+        public static DataBase getInstance()
         {
             if(instance == null)
             {
@@ -20,6 +20,21 @@ namespace Singleton
             }
 
             return instance;
+        }
+
+        public void connect()
+        {
+
+        }
+
+        public void executeQuery()
+        {
+
+        }
+
+        public vois closeConnection()
+        {
+
         }
     }
 }
