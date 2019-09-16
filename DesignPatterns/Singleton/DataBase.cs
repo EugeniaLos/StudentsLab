@@ -32,7 +32,7 @@ namespace Singleton
 
         }
 
-        public vois closeConnection()
+        public void closeConnection()
         {
 
         }
