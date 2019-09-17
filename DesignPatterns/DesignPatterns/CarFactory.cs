@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DesignPatterns.AbstractFactory.CarParts;
 
-namespace AbstractFactory
+namespace DesignPatterns.AbstractFactory
 {
-    interface CarFactory
+    public interface CarFactory
     {
         IEngine GetEngine();
 

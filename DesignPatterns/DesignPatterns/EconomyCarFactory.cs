@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DesignPatterns.AbstractFactory.CarParts;
+using DesignPatterns.AbstractFactory.EquipmentTypes.EngineTypes;
+using DesignPatterns.AbstractFactory.EquipmentTypes.WheelTypes;
+using DesignPatterns.AbstractFactory.EquipmentTypes.SuspensionTypes;
 
-namespace AbstractFactory
+
+namespace DesignPatterns.AbstractFactory
 {
-    class EconomyCarFactory: CarFactory
+    public class EconomyCarFactory : CarFactory
     {
         public IEngine GetEngine()
         {
