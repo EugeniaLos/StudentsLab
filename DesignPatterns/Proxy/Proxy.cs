@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Proxy
+namespace DesignPatterns.Proxy
 {
-    class Proxy: IYersterdayRate
+    public class Proxy: IYersterdayRate
     {
-        public void getRate()
+        public void GetRate()
         {
             YersterdayRate rate = new YersterdayRate();
-            rate.getRate();
+            rate.GetRate();
         }
 
     }

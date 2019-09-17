@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Proxy
+namespace DesignPatterns.Proxy
 {
-    interface IYersterdayRate
+    public interface IYersterdayRate
     {
-        void getRate();
+        void GetRate();
     }
 }
