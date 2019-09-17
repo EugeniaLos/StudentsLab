@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facade
+namespace DesignPatterns.Facade
 {
-    class OGGCodec: Codec
+    public class OGGCodec: Codec
     {
     }
 }

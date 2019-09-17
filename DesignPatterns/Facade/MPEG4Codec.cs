@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facade
+namespace DesignPatterns.Facade
 {
-    class MPEG4Codec: Codec
+    public class MPEG4Codec: Codec
     {
     }
 }

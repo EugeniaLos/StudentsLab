@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facade
+namespace DesignPatterns.Facade
 {
-    class VideoFile
+    public class VideoFile
     {
         string FileName { get; set; }
         public VideoFile(string filename)

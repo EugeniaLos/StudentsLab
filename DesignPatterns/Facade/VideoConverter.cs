@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facade
+namespace DesignPatterns.Facade
 {
-    static class VideoConverter
+    public static class VideoConverter
     {
         public static void Convert(VideoFile file, Codec codec)
         {

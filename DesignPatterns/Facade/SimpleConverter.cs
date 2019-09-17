@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Facade
+namespace DesignPatterns.Facade
 {
-    class SimpleConverter
+    public class SimpleConverter
     {
         public void Convert(string filename, string format)
         {
