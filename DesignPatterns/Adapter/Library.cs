@@ -5,9 +5,9 @@ using System.Text;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
 
-namespace Adapter
+namespace DesignPatterns.Adapter
 {
-    static class Library
+    public static class Library
     {
         public static void GetBoooksXml()
         {

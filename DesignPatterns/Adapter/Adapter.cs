@@ -5,9 +5,9 @@ using System.Text;
 using System.Runtime.Serialization.Json;
 using System.Runtime.Serialization;
 
-namespace Adapter
+namespace DesignPatterns.Adapter
 {
-    class Adapter
+    public class Adapter
     {
         private void ConvertXMLtoJson()
         {
