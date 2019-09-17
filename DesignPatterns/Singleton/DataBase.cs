@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Singleton
+namespace DesignPatterns.Singleton
 {
-    class DataBase
+    public class DataBase
     {
         private static DataBase instance;
         private DataBase()
@@ -12,7 +12,7 @@ namespace Singleton
 
         }
 
-        public static DataBase getInstance()
+        public static DataBase GetInstance()
         {
             if(instance == null)
             {
@@ -22,17 +22,17 @@ namespace Singleton
             return instance;
         }
 
-        public void connect()
+        public void Connect()
         {
 
         }
 
-        public void executeQuery()
+        public void ExecuteQuery()
         {
 
         }
 
-        public void closeConnection()
+        public void CloseConnection()
         {
 
         }
