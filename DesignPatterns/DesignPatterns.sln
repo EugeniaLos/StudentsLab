@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractFactory", "DesignPatterns\AbstractFactory.csproj", "{031188AC-076C-4D86-88DC-DA0D971C09C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.AbstractFactory", "DesignPatterns\DesignPatterns.AbstractFactory.csproj", "{031188AC-076C-4D86-88DC-DA0D971C09C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapter", "Adapter\Adapter.csproj", "{9B032BF3-8CD7-49F6-80BF-6013F7C14615}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.Adapter", "Adapter\DesignPatterns.Adapter.csproj", "{9B032BF3-8CD7-49F6-80BF-6013F7C14615}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Singleton", "Singleton\Singleton.csproj", "{F0B9CB12-CD26-46B8-BC86-F40FC95C3E8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesingPatterns.Singleton", "Singleton\DesingPatterns.Singleton.csproj", "{F0B9CB12-CD26-46B8-BC86-F40FC95C3E8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Facade", "Facade\Facade.csproj", "{7A538A5E-A30D-4B8E-AE52-68B306A829D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.Facade", "Facade\DesignPatterns.Facade.csproj", "{7A538A5E-A30D-4B8E-AE52-68B306A829D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Proxy\Proxy.csproj", "{3C72B104-B509-4609-B426-62144394A647}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns.Proxy", "Proxy\DesignPatterns.Proxy.csproj", "{3C72B104-B509-4609-B426-62144394A647}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns.ThreadSafetySingleton", "DesignPatterns.ThreadSafetySingleton\DesignPatterns.ThreadSafetySingleton.csproj", "{500C5ED0-A521-416C-BA9B-7D43F1A0755C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{3C72B104-B509-4609-B426-62144394A647}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C72B104-B509-4609-B426-62144394A647}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C72B104-B509-4609-B426-62144394A647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{500C5ED0-A521-416C-BA9B-7D43F1A0755C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{500C5ED0-A521-416C-BA9B-7D43F1A0755C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{500C5ED0-A521-416C-BA9B-7D43F1A0755C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{500C5ED0-A521-416C-BA9B-7D43F1A0755C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

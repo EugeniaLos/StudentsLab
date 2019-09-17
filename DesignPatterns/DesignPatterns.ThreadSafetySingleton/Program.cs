@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DesignPatterns.Singleton
+namespace DesignPatterns.ThreadSafetySingleton
 {
     class Program
     {

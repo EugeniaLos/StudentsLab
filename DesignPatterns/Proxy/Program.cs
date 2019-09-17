@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Proxy
+namespace DesignPatterns.Proxy
 {
     class Program
     {

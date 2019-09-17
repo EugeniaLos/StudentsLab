@@ -6,7 +6,7 @@ namespace DesignPatterns.Singleton
 {
     public class DataBase
     {
-        private static DataBase instance;
+        private static DataBase _instance;
         private DataBase()
         {
 

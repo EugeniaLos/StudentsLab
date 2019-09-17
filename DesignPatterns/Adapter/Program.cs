@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Adapter
+namespace DesignPatterns.Adapter
 {
     class Program
     {
