@@ -14,12 +14,7 @@ namespace DesignPatterns.Singleton
 
         public static DataBase GetInstance()
         {
-            if(instance == null)
-            {
-                instance = new DataBase();
-            }
-
-            return instance;
+            return _instance ?? (_instance = new DataBase());
         }
 
         public void Connect()
