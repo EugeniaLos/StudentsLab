@@ -5,7 +5,7 @@ using DesignPatterns.AbstractFactory.CarParts;
 
 namespace DesignPatterns.AbstractFactory
 {
-    public interface CarFactory
+    public interface ICarFactory
     {
         IEngine GetEngine();
 
