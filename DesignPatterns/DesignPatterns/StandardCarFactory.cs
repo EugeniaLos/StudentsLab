@@ -8,7 +8,7 @@ using DesignPatterns.AbstractFactory.EquipmentTypes.SuspensionTypes;
 
 namespace DesignPatterns.AbstractFactory
 {
-    public class StandardCarFactory
+    public class StandardCarFactory: CarFactory
     {
         public IEngine GetEngine()
         {
