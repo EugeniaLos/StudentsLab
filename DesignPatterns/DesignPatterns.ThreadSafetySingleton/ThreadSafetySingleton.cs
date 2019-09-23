@@ -14,14 +14,21 @@ namespace DesignPatterns.ThreadSafetySingleton
 
         }
 
-        public static ThreadSafetySingleton GetInstance
+        public static ThreadSafetySingleton Instance
         {
             get
             {
-                lock (_locker)
+                if (_instance == null)
                 {
-                    return _instance ?? (_instance = new ThreadSafetySingleton());
+                    lock (_locker)
+                    {
+                        if (_instance == null)
+                        {
+                            return new ThreadSafetySingleton();
+                        } 
+                    }
                 }
+                return _instance;
             }
         }
 
