@@ -18,7 +18,7 @@ namespace DesignPatterns.Facade
             else
             {
                 Codec futureCodec = new OGGCodec();
-                VideoConverter.Equals(sourceFile, futureCodec);
+                VideoConverter.Convert(sourceFile, futureCodec);
             }
         }
     }
