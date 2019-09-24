@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Logger
 {
-    class Logger: ILogger
+    public class Logger: ILogger
     {
         private ILogger loger;
 
