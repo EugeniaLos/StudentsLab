@@ -1,38 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace Logger
 {
     public class Logger: ILogger
     {
-        private ILogger loger;
-
-        public Logger(ILogger loger)
-        {
-            this.loger = loger;
-        }
+        private ILogger logger;
+        private ConfigurationBuilder builder;
 
         public Logger()
         {
-            this.loger = new ConsoleLogger();
+            this.logger = new ConsoleLogger();
         }
 
         public void Error(string message)
         {
-            loger.Error(message);
+            logger.Error(message);
         }
         public void Error(Exception ex)
         {
-            loger.Error(ex);
+            logger.Error(ex);
         }
         public void Warning(string message)
         {
-            loger.Warning(message);
+            logger.Warning(message);
         }
         public void Info(string message)
         {
-            loger.Info(message);
+            logger.Info(message);
         }
     }
 }
