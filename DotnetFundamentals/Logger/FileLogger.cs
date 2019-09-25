@@ -8,6 +8,7 @@ namespace Logger
     public class FileLogger: ILogger
     {
         private StreamWriter streamWriter;
+
         public FileLogger()
         {
             if (streamWriter == null)

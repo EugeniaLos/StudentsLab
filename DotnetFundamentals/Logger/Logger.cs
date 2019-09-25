@@ -10,11 +10,19 @@ namespace Logger
     public class Logger: ILogger
     {
         private ILogger logger;
-        private ConfigurationBuilder builder;
+        //private ConfigurationBuilder builder;
 
         public Logger()
         {
-            this.logger = new ConsoleLogger();
+            string workingDirectory = Environment.CurrentDirectory;
+            var builder = new ConfigurationBuilder()
+             .SetBasePath(Directory.GetParent(workingDirectory).Parent.Parent.FullName)
+             .AddJsonFile("appsettings.json");
+
+            var config = builder.Build();
+
+            var consoleLogLevel = config.GetSection("ConsoleLogger:LogLevel").Get<List<string>>();
+            var fileLogLevel = config.GetSection("FileLogger:LogLevel").Get<List<string>>();
         }
 
         public void Error(string message)
