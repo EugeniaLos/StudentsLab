@@ -7,39 +7,32 @@ namespace Logger
 {
     public class FileLogger: ILogger
     {
-        private StreamWriter streamWriter;
-
-        public FileLogger()
-        {
-            if (streamWriter == null)
-            {
-                streamWriter = new StreamWriter(Path.Combine(Environment.CurrentDirectory, "loggerFile.txt"), true);
-            }
-        }
-
         public void Error(string message)
         {
-            streamWriter.WriteLine(message);
+            WriteToFile(message);
         }
 
         public void Error(Exception ex)
         {
-            streamWriter.WriteLine(ex.ToString());
+            WriteToFile(ex.ToString());
         }
 
         public void Warning(string message)
         {
-            streamWriter.WriteLine(message);
+            WriteToFile(message);
         }
 
         public void Info(string message)
         {
-            streamWriter.WriteLine(message);
+            WriteToFile(message);
         }
 
-        ~FileLogger()
+        private void WriteToFile(string message)
         {
-            streamWriter.Close();
+            using (StreamWriter sw = new StreamWriter(Path.Combine(Environment.CurrentDirectory, "loggerFile.txt"), true, System.Text.Encoding.Default))
+            {
+                sw.WriteLine(message);
+            }
         }
     }
 }
