@@ -5,29 +5,29 @@ using System.IO;
 
 namespace Logger
 {
-    public class FileLogger: ILogger
+    public class FileLogger//: ILogger
     {
-        public void Error(string message)
+        public static void Error(string message)
         {
             WriteToFile(message);
         }
 
-        public void Error(Exception ex)
+        public static void Error(Exception ex)
         {
             WriteToFile(ex.ToString());
         }
 
-        public void Warning(string message)
+        public static void Warning(string message)
         {
             WriteToFile(message);
         }
 
-        public void Info(string message)
+        public static void Info(string message)
         {
             WriteToFile(message);
         }
 
-        private void WriteToFile(string message)
+        private static void WriteToFile(string message)
         {
             using (StreamWriter sw = new StreamWriter(Path.Combine(Environment.CurrentDirectory, "loggerFile.txt"), true, System.Text.Encoding.Default))
             {

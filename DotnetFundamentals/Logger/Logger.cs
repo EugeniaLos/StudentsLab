@@ -4,16 +4,14 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
+using System.Reflection;
 
 namespace Logger
 {
     public class Logger: ILogger
     {
-        private List<string> consoleLogLevel;
-        private List<string> fileLogLevel;
-        private ConsoleLogger consoleLogger = new ConsoleLogger();
-        private FileLogger fileLogger = new FileLogger();
-        //private ConfigurationBuilder builder;
+        private Dictionary<string, string[]> _configuration;
 
         public Logger()
         {
@@ -24,77 +22,61 @@ namespace Logger
 
             var config = builder.Build();
 
-            consoleLogLevel = config.GetSection("ConsoleLogger:LogLevel").Get<List<string>>();
-            fileLogLevel = config.GetSection("FileLogger:LogLevel").Get<List<string>>();
+            _configuration = config.GetSection("Logging").Get<Dictionary<string, string[]>>();
 
         }
 
         public void Error(string message)
         {
-            if (PermittedLevel("Error", consoleLogLevel))
-            {
-                consoleLogger.Error(message);
-            }
-
-            if (PermittedLevel("Error", fileLogLevel))
-            {
-                fileLogger.Error(message);
-            }
+            WriteToPermittedDestination("Error", message);
         }
 
         public void Error(Exception ex)
         {
-            if (PermittedLevel("Error", consoleLogLevel))
-            {
-                consoleLogger.Error(ex);
-            }
-
-            if (PermittedLevel("Error", fileLogLevel))
-            {
-                fileLogger.Error(ex);
-            }
+          
         }
 
         public void Warning(string message)
         {
-            if (PermittedLevel("Warning", consoleLogLevel))
-            {
-                consoleLogger.Warning(message);
-            }
-
-            if (PermittedLevel("Warning", fileLogLevel))
-            {
-                fileLogger.Warning(message);
-            }
+            WriteToPermittedDestination("Warning", message);
         }
 
         public void Info(string message)
         {
-            if (PermittedLevel("Info", consoleLogLevel))
-            {
-                consoleLogger.Info(message);
-            }
+            WriteToPermittedDestination("Info", message);
+        }
 
-            if (PermittedLevel("Info", fileLogLevel))
+        private void WriteToPermittedDestination(string desiredLevel, string message)
+        {
+            bool destinationProvided = false;
+            foreach (string key in _configuration.Keys)
             {
-                fileLogger.Info(message);
+                foreach (string level in _configuration[key])
+                {
+                    if (level == desiredLevel)
+                    {
+                        string typeName = "Logger." + key;
+                        InvokeStringMethod(typeName, level, message);
+                        destinationProvided = true;
+                    }
+                }
+            }
+            if (!destinationProvided)
+            {
+                InvokeStringMethod("Logger.ConsoleLogger", desiredLevel, message);
             }
         }
 
-        private bool PermittedLevel(string level, List<string> permittedLevels)
+        private void InvokeStringMethod(string typeName, string methodName, string stringParam)
         {
-            if (permittedLevels == null)
-            {
-                return false;
-            }
-            foreach (string log in permittedLevels)
-            {
-                if (log == level)
-                {
-                    return true;
-                }
-            }
-            return false;
+            Type calledType = Type.GetType(typeName);
+            calledType.InvokeMember(
+                            methodName,
+                            BindingFlags.InvokeMethod | BindingFlags.Public |
+                                BindingFlags.Static,
+                            null,
+                            null,
+                            new Object[] { stringParam });
         }
     }
 }
