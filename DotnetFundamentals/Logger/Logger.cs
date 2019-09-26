@@ -26,16 +26,6 @@ namespace Logger
 
         }
 
-        public void Error(string message)
-        {
-            WriteToPermittedDestination("Error", message);
-        }
-
-        public void Error(Exception ex)
-        {
-          
-        }
-
         public void Warning(string message)
         {
             WriteToPermittedDestination("Warning", message);
@@ -44,6 +34,32 @@ namespace Logger
         public void Info(string message)
         {
             WriteToPermittedDestination("Info", message);
+        }
+
+        public void Error(string message)
+        {
+            WriteToPermittedDestination("Error", message);
+        }
+
+        public void Error(Exception ex)
+        {
+            bool destinationProvided = false;
+            foreach (string key in _configuration.Keys)
+            {
+                foreach (string level in _configuration[key])
+                {
+                    if (level == "Error")
+                    {
+                        string typeName = "Logger." + key;
+                        InvokeExMethod(typeName, level, ex);
+                        destinationProvided = true;
+                    }
+                }
+            }
+            if (!destinationProvided)
+            {
+                InvokeExMethod("Logger.ConsoleLogger", "Error", ex);
+            }
         }
 
         private void WriteToPermittedDestination(string desiredLevel, string message)
@@ -77,6 +93,18 @@ namespace Logger
                             null,
                             null,
                             new Object[] { stringParam });
+        }
+
+        private void InvokeExMethod(string typeName, string methodName, Exception exParam)
+        {
+            Type calledType = Type.GetType(typeName);
+            calledType.InvokeMember(
+                            methodName,
+                            BindingFlags.InvokeMethod | BindingFlags.Public |
+                                BindingFlags.Static,
+                            null,
+                            null,
+                            new Object[] { exParam });
         }
     }
 }

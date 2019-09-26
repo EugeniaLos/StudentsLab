@@ -8,7 +8,7 @@ namespace Logger
         {
             Console.WriteLine("Hello World!");
             var l = new Logger();
-            l.Error("New message");
+            l.Error("No!!!!!!!");
             Console.ReadLine();
         }
     }
