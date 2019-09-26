@@ -28,41 +28,41 @@ namespace Logger
 
         public void Warning(string message)
         {
-            WriteToPermittedDestination("Warning", message);
+            var instances = GetLoggerInstance("Warning");
+            foreach(ILogger instance in instances)
+            {
+                instance.Warning(message);
+            }
         }
 
         public void Info(string message)
         {
-            WriteToPermittedDestination("Info", message);
+            var instances = GetLoggerInstance("Info");
+            foreach (ILogger instance in instances)
+            {
+                instance.Info(message);
+            }
         }
 
         public void Error(string message)
         {
-            WriteToPermittedDestination("Error", message);
+            var instances = GetLoggerInstance("Error");
+            foreach (ILogger instance in instances)
+            {
+                instance.Error(message);
+            }
         }
 
         public void Error(Exception ex)
         {
-            bool destinationProvided = false;
-            foreach (string key in _configuration.Keys)
+            var instances = GetLoggerInstance("Error");
+            foreach (ILogger instance in instances)
             {
-                foreach (string level in _configuration[key])
-                {
-                    if (level == "Error")
-                    {
-                        string typeName = "Logger." + key;
-                        InvokeExMethod(typeName, level, ex);
-                        destinationProvided = true;
-                    }
-                }
-            }
-            if (!destinationProvided)
-            {
-                InvokeExMethod("Logger.ConsoleLogger", "Error", ex);
+                instance.Error(ex);
             }
         }
 
-        private void WriteToPermittedDestination(string desiredLevel, string message)
+        private IEnumerable<ILogger> GetLoggerInstance(string desiredLevel)
         {
             bool destinationProvided = false;
             foreach (string key in _configuration.Keys)
@@ -72,39 +72,18 @@ namespace Logger
                     if (level == desiredLevel)
                     {
                         string typeName = "Logger." + key;
-                        InvokeStringMethod(typeName, level, message);
+                        Type calledType = Type.GetType(typeName);
+                        var instance = Activator.CreateInstance(calledType);
+                        yield return (ILogger)instance;
                         destinationProvided = true;
                     }
                 }
             }
             if (!destinationProvided)
             {
-                InvokeStringMethod("Logger.ConsoleLogger", desiredLevel, message);
+                var instance = new ConsoleLogger();
+                yield return instance;
             }
-        }
-
-        private void InvokeStringMethod(string typeName, string methodName, string stringParam)
-        {
-            Type calledType = Type.GetType(typeName);
-            calledType.InvokeMember(
-                            methodName,
-                            BindingFlags.InvokeMethod | BindingFlags.Public |
-                                BindingFlags.Static,
-                            null,
-                            null,
-                            new Object[] { stringParam });
-        }
-
-        private void InvokeExMethod(string typeName, string methodName, Exception exParam)
-        {
-            Type calledType = Type.GetType(typeName);
-            calledType.InvokeMember(
-                            methodName,
-                            BindingFlags.InvokeMethod | BindingFlags.Public |
-                                BindingFlags.Static,
-                            null,
-                            null,
-                            new Object[] { exParam });
         }
     }
 }
