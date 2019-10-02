@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
+using System.Linq;
 
 namespace Logger
 {
     public class Logger: ILogger
     {
+        private List<ILogger> Loggers = new List<ILogger>();
         private Dictionary<string, string[]> _configuration;
+        private Dictionary<ILogger, Level[]> LoggersMapping = new Dictionary<ILogger, Level[]>();
+        private Dictionary<Level, ILogger[]> LoggersInverseMapping;
 
         public Logger()
         {
@@ -22,8 +26,7 @@ namespace Logger
 
             var config = builder.Build();
 
-            _configuration = config.GetSection("Logging").Get<Dictionary<string, string[]>>();
-
+            CreateILoggerInstances(config);
         }
 
         public void Warning(string message)
@@ -84,6 +87,29 @@ namespace Logger
                 var instance = new ConsoleLogger();
                 yield return instance;
             }
+        }
+
+        private void CreateILoggerInstances(IConfigurationRoot config)
+        {
+            _configuration = config.GetSection("Logging").Get<Dictionary<string, string[]>>();
+            var configuration = config.GetSection("Logging").Get<Dictionary<string, Level[]>>();
+            var type = typeof(ILogger);
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => type.IsAssignableFrom(p));
+            foreach (string logger in configuration.Keys)
+            {
+                foreach (Type t in types)
+                {
+                    if (logger == t.Name)
+                    {
+                        Loggers.Add((ILogger)Activator.CreateInstance(t));
+                        LoggersMapping.Add(Loggers[Loggers.Count-1], configuration[logger]);
+                        
+                    }
+                }
+            }
+
         }
     }
 }
