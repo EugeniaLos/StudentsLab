@@ -26,15 +26,15 @@ namespace CsvEnumerable
 
         public IEnumerator GetEnumerator()
         {
-            return new CsvEnumarator(records);
+            return new CsvEnumerator(records);
         }
 
-        private class CsvEnumarator: IEnumerator
+        private class CsvEnumerator: IEnumerator
         {
             private string[] records;
             private int position = -1;
 
-            public CsvEnumarator(List<string> records)
+            public CsvEnumerator(List<string> records)
             {
                 this.records = new string[records.Count];
                 records.CopyTo(this.records);
