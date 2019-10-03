@@ -13,11 +13,16 @@ namespace Logger
     public class Logger: ILogger
     {
         private List<ILogger> Loggers = new List<ILogger>();
-        private Dictionary<string, string[]> _configuration;
         private Dictionary<ILogger, string[]> LoggersMapping = new Dictionary<ILogger, string[]>();
         private Dictionary<string, List<ILogger>> DependencyOnLevel = new Dictionary<string, List<ILogger>>();
+        private static Logger _instance;
 
-        public Logger()
+        public static Logger GetInstance()
+        {
+            return _instance ?? (_instance = new Logger());
+        }
+
+        private Logger()
         {
             string workingDirectory = Environment.CurrentDirectory;
             var builder = new ConfigurationBuilder()
@@ -63,7 +68,6 @@ namespace Logger
 
         private void CreateILoggerInstances(IConfigurationRoot config)
         {
-            _configuration = config.GetSection("Logging").Get<Dictionary<string, string[]>>();
             var configuration = config.GetSection("Logging").Get<Dictionary<string, string[]>>();
             var type = typeof(ILogger);
             var types = AppDomain.CurrentDomain.GetAssemblies()

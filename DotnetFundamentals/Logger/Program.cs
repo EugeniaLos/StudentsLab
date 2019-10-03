@@ -7,7 +7,7 @@ namespace Logger
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var l = new Logger();
+            var l = Logger.GetInstance();
             l.Warning("Oopsie!!!");
             Console.ReadLine();
         }
