@@ -15,7 +15,7 @@ namespace Logger
         private List<ILogger> Loggers = new List<ILogger>();
         private Dictionary<string, string[]> _configuration;
         private Dictionary<ILogger, string[]> LoggersMapping = new Dictionary<ILogger, string[]>();
-        private Dictionary<Level, List<ILogger>> DependencyOnLevel = new Dictionary<Level, List<ILogger>>();
+        private Dictionary<string, List<ILogger>> DependencyOnLevel = new Dictionary<string, List<ILogger>>();
 
         public Logger()
         {
@@ -27,65 +27,37 @@ namespace Logger
             var config = builder.Build();
 
             CreateILoggerInstances(config);
+            MadeDependencyOnLevel();
         }
 
         public void Warning(string message)
         {
-            var instances = GetLoggerInstance("Warning");
-            foreach(ILogger instance in instances)
-            {
-                instance.Warning(message);
-            }
+            InvokeMethod("Warning", message);
         }
 
         public void Info(string message)
         {
-            var instances = GetLoggerInstance("Info");
-            foreach (ILogger instance in instances)
-            {
-                instance.Info(message);
-            }
+            InvokeMethod("Info", message);
         }
 
         public void Error(string message)
         {
-            var instances = GetLoggerInstance("Error");
-            foreach (ILogger instance in instances)
-            {
-                instance.Error(message);
-            }
+            InvokeMethod("Error", message);
         }
 
         public void Error(Exception ex)
         {
-            var instances = GetLoggerInstance("Error");
-            foreach (ILogger instance in instances)
+            if (DependencyOnLevel.ContainsKey("Error"))
             {
-                instance.Error(ex);
-            }
-        }
-
-        private IEnumerable<ILogger> GetLoggerInstance(string desiredLevel)
-        {
-            bool destinationProvided = false;
-            foreach (string key in _configuration.Keys)
-            {
-                foreach (string level in _configuration[key])
+                foreach (ILogger instance in DependencyOnLevel["Error"])
                 {
-                    if (level == desiredLevel)
-                    {
-                        string typeName = "Logger." + key;
-                        Type calledType = Type.GetType(typeName);
-                        var instance = Activator.CreateInstance(calledType);
-                        yield return (ILogger)instance;
-                        destinationProvided = true;
-                    }
+                    instance.Error(ex);
                 }
             }
-            if (!destinationProvided)
+            else
             {
                 var instance = new ConsoleLogger();
-                yield return instance;
+                instance.Error(ex);
             }
         }
 
@@ -112,26 +84,39 @@ namespace Logger
 
         private void MadeDependencyOnLevel()
         {
-            foreach (Level level in (Level[])Enum.GetValues(typeof(Level)))
+            foreach(ILogger instance in LoggersMapping.Keys)
             {
-                foreach(ILogger instance in LoggersMapping.Keys)
+                foreach(string instanceLevel in LoggersMapping[instance])
                 {
-                    foreach(string instanceLevel in LoggersMapping[instance])
+                    if (DependencyOnLevel.ContainsKey(instanceLevel))
                     {
-                        if(instanceLevel == level.ToString())
-                        {
-                            if (DependencyOnLevel.ContainsKey(level))
-                            {
-                                DependencyOnLevel[level].Add(instance);
-                            }
-                            else
-                            {
-                                List<ILogger> list = new List<ILogger> { instance };
-                                DependencyOnLevel.Add(level, list);
-                            }
-                        }
+                         DependencyOnLevel[instanceLevel].Add(instance);
+                    }
+                    else
+                    {
+                        DependencyOnLevel.Add(instanceLevel, new List<ILogger> { instance });
                     }
                 }
+            }
+        }
+
+        private void InvokeMethod(string level, string message)
+        {
+            if (DependencyOnLevel.ContainsKey(level))
+            {
+                foreach (ILogger instance in DependencyOnLevel[level])
+                {
+                    Type t = instance.GetType();
+                    MethodInfo method = t.GetMethod(level);
+                    method.Invoke(instance, new object[] { message });
+                }
+            }
+            else
+            {
+                var instance = new ConsoleLogger();
+                Type t = instance.GetType();
+                MethodInfo method = t.GetMethod(level);
+                method.Invoke(instance, new object[] { message });
             }
         }
     }
