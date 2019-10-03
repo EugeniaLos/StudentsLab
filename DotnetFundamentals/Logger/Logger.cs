@@ -14,8 +14,8 @@ namespace Logger
     {
         private List<ILogger> Loggers = new List<ILogger>();
         private Dictionary<string, string[]> _configuration;
-        private Dictionary<ILogger, Level[]> LoggersMapping = new Dictionary<ILogger, Level[]>();
-        private Dictionary<Level, ILogger[]> LoggersInverseMapping;
+        private Dictionary<ILogger, string[]> LoggersMapping = new Dictionary<ILogger, string[]>();
+        private Dictionary<Level, List<ILogger>> DependencyOnLevel = new Dictionary<Level, List<ILogger>>();
 
         public Logger()
         {
@@ -92,7 +92,7 @@ namespace Logger
         private void CreateILoggerInstances(IConfigurationRoot config)
         {
             _configuration = config.GetSection("Logging").Get<Dictionary<string, string[]>>();
-            var configuration = config.GetSection("Logging").Get<Dictionary<string, Level[]>>();
+            var configuration = config.GetSection("Logging").Get<Dictionary<string, string[]>>();
             var type = typeof(ILogger);
             var types = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(s => s.GetTypes())
@@ -105,11 +105,34 @@ namespace Logger
                     {
                         Loggers.Add((ILogger)Activator.CreateInstance(t));
                         LoggersMapping.Add(Loggers[Loggers.Count-1], configuration[logger]);
-                        
                     }
                 }
             }
+        }
 
+        private void MadeDependencyOnLevel()
+        {
+            foreach (Level level in (Level[])Enum.GetValues(typeof(Level)))
+            {
+                foreach(ILogger instance in LoggersMapping.Keys)
+                {
+                    foreach(string instanceLevel in LoggersMapping[instance])
+                    {
+                        if(instanceLevel == level.ToString())
+                        {
+                            if (DependencyOnLevel.ContainsKey(level))
+                            {
+                                DependencyOnLevel[level].Add(instance);
+                            }
+                            else
+                            {
+                                List<ILogger> list = new List<ILogger> { instance };
+                                DependencyOnLevel.Add(level, list);
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
