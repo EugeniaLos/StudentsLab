@@ -15,11 +15,26 @@ namespace Logger
         private List<ILogger> Loggers = new List<ILogger>();
         private Dictionary<ILogger, string[]> LoggersMapping = new Dictionary<ILogger, string[]>();
         private Dictionary<string, List<ILogger>> DependencyOnLevel = new Dictionary<string, List<ILogger>>();
-        private static Logger _instance;
 
-        public static Logger GetInstance()
+        private static Logger loggerInstance;
+        private static readonly object locker = new object();
+
+        public static Logger Instance
         {
-            return _instance ?? (_instance = new Logger());
+            get
+            {
+                if (loggerInstance == null)
+                {
+                    lock (locker)
+                    {
+                        if (loggerInstance == null)
+                        {
+                            return new Logger();
+                        }
+                    }
+                }
+                return loggerInstance;
+            }
         }
 
         private Logger()
