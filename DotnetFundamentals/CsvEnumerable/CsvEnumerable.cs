@@ -8,62 +8,76 @@ using System.Text;
 
 namespace CsvEnumerable
 {
-    public class CsvEnumerable: IEnumerable
+    public class CsvEnumerable<T>: IEnumerable<T>
     {
-        private List<string> records = new List<string>();
+        private string fileName;
         public CsvEnumerable(string fileName)
         {
-            using (StreamReader sr = new StreamReader(Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, fileName)))
-            {
-                String line;
-
-                while ((line = sr.ReadLine()) != null)
-                {
-                    records.Add(line);
-                }
-            }
+            this.fileName = fileName;
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
-            return new CsvEnumerator(records);
+            return new CsvEnumerator<T>(fileName);
         }
 
-        private class CsvEnumerator: IEnumerator
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            private string[] records;
-            private int position = -1;
+            return this.GetEnumerator();
+        }
 
-            public CsvEnumerator(List<string> records)
-            {
-                this.records = new string[records.Count];
-                records.CopyTo(this.records);
-            }
 
-            public object Current
+
+        private class CsvEnumerator<T>: IEnumerator<T>
+        {
+            private bool firstRecord;
+            private string fileName;
+            private StreamReader sr;
+            private CsvReader csvReader;
+
+            public CsvEnumerator(string fileName)
             {
-                get
-                {
-                    if (position != -1 || position < records.Length)
-                        return records[position];
-                    return "No record";
-                }
+                this.fileName = fileName;
+                firstRecord = true;
             }
 
             public bool MoveNext()
             {
-                if (position < records.Length - 1)
+                if (firstRecord)
                 {
-                    position++;
-                    return true;
+                    sr = new StreamReader(Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, fileName));
+                    csvReader = new CsvReader(sr);
+                    firstRecord = false;
                 }
-                else
-                    return false;
+                return csvReader.Read();
+            }
+
+
+            public T Current
+            {
+                get
+                {
+                    return csvReader.GetRecord<T>();
+                }
+            }
+
+            object IEnumerator.Current
+            {
+                get
+                {
+                    return csvReader.GetRecord<T>();
+                }
             }
 
             public void Reset()
             {
-                position = -1;
+                csvReader.Dispose();
+                sr.Dispose();
+            }
+
+            public void Dispose()
+            {
+                Reset();
             }
         }
     }

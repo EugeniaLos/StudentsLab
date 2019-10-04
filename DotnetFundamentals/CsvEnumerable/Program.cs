@@ -7,10 +7,10 @@ namespace CsvEnumerable
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var data = new CsvEnumerable("File.csv");
-            foreach(string record in data)
+            var data = new CsvEnumerable<User>("File.csv");
+            foreach(User record in data)
             {
-                Console.WriteLine(record);
+                Console.WriteLine(record.Name);
             }
         }
     }
