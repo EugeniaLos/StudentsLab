@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace MoneyManager
 {
-    public class User
+    public class Asset
     {
-
         public int Id { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
-        public string Email { get; set; }
-
-        public string Hash { get; set; }
-
-        public string Salt { get; set; }
+        [Required]
+        public int UserId { get; set; }
     }
 }
