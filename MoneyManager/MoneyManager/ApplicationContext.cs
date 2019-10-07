@@ -18,7 +18,15 @@ namespace MoneyManager
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // использование Fluent API
+            //Выполняется при вызове Database.EnsureCreated(), должны быть указаны id
+            //modelBuilder.Entity<User>().HasData(
+            //            new User[]
+            //            {
+            //    new User { Name="Tom", Email = "IAmTom@groot.com"},
+            //    new User { Name="Alice", Email = "Superstar1955@yahoo.uk"},
+            //    new User { Name="Sam", Email = "TheGreenOne@spies.com"}
+            //            });
+
             base.OnModelCreating(modelBuilder);
         }
     }

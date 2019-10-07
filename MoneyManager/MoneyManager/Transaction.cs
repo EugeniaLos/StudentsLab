@@ -13,7 +13,7 @@ namespace MoneyManager
         public int CategoryId { get; set; }
 
         [Required]
-        public float Amount { get; set; }
+        public decimal Amount { get; set; }
 
         [Required]
         public DateTime Date { get; set; }
