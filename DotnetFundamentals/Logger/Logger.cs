@@ -15,7 +15,7 @@ namespace Logger
         private Dictionary<string, List<ILogger>> dependencyOnLevel = new Dictionary<string, List<ILogger>>();
 
         private static Logger loggerInstance;
-        private static readonly object locker = new object();
+        private static readonly object syncRoot = new object();
 
         public static Logger Instance
         {
@@ -23,7 +23,7 @@ namespace Logger
             {
                 if (loggerInstance == null)
                 {
-                    lock (locker)
+                    lock (syncRoot)
                     {
                         if (loggerInstance == null)
                         {
