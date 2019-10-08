@@ -8,17 +8,22 @@ using System.Text;
 
 namespace CsvEnumerable
 {
-    public class CsvEnumerable<T>: IEnumerable<T>
+    public class CsvEnumerable<T>: IEnumerable<T>, IEnumerator<T>
     {
         private string filePath;
+        private StreamReader streamReader;
+        private CsvReader csvReader;
+        private bool firstRecord;
+
         public CsvEnumerable(string filePath)
         {
             this.filePath = filePath;
+            firstRecord = true;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return new CsvEnumerator<T>(filePath);
+            return this;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -26,59 +31,43 @@ namespace CsvEnumerable
             return this.GetEnumerator();
         }
 
-
-
-        private class CsvEnumerator<T>: IEnumerator<T>
+        public bool MoveNext()
         {
-            private bool firstRecord;
-            private string filePath;
-            private StreamReader streamReader;
-            private CsvReader csvReader;
-
-            public CsvEnumerator(string filePath)
+            if (firstRecord)
             {
-                this.filePath = filePath;
-                firstRecord = true;
+                streamReader = new StreamReader(filePath);
+                csvReader = new CsvReader(streamReader);
+                firstRecord = false;
             }
-
-            public bool MoveNext()
-            {
-                if (firstRecord)
-                {
-                    streamReader = new StreamReader(filePath);
-                    csvReader = new CsvReader(streamReader);
-                    firstRecord = false;
-                }
-                return csvReader.Read();
-            }
-
-
-            public T Current
-            {
-                get
-                {
-                    return csvReader.GetRecord<T>();
-                }
-            }
-
-            object IEnumerator.Current
-            {
-                get
-                {
-                    return csvReader.GetRecord<T>();
-                }
-            }
-
-            public void Reset()
-            {
-                csvReader.Dispose();
-                streamReader.Dispose();
-            }
-
-            public void Dispose()
-            {
-                Reset();
-            }
+        return csvReader.Read();
         }
+
+         public T Current
+         {
+            get
+            {
+                return csvReader.GetRecord<T>();
+            }
+         }
+
+         object IEnumerator.Current
+         {
+            get
+            {
+                return csvReader.GetRecord<T>();
+            }
+         }
+
+         public void Reset()
+         {
+            csvReader.Dispose();
+            streamReader.Dispose();
+            firstRecord = true;
+         }
+
+         public void Dispose()
+         {
+            Reset();
+         }
     }
 }
