@@ -18,10 +18,12 @@ namespace MoneyManager
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        //[Required]
         public string Hash { get; set; }
 
-        [Required]
+        //[Required]
         public string Salt { get; set; }
+
+        public List<Asset> Assets { get; set; }
     }
 }

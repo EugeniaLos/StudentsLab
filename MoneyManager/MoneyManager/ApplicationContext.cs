@@ -7,7 +7,11 @@ namespace MoneyManager
 {
     public class ApplicationContext: DbContext
     {
-        //public DbSet<User> Users {get; set;}
+        public DbSet<User> Users {get; set;}
+        public DbSet<Asset> Assets { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
@@ -26,7 +30,7 @@ namespace MoneyManager
             //    new User { Name="Alice", Email = "Superstar1955@yahoo.uk"},
             //    new User { Name="Sam", Email = "TheGreenOne@spies.com"}
             //            });
-
+            InitializerDB.Initialize(modelBuilder, this);
             base.OnModelCreating(modelBuilder);
         }
     }

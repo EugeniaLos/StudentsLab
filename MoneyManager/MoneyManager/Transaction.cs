@@ -12,6 +12,8 @@ namespace MoneyManager
         [Required]
         public int CategoryId { get; set; }
 
+        public Category Category { get; set; }
+
         [Required]
         public decimal Amount { get; set; }
 
@@ -20,6 +22,8 @@ namespace MoneyManager
 
         [Required]
         public int AssetId { get; set; }
+
+        public Asset Asset { get; set; }
 
         public string Comment { get; set; }
     }

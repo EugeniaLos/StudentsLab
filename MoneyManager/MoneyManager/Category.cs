@@ -15,6 +15,8 @@ namespace MoneyManager
         [Required]
         public int Type { get; set; }
 
+        public List<Transaction> transactions { get; set; }
+
         //public int ParentId { get; set; }
     }
 }
