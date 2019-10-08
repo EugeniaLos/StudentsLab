@@ -10,15 +10,15 @@ namespace CsvEnumerable
 {
     public class CsvEnumerable<T>: IEnumerable<T>
     {
-        private string fileName;
-        public CsvEnumerable(string fileName)
+        private string filePath;
+        public CsvEnumerable(string filePath)
         {
-            this.fileName = fileName;
+            this.filePath = filePath;
         }
 
         public IEnumerator<T> GetEnumerator()
         {
-            return new CsvEnumerator<T>(fileName);
+            return new CsvEnumerator<T>(filePath);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -31,13 +31,13 @@ namespace CsvEnumerable
         private class CsvEnumerator<T>: IEnumerator<T>
         {
             private bool firstRecord;
-            private string fileName;
-            private StreamReader sr;
+            private string filePath;
+            private StreamReader streamReader;
             private CsvReader csvReader;
 
-            public CsvEnumerator(string fileName)
+            public CsvEnumerator(string filePath)
             {
-                this.fileName = fileName;
+                this.filePath = filePath;
                 firstRecord = true;
             }
 
@@ -45,8 +45,8 @@ namespace CsvEnumerable
             {
                 if (firstRecord)
                 {
-                    sr = new StreamReader(Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName, fileName));
-                    csvReader = new CsvReader(sr);
+                    streamReader = new StreamReader(filePath);
+                    csvReader = new CsvReader(streamReader);
                     firstRecord = false;
                 }
                 return csvReader.Read();
@@ -72,7 +72,7 @@ namespace CsvEnumerable
             public void Reset()
             {
                 csvReader.Dispose();
-                sr.Dispose();
+                streamReader.Dispose();
             }
 
             public void Dispose()
