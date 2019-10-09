@@ -131,3 +131,7 @@ $RECYCLE.BIN
 .DS_Store
 
 _NCrunch
+DotnetFundamentals/.vs
+DotnetFundamentals/CsvEnumerable/.vs
+DotnetFundamentals/Logger/.vs
+MoneyManager/.vs
