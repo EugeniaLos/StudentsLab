@@ -21,12 +21,12 @@ namespace MoneyManager
                 .UseSqlServer(connectionString)
                 .Options;
 
-            using (ApplicationContext db = new ApplicationContext(options))
+            using (ApplicationContext context = new ApplicationContext(options))
             {
-                if (db.FirstCreated)
+                if (context.FirstCreated)
                 {
                     var initializer = new InitializerDB();
-                    initializer.Initialize(db);
+                    initializer.Initialize(context);
                 }
             }
 
