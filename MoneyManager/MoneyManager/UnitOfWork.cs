@@ -6,7 +6,7 @@ using MoneyManager.Repositories;
 
 namespace MoneyManager
 {
-    public class UnitOfWork
+    public class UnitOfWork: IDisposable
     {
         private ApplicationContext applicationContext;
         private UserRepository userRepository;
@@ -26,6 +26,39 @@ namespace MoneyManager
                 var initializer = new InitializerDB();
                 initializer.Initialize(applicationContext);
             }
+        }
+
+        public UserRepository Users
+        {
+            get { return userRepository ?? (userRepository = new UserRepository(applicationContext)); }
+        }
+
+        public AssetRepository Assets
+        {
+            get { return assetRepository ?? (assetRepository = new AssetRepository(applicationContext)); }
+        }
+
+        public CategoryRepository Categories
+        {
+            get { return categoryRepository ?? (categoryRepository = new CategoryRepository(applicationContext)); }
+        }
+
+        public TransactionRepository Transactions
+        {
+            get
+            {
+                return transactionRepository ?? (transactionRepository = new TransactionRepository(applicationContext));
+            }
+        }
+
+        public void Save()
+        {
+            applicationContext.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            applicationContext.Dispose();
         }
     }
 }
