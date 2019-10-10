@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -28,6 +29,11 @@ namespace MoneyManager.Repositories
             Transaction Transaction = context.Transactions.Find(id);
             if (Transaction != null)
                 context.Transactions.Remove(Transaction);
+        }
+
+        public void Update(Transaction transaction)
+        {
+            context.Entry(transaction).State = EntityState.Modified;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -31,9 +32,9 @@ namespace MoneyManager.Repositories
                 context.Users.Remove(User);
         }
 
-        //public void Update(User user)
-        //{
-        //    context.Entry(user).State = EntityState.Modified;
-        //}
+        public void Update(User user)
+        {
+            context.Entry(user).State = EntityState.Modified;
+        }
     }
 }

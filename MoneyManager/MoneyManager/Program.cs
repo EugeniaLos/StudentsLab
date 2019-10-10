@@ -23,7 +23,7 @@ namespace MoneyManager
 
             using (ApplicationContext context = new ApplicationContext(options))
             {
-                if (context.FirstCreated)
+                if (context.IsEmpty)
                 {
                     var initializer = new InitializerDB();
                     initializer.Initialize(context);

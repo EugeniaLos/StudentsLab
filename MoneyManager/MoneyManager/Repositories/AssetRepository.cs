@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -28,6 +29,11 @@ namespace MoneyManager.Repositories
             Asset Asset = context.Assets.Find(id);
             if (Asset != null)
                 context.Assets.Remove(Asset);
+        }
+
+        public void Update(Asset asset)
+        {
+            context.Entry(asset).State = EntityState.Modified;
         }
     }
 }
