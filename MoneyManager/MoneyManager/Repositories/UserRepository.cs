@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MoneyManager.Repositories
@@ -30,6 +31,11 @@ namespace MoneyManager.Repositories
             User User = context.Users.Find(id);
             if (User != null)
                 context.Users.Remove(User);
+        }
+
+        public User Get(int id)
+        {
+            return context.Users.First(u => u.Id == id);
         }
 
         public void Update(User user)

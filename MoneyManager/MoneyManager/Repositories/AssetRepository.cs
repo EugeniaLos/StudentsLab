@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MoneyManager.Repositories
@@ -29,6 +30,11 @@ namespace MoneyManager.Repositories
             Asset Asset = context.Assets.Find(id);
             if (Asset != null)
                 context.Assets.Remove(Asset);
+        }
+
+        public Asset Get(int id)
+        {
+            return context.Assets.First(a => a.Id == id);
         }
 
         public void Update(Asset asset)

@@ -33,6 +33,11 @@ namespace MoneyManager.Repositories
                 context.Transactions.Remove(Transaction);
         }
 
+        public Transaction Get(int id)
+        {
+            return context.Transactions.First(t => t.Id == id);
+        }
+
         public void Update(Transaction transaction)
         {
             context.Entry(transaction).State = EntityState.Modified;

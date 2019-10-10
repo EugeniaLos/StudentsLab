@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MoneyManager.Repositories
@@ -29,6 +30,11 @@ namespace MoneyManager.Repositories
             Category Category = context.Categories.Find(id);
             if (Category != null)
                 context.Categories.Remove(Category);
+        }
+
+        public Category Get(int id)
+        {
+            return context.Categories.First(c => c.Id == id);
         }
 
         public void Update(Category category)
