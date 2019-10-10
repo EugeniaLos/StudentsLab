@@ -83,5 +83,10 @@ namespace MoneyManager
         {
             return Users.GetAll().First(u => u.Email == email);
         }
+
+        public IEnumerable<object> GetSortedUsers()
+        {
+            return Users.GetAll().OrderBy(u => u.Name).Select(u => new {u.Id, u.Name, u.Email});
+        }
     }
 }
