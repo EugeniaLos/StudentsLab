@@ -78,5 +78,10 @@ namespace MoneyManager
                 Transactions.Delete(id);
             }
         }
+
+        public User GetUserByEmail(string email)
+        {
+            return Users.GetAll().First(u => u.Email == email);
+        }
     }
 }
