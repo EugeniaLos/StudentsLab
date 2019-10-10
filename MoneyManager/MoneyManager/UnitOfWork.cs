@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using MoneyManager.Repositories;
@@ -59,6 +60,23 @@ namespace MoneyManager
         public void Dispose()
         {
             applicationContext.Dispose();
+        }
+
+        public void DeleteCurrentMonthUsersTransaction(int userId)
+        {
+            var monthTransaction = Transactions.GetAll().Where(u => u.Date.Month == DateTime.Today.Month)
+                .Where(u => u.Date.Year == DateTime.Today.Year);
+            var suitedAssetsId = Assets.GetAll().Where(a => a.UserId == userId);
+            var removableTransactionId = monthTransaction
+                .Join(
+                    suitedAssetsId,
+                    t => t.AssetId,
+                    a => a.Id,
+                    (transaction, asset) => transaction.Id);
+            foreach (int id in removableTransactionId)
+            {
+                Transactions.Delete(id);
+            }
         }
     }
 }

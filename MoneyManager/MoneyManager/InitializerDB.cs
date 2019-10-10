@@ -77,10 +77,10 @@ namespace MoneyManager
                         });
                     applicationContext.SaveChanges();
 
-                    Transaction[] transactions = new Transaction[210];
-                    for(int i = 0; i <210; i++)
+                    Transaction[] transactions = new Transaction[1000];
+                    for(int i = 0; i <1000; i++)
                     {
-                        transactions[i] = new Transaction { Date = RandomDay(), Amount = (decimal)gen.Next(1, 110000), AssetId = gen.Next(1, 23), CategoryId = gen.Next(1, 11) };
+                        transactions[i] = new Transaction { Date =RandomDay(), Amount = (decimal)gen.Next(1, 110000), AssetId = gen.Next(1, 23), CategoryId = gen.Next(1, 11) };
                     }
                     applicationContext.Transactions.AddRange(transactions);
                     applicationContext.SaveChanges();
@@ -97,7 +97,7 @@ namespace MoneyManager
 
         DateTime RandomDay()
         {
-            DateTime start = new DateTime(1995, 1, 1);
+            DateTime start = new DateTime(2019, 1, 1);
             int range = (DateTime.Today - start).Days;
             return start.AddDays(gen.Next(range));
         }
