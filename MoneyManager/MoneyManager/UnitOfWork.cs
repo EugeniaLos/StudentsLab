@@ -111,7 +111,7 @@ namespace MoneyManager
             };
         }
 
-        public IEnumerable<object> GetAssets(int userId)
+        public IEnumerable<object> GetAssetsWhithBalance(int userId)
         {
             var incomeCategories = Categories.GetAll().Where(c => c.Type == 1);
             var outgoingsCategories = Categories.GetAll().Where(c => c.Type == 0);
@@ -153,6 +153,34 @@ namespace MoneyManager
                     sum = assetBalance[key]
                 };
             }
+        }
+
+        public IEnumerable<IEnumerable<object>> GetOrderedTransactions(int userid)
+        {
+            yield return GetUsersTransactionId(userid).OrderByDescending(t => t.Date).Select(t => new
+            {
+                Asset = Assets.Get(t.AssetId).Name,
+                Category = Categories.Get(t.CategoryId).Name,
+                t.Amount,
+                t.Date,
+                t.Comment
+            });
+            yield return GetUsersTransactionId(userid).OrderBy(t => Assets.Get(t.AssetId).Name).Select(t => new
+            {
+                Asset = Assets.Get(t.AssetId).Name,
+                Category = Categories.Get(t.CategoryId).Name,
+                t.Amount,
+                t.Date,
+                t.Comment
+            }); ;
+            yield return GetUsersTransactionId(userid).OrderBy(t => Categories.Get(t.CategoryId).Name).Select(t => new
+            {
+                Asset = Assets.Get(t.AssetId).Name,
+                Category = Categories.Get(t.CategoryId).Name,
+                t.Amount,
+                t.Date,
+                t.Comment
+            }); ;
         }
 
         //private decimal GetBalanceByCategories
