@@ -183,6 +183,8 @@ namespace MoneyManager
             }); ;
         }
 
+
+
         //private decimal GetBalanceByCategories
 
         private IEnumerable<decimal> GetAmountByUseridAndCategories(int userId, IEnumerable<Category> categories)
