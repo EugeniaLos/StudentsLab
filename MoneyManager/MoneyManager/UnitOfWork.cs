@@ -58,6 +58,16 @@ namespace MoneyManager
             applicationContext.SaveChanges();
         }
 
+        public User GetUserByEmail(string email)
+        {
+            return Users.GetAll().First(u => u.Email == email);
+        }
+
+        public IEnumerable<object> GetSortedUsers()
+        {
+            return Users.GetAll().OrderBy(u => u.Name).Select(u => new { id = u.Id, Name = u.Name, Email = u.Email });
+        }
+
         public void Dispose()
         {
             applicationContext.Dispose();
@@ -78,16 +88,6 @@ namespace MoneyManager
             {
                 Transactions.Delete(id);
             }
-        }
-
-        public User GetUserByEmail(string email)
-        {
-            return Users.GetAll().First(u => u.Email == email);
-        }
-
-        public IEnumerable<object> GetSortedUsers()
-        {
-            return Users.GetAll().OrderBy(u => u.Name).Select(u => new {id = u.Id, Name = u.Name, Email = u.Email});
         }
 
         public object GetBalance(int userId)
@@ -111,6 +111,52 @@ namespace MoneyManager
             };
         }
 
+        public IEnumerable<object> GetAssets(int userId)
+        {
+            var incomeCategories = Categories.GetAll().Where(c => c.Type == 1);
+            var outgoingsCategories = Categories.GetAll().Where(c => c.Type == 0);
+            var assets = Assets.GetAll().Where(a => a.UserId == userId);
+            Dictionary<Asset, IEnumerable<Transaction>> transactions = assets.ToDictionary(asset => asset,
+                asset => Transactions.GetAll()
+                    .Where(t => t.AssetId == asset.Id));
+            Dictionary<Asset, IEnumerable<decimal>> plusBalance = transactions.Keys.ToDictionary(asset => asset,
+                asset => transactions[asset]
+                    .Join(incomeCategories,
+                        t => t.CategoryId,
+                        c => c.Id,
+                        (transaction,
+                            category) => transaction.Amount));
+            Dictionary<Asset, IEnumerable<decimal>> minusBalance = transactions.Keys.ToDictionary(asset => asset,
+                asset => transactions[asset]
+                    .Join(outgoingsCategories,
+                        t => t.CategoryId,
+                        c => c.Id,
+                        (transaction,
+                            category) => transaction.Amount));
+            Dictionary<Asset, decimal> assetBalance = plusBalance.Keys.ToDictionary(key => key,
+                key => plusBalance[key]
+                    .Sum());
+            foreach (var key in minusBalance.Keys)
+            {
+                foreach (var outgoings in minusBalance[key])
+                {
+                    assetBalance[key] -= outgoings;
+                } 
+            }
+
+            foreach (var key in assetBalance.Keys)
+            {
+                yield return new
+                {
+                    key.Id,
+                    key.Name,
+                    sum = assetBalance[key]
+                };
+            }
+        }
+
+        //private decimal GetBalanceByCategories
+
         private IEnumerable<decimal> GetAmountByUseridAndCategories(int userId, IEnumerable<Category> categories)
         {
             return GetUsersTransactionId(userId)
@@ -120,6 +166,7 @@ namespace MoneyManager
                     c => c.Id,
                     (transaction, category) => transaction.Amount);
         }
+
 
         private IEnumerable<Transaction> GetUsersTransactionId(int userId)
         {
