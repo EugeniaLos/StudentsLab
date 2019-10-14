@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -93,14 +94,12 @@ namespace MoneyManager
         public object GetBalance(int userId)
         {
             var incomeCategories = Categories.GetAll().Where(c => c.Type == 1);
-            var outgoingsCategories = Categories.GetAll().Where(c => c.Type == 0);
-            var incomeEnumerable = GetAmountByUseridAndCategories(userId, incomeCategories);
-            var outgoingsEnumerable = GetAmountByUseridAndCategories(userId, outgoingsCategories);
+            var expensesCategories = Categories.GetAll().Where(c => c.Type == 0);
+            var transactions = GetUsersTransactionId(userId);
+            var incomeEnumerable = GetAmountByUseridAndCategories(transactions, incomeCategories);
+            var expensesEnumerable = GetAmountByUseridAndCategories(transactions, expensesCategories);
             decimal balance = incomeEnumerable.Sum();
-            foreach (decimal outgoings in outgoingsEnumerable)
-            {
-                balance -= outgoings;
-            }
+            balance = expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses);
             var user = Users.Get(userId);
             return new
             {
@@ -114,7 +113,7 @@ namespace MoneyManager
         public IEnumerable<object> GetAssetsWhithBalance(int userId)
         {
             var incomeCategories = Categories.GetAll().Where(c => c.Type == 1);
-            var outgoingsCategories = Categories.GetAll().Where(c => c.Type == 0);
+            var expensesCategories = Categories.GetAll().Where(c => c.Type == 0);
             var assets = Assets.GetAll().Where(a => a.UserId == userId);
             Dictionary<Asset, IEnumerable<Transaction>> transactions = assets.ToDictionary(asset => asset,
                 asset => Transactions.GetAll()
@@ -128,7 +127,7 @@ namespace MoneyManager
                             category) => transaction.Amount));
             Dictionary<Asset, IEnumerable<decimal>> minusBalance = transactions.Keys.ToDictionary(asset => asset,
                 asset => transactions[asset]
-                    .Join(outgoingsCategories,
+                    .Join(expensesCategories,
                         t => t.CategoryId,
                         c => c.Id,
                         (transaction,
@@ -138,9 +137,9 @@ namespace MoneyManager
                     .Sum());
             foreach (var key in minusBalance.Keys)
             {
-                foreach (var outgoings in minusBalance[key])
+                foreach (var expenses in minusBalance[key])
                 {
-                    assetBalance[key] -= outgoings;
+                    assetBalance[key] -= expenses;
                 } 
             }
 
@@ -183,13 +182,55 @@ namespace MoneyManager
             }); ;
         }
 
+        public IEnumerable<object> BalancePerPeriod(int userId, DateTime startDate, DateTime endDate)
+        {
+            var transactionsPerPeriod = GetUsersTransactionId(userId).Where(t => t.Date > startDate)
+                .Where(t => t.Date < endDate);
+            var incomeCategories = Categories.GetAll().Where(c => c.Type == 1);
+            var expensesCategories = Categories.GetAll().Where(c => c.Type == 0);
+            var transactionGroups = transactionsPerPeriod.OrderBy(t => t.Date).GroupBy(t => t.Date.Month);
+            foreach (var g in transactionGroups)
+            {
+                decimal balance = 0;
+                var incomeEnumerable = g
+                    .Join(
+                        incomeCategories,
+                        t => t.CategoryId,
+                        c => c.Id,
+                        (transaction, category) => transaction.Amount);
+                var expensesEnumerable = g
+                    .Join(
+                        expensesCategories,
+                        t => t.CategoryId,
+                        c => c.Id,
+                        (transaction, category) => transaction.Amount);
+                yield return new
+                {
+                    income = incomeEnumerable.Sum(),
+                    expenses = expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses),
+                    g.First().Date.Month,
+                };
+            }
+        }
 
+        private decimal GetIncomeBalance(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
+        {
+            var incomeEnumerable = GetAmountByUseridAndCategories(transactions, categories);
+            return incomeEnumerable.Sum();
+        }
+
+        private decimal GetExpensesBalance(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
+        {
+            var expensesEnumerable = GetAmountByUseridAndCategories(transactions, categories);
+            decimal balance = 0;
+            return expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses);
+        }
 
         //private decimal GetBalanceByCategories
 
-        private IEnumerable<decimal> GetAmountByUseridAndCategories(int userId, IEnumerable<Category> categories)
+        private IEnumerable<decimal> GetAmountByUseridAndCategories(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
         {
-            return GetUsersTransactionId(userId)
+            return transactions
                 .Join(
                     categories,
                     t => t.CategoryId,
