@@ -64,9 +64,9 @@ namespace MoneyManager
                         new Category[]
                         {
                             new Category { Name = "Transportation", Type = 0}, //1 - income, 0 - expense
-                            new Category { Name = "Food", Type = 0},
-                            new Category { Name = "Travelling", Type = 0},
-                            new Category {  Name = "Clothes", Type = 0},
+                            new Category { Name = "Taxi", Type = 0, ParentId = 1},
+                            new Category { Name = "Subway", Type = 0, ParentId = 1},
+                            new Category {  Name = "Train", Type = 0, ParentId = 1},
                             new Category {  Name = "Pets", Type = 0},
                             new Category {  Name = "Movies and TV", Type = 0},
                             new Category {  Name = "Job", Type = 1},
@@ -76,14 +76,15 @@ namespace MoneyManager
                             new Category {  Name = "Freelance", Type = 1},
                             new Category {  Name = "Netflix subscription", Type = 0, ParentId = 6},
                             new Category {  Name = "Cinema tickets", Type = 0, ParentId = 6},
-                            new Category {  Name = "Bills", Type = 0},
+                            new Category {  Name = "Pet's food", Type = 0, ParentId = 5},
+                            new Category {  Name = "Pet's toys", Type = 0, ParentId = 5},
                         });
                     applicationContext.SaveChanges();
 
                     Transaction[] transactions = new Transaction[1000];
                     for(int i = 0; i <1000; i++)
                     {
-                        transactions[i] = new Transaction { Date = RandomDay(), Amount = (decimal)gen.Next(1, 110000), AssetId = gen.Next(1, 23), CategoryId = gen.Next(1, 14) };
+                        transactions[i] = new Transaction { Date = RandomDay(), Amount = (decimal)gen.Next(1, 110000), AssetId = gen.Next(1, 23), CategoryId = gen.Next(1, 15) };
                     }
                     applicationContext.Transactions.AddRange(transactions);
                     applicationContext.SaveChanges();
