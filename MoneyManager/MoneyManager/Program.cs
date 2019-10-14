@@ -18,13 +18,12 @@ namespace MoneyManager
             string connectionString = config.GetConnectionString("DefaultConnection");
 
             var unitOfWork = new UnitOfWork(connectionString);
-            foreach (var obj in unitOfWork.GetOrderedTransactions(1))
+
+            DateTime d = new DateTime(2019, 8, 1);
+            foreach (var obj in unitOfWork.GetParentCategoriesAmount(6, false))
             {
-                foreach (var objj in obj)
-                {
-                    Console.WriteLine(objj);
-                }
-                Console.WriteLine();
+
+                Console.WriteLine(obj);
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine();
