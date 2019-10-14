@@ -96,8 +96,8 @@ namespace MoneyManager
             var incomeCategories = Categories.GetAll().Where(c => c.Type == 1);
             var expensesCategories = Categories.GetAll().Where(c => c.Type == 0);
             var transactions = GetUsersTransactionId(userId);
-            var incomeEnumerable = GetAmountByUseridAndCategories(transactions, incomeCategories);
-            var expensesEnumerable = GetAmountByUseridAndCategories(transactions, expensesCategories);
+            var incomeEnumerable = GetAmountByTransactionsAndCategories(transactions, incomeCategories);
+            var expensesEnumerable = GetAmountByTransactionsAndCategories(transactions, expensesCategories);
             decimal balance = incomeEnumerable.Sum();
             balance = expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses);
             var user = Users.Get(userId);
@@ -110,7 +110,7 @@ namespace MoneyManager
             };
         }
 
-        public IEnumerable<object> GetAssetsWhithBalance(int userId)
+        public IEnumerable<object> GetAssetsWithBalance(int userId)
         {
             var incomeCategories = Categories.GetAll().Where(c => c.Type == 1);
             var expensesCategories = Categories.GetAll().Where(c => c.Type == 0);
@@ -213,22 +213,64 @@ namespace MoneyManager
             }
         }
 
-        private decimal GetIncomeBalance(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
+        public IEnumerable<object> GetParentCategoriesAmount(int userId, bool income)
         {
-            var incomeEnumerable = GetAmountByUseridAndCategories(transactions, categories);
-            return incomeEnumerable.Sum();
+            var parentCategoriesId = new List<int>();
+            foreach (var c in Categories.GetAll()) parentCategoriesId.Add(c.ParentId);
+
+            var categories = new List<Category>();
+            foreach (int id in parentCategoriesId.Distinct())
+            {
+                if (id != 0)
+                {
+                    categories.Add(Categories.Get(id));
+                }
+                else
+                {
+                    continue;
+                }
+
+                if (income)
+                {
+                    if (categories.Last().Type == 0) categories.Remove(categories.Last());
+                }
+                else
+                {
+                    if (categories.Last().Type == 1) categories.Remove(categories.Last());
+                }
+            }
+
+            var monthCategory = Transactions.GetAll().Where(t => t.Date.Month == DateTime.Today.Month)
+                .Select(t => Categories.Get(t.CategoryId));
+
+            return categories.Join(
+                monthCategory.Distinct(),
+                c => c.Id,
+                t => t.Id,
+                (c, t) => new
+                {
+                    c.Name,
+                    Amount = categories.Count
+                }
+            );
         }
 
-        private decimal GetExpensesBalance(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
-        {
-            var expensesEnumerable = GetAmountByUseridAndCategories(transactions, categories);
-            decimal balance = 0;
-            return expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses);
-        }
+        //private decimal GetIncomeBalance(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
+        //{
+        //    var incomeEnumerable = GetAmountByTransactionsAndCategories(transactions, categories);
+        //    return incomeEnumerable.Sum();
+        //}
+
+        //private decimal GetExpensesBalance(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
+        //{
+        //    var expensesEnumerable = GetAmountByTransactionsAndCategories(transactions, categories);
+        //    decimal balance = 0;
+        //    return expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses);
+        //}
 
         //private decimal GetBalanceByCategories
 
-        private IEnumerable<decimal> GetAmountByUseridAndCategories(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
+        private IEnumerable<decimal> GetAmountByTransactionsAndCategories(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
         {
             return transactions
                 .Join(
