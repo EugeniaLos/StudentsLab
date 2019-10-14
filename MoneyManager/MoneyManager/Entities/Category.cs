@@ -17,6 +17,6 @@ namespace MoneyManager
 
         public List<Transaction> transactions { get; set; }
 
-        //public int ParentId { get; set; }
+        public int ParentId { get; set; }
     }
 }

@@ -68,19 +68,22 @@ namespace MoneyManager
                             new Category { Name = "Travelling", Type = 0},
                             new Category {  Name = "Clothes", Type = 0},
                             new Category {  Name = "Pets", Type = 0},
-                            new Category {  Name = "Movies", Type = 0},
-                            new Category {  Name = "Salary", Type = 1},
-                            new Category { Name = "Bonus", Type = 1},
-                            new Category {  Name = "Overtime money", Type = 1},
+                            new Category {  Name = "Movies and TV", Type = 0},
+                            new Category {  Name = "Job", Type = 1},
+                            new Category {  Name = "Salary", Type = 1, ParentId = 7},
+                            new Category { Name = "Bonus", Type = 1, ParentId = 7},
+                            new Category {  Name = "Overtime money", Type = 1, ParentId = 7},
+                            new Category {  Name = "Freelance", Type = 1},
+                            new Category {  Name = "Netflix subscription", Type = 0, ParentId = 6},
+                            new Category {  Name = "Cinema tickets", Type = 0, ParentId = 6},
                             new Category {  Name = "Bills", Type = 0},
-                            new Category {  Name = "Netflix subscription", Type = 0},
                         });
                     applicationContext.SaveChanges();
 
                     Transaction[] transactions = new Transaction[1000];
                     for(int i = 0; i <1000; i++)
                     {
-                        transactions[i] = new Transaction { Date = RandomDay(), Amount = (decimal)gen.Next(1, 110000), AssetId = gen.Next(1, 23), CategoryId = gen.Next(1, 11) };
+                        transactions[i] = new Transaction { Date = RandomDay(), Amount = (decimal)gen.Next(1, 110000), AssetId = gen.Next(1, 23), CategoryId = gen.Next(1, 14) };
                     }
                     applicationContext.Transactions.AddRange(transactions);
                     applicationContext.SaveChanges();
