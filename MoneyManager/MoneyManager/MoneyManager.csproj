@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20191015082218_unwantedColumnCleanup.cs" />
+    <Compile Remove="Migrations\20191015082218_unwantedColumnCleanup.Designer.cs" />
+    <Compile Remove="Migrations\20191015101904_InitialCreate.cs" />
+    <Compile Remove="Migrations\20191015101904_InitialCreate.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.6">
