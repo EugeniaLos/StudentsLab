@@ -8,13 +8,13 @@ namespace MoneyManager.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            var b = migrationBuilder.Sql(@"UPDATE dbo.Transactions SET dbo.Transactions.CategoryId = dbo.Categories.ParentId
-                                           FROM dbo.Transactions
-                                           INNER JOIN dbo.Categories
-                                           ON dbo.Transactions.CategoryId = dbo.Categories.Id
-                                           WHERE dbo.Categories.Id
-                                           IN (SELECT dbo.Categories.Id FROM dbo.Categories WHERE dbo.Categories.ParentId != 0)");
-            migrationBuilder.DropColumn("ParentId", "dbo.Categories");
+            var b = migrationBuilder.Sql(@"UPDATE dbo.Transaction SET dbo.Transaction.CategoryId = dbo.Category.ParentId
+                                           FROM dbo.Transaction
+                                           INNER JOIN dbo.Category
+                                           ON dbo.Transaction.CategoryId = dbo.Category.Id
+                                           WHERE dbo.Category.Id
+                                           IN (SELECT dbo.Category.Id FROM dbo.Category WHERE dbo.Category.ParentId IS NOT NULL)");
+            migrationBuilder.DropColumn("ParentId", "dbo.Category");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

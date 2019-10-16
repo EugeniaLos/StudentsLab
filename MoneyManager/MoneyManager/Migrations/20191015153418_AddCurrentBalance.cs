@@ -6,23 +6,23 @@ namespace MoneyManager.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<decimal>("CurBalance", "Assets", nullable: true);
-            migrationBuilder.Sql(@"UPDATE Assets 
-Set CurrentBalance = amountTable.Amount
-From Assets
-inner join (SELECT table1.AssetId,
-		table1.deb - table2.cred AS Amount
-FROM  (SELECT AssetId, sum(Amount) deb
-	FROM Transactions 
-	Inner Join Categories on Transactions.CategoryId = Categories.Id 
-	where categories.Type = 1
-	group by AssetId) table1 JOIN (SELECT AssetId, sum(Amount) cred
-	FROM Transactions 
-	Inner Join Categories on Transactions.CategoryId = Categories.Id 
-	where categories.Type = 0
-	group by AssetId) 
-	table2 on table1.AssetId = table2.AssetId) amountTable
-	on Assets.Id = amountTable.AssetId");
+            migrationBuilder.AddColumn<decimal>("CurrentBalance", "Asset", nullable: true);
+            migrationBuilder.Sql(@"UPDATE Asset 
+                                    Set CurrentBalance = amountTable.Amount
+                                    From Asset
+                                    inner join (SELECT table1.AssetId,
+   		                            table1.deb - table2.cred AS Amount
+                                    FROM  (SELECT AssetId, sum(Amount) deb
+	                                FROM Transaction 
+	                                Inner Join Category on Transaction.CategoryId = Category.Id 
+	                                where Category.Type = 1
+	                                group by AssetId) table1 JOIN (SELECT AssetId, sum(Amount) cred
+	                                FROM Transaction 
+	                                Inner Join Category on Transaction.CategoryId = Category.Id 
+	                                where Category.Type = 0
+	                                group by AssetId) 
+	                                table2 on table1.AssetId = table2.AssetId) amountTable
+	                                on Asset.Id = amountTable.AssetId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
