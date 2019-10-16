@@ -210,20 +210,21 @@ namespace MoneyManager
                     expenses = expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses),
                     g.First().Date.Month,
                 };
+
             }
         }
 
         public IEnumerable<object> GetParentCategoriesAmount(int userId, bool income)
         {
-            var parentCategoriesId = new List<int>();
+            var parentCategoriesId = new List<int?>();
             foreach (var c in Categories.GetAll()) parentCategoriesId.Add(c.ParentId);
 
             var categories = new List<Category>();
-            foreach (int id in parentCategoriesId.Distinct())
+            foreach (int? id in parentCategoriesId.Distinct())
             {
-                if (id != 0)
+                if (id != null)
                 {
-                    categories.Add(Categories.Get(id));
+                    categories.Add(Categories.Get((int)id));
                 }
                 else
                 {

@@ -63,17 +63,17 @@ namespace MoneyManager
                     applicationContext.AddRange(
                         new Category[]
                         {
-                            new Category { Name = "Transportation", Type = 0}, //1 - income, 0 - expense
+                            new Category { Name = "Transportation", Type = 0, ParentId = null}, //1 - income, 0 - expense
                             new Category { Name = "Taxi", Type = 0, ParentId = 1},
                             new Category { Name = "Subway", Type = 0, ParentId = 1},
                             new Category {  Name = "Train", Type = 0, ParentId = 1},
-                            new Category {  Name = "Pets", Type = 0},
-                            new Category {  Name = "Movies and TV", Type = 0},
-                            new Category {  Name = "Job", Type = 1},
+                            new Category {  Name = "Pets", Type = 0, ParentId = null},
+                            new Category {  Name = "Movies and TV", Type = 0, ParentId = null},
+                            new Category {  Name = "Job", Type = 1, ParentId = null},
                             new Category {  Name = "Salary", Type = 1, ParentId = 7},
                             new Category { Name = "Bonus", Type = 1, ParentId = 7},
                             new Category {  Name = "Overtime money", Type = 1, ParentId = 7},
-                            new Category {  Name = "Freelance", Type = 1},
+                            new Category {  Name = "Freelance", Type = 1, ParentId = null},
                             new Category {  Name = "Netflix subscription", Type = 0, ParentId = 6},
                             new Category {  Name = "Cinema tickets", Type = 0, ParentId = 6},
                             new Category {  Name = "Pet's food", Type = 0, ParentId = 5},

@@ -11,18 +11,13 @@ namespace MoneyManager
         public int Id { get; set; }
 
         [Required]
+        [StringLength(64)]
         public string Name { get; set; }
 
         [Required]
-        [DataType(DataType.EmailAddress)]
         [EmailAddress]
+        [StringLength(64)]
         public string Email { get; set; }
-
-        //[Required]
-        public string Hash { get; set; }
-
-        //[Required]
-        public string Salt { get; set; }
 
         public List<Asset> Assets { get; set; }
     }

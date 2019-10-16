@@ -15,6 +15,7 @@ namespace MoneyManager
         public Category Category { get; set; }
 
         [Required]
+        [DataType("decimal(16 ,3")]
         public decimal Amount { get; set; }
 
         [Required]

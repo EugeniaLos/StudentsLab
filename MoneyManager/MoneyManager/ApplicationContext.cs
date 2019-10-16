@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace MoneyManager
 {
@@ -25,10 +26,14 @@ namespace MoneyManager
         //public bool FirstCreated { get; private set; }
         public bool IsEmpty { get; private set; }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    //FirstCreated = true;
-        //    base.OnModelCreating(modelBuilder);
-        //}
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                // equivalent of modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+                entityType.Relational().TableName = entityType.DisplayName();
+            }
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

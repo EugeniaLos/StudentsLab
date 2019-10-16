@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MoneyManager
 {
@@ -10,6 +11,7 @@ namespace MoneyManager
         public int Id { get; set; }
 
         [Required]
+        [StringLength(64)]
         public string Name { get; set; }
 
         [Required]
@@ -17,6 +19,10 @@ namespace MoneyManager
 
         public List<Transaction> transactions { get; set; }
 
-        public int ParentId { get; set; }
+
+        public int? ParentId { get; set; }
+
+        [ForeignKey("ParentId")]
+        public virtual Category Parent { get; set; }
     }
 }
