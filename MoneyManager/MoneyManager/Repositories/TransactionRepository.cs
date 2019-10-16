@@ -7,40 +7,19 @@ using System.Text;
 
 namespace MoneyManager.Repositories
 {
-    public class TransactionRepository: IRepository<Transaction>
+    public class TransactionRepository: Repository<Transaction>
     {
-        private ApplicationContext context;
-
-        public TransactionRepository(ApplicationContext context)
-        {
-            this.context = context;
-        }
-
-        public IEnumerable<Transaction> GetAll()
-        {
-            return context.Transactions;
-        }
-
-        public void Create(Transaction Transaction)
-        {
-            context.Transactions.Add(Transaction);
-        }
-
-        public void Delete(int id)
-        {
-            Transaction Transaction = context.Transactions.Find(id);
-            if (Transaction != null)
-                context.Transactions.Remove(Transaction);
-        }
+        public TransactionRepository(ApplicationContext context) : base(context) { }
 
         public Transaction Get(int id)
         {
             return context.Transactions.First(t => t.Id == id);
         }
 
-        public void Update(Transaction transaction)
+        public IEnumerable<Transaction> CurrentMonth()
         {
-            context.Entry(transaction).State = EntityState.Modified;
+            return context.Transactions.Where(u => u.Date.Month == DateTime.Today.Month)
+                .Where(u => u.Date.Year == DateTime.Today.Year);
         }
     }
 }

@@ -1,19 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MoneyManager
 {
-    public interface IRepository<T> where T : class
+    public abstract class Repository<T> where T : class
     {
-        IEnumerable<T> GetAll();
+        public ApplicationContext context;
 
-        //T Get(int id);
+        public Repository(ApplicationContext context)
+        {
+            this.context = context;
+        }
 
-        void Create(T item);
+        public virtual IEnumerable<T> GetAll()
+        {
+            return context.Set<T>().AsEnumerable();
+        }
 
-        void Update(T item);
+        public virtual void Create(T item)
+        {
+            context.Set<T>().Add(item);
+        }
+        public virtual void Update(T item)
+        {
+            context.Set<T>().Update(item);
+        }
 
-        void Delete(int id);
+        public virtual void Delete(int id)
+        {
+            T item = context.Set<T>().Find(id);
+            if (item != null)
+                context.Set<T>().Remove(item);
+        }
+
     }
 }

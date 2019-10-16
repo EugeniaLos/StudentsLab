@@ -6,41 +6,18 @@ using System.Text;
 
 namespace MoneyManager.Repositories
 {
-    public class UserRepository: IRepository<User>
+    public class UserRepository: Repository<User>
     {
-
-        private ApplicationContext context;
-
-        public UserRepository(ApplicationContext context)
-        {
-            this.context = context;
-        }
-
-        public IEnumerable<User> GetAll()
-        {
-            return context.Users;
-        }
-
-        public void Create(User user)
-        {
-            context.Users.Add(user);
-        }
-
-        public void Delete(int id)
-        {
-            User User = context.Users.Find(id);
-            if (User != null)
-                context.Users.Remove(User);
-        }
+        public UserRepository(ApplicationContext context) : base(context) { }
 
         public User Get(int id)
         {
             return context.Users.First(u => u.Id == id);
         }
 
-        public void Update(User user)
+        public IEnumerable<object> GetSortedUsers()
         {
-            context.Entry(user).State = EntityState.Modified;
+            return context.Users.OrderBy(u => u.Name).Select(u => new { id = u.Id, Name = u.Name, Email = u.Email });
         }
     }
 }

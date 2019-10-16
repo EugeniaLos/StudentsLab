@@ -64,32 +64,27 @@ namespace MoneyManager
             return Users.GetAll().First(u => u.Email == email);
         }
 
-        public IEnumerable<object> GetSortedUsers()
-        {
-            return Users.GetAll().OrderBy(u => u.Name).Select(u => new { id = u.Id, Name = u.Name, Email = u.Email });
-        }
-
         public void Dispose()
         {
             applicationContext.Dispose();
         }
 
-        public void DeleteCurrentMonthUsersTransaction(int userId)
-        {
-            var monthTransaction = Transactions.GetAll().Where(u => u.Date.Month == DateTime.Today.Month)
-                .Where(u => u.Date.Year == DateTime.Today.Year);
-            var suitedAssetsId = Assets.GetAll().Where(a => a.UserId == userId);
-            var removableTransactionId = monthTransaction
-                .Join(
-                    suitedAssetsId,
-                    t => t.AssetId,
-                    a => a.Id,
-                    (transaction, asset) => transaction.Id);
-            foreach (int id in removableTransactionId)
-            {
-                Transactions.Delete(id);
-            }
-        }
+        //public void DeleteCurrentMonthUsersTransaction(int userId)
+        //{
+        //    var monthTransaction = Transactions.GetAll().Where(u => u.Date.Month == DateTime.Today.Month)
+        //        .Where(u => u.Date.Year == DateTime.Today.Year);
+        //    var suitedAssetsId = Assets.GetAll().Where(a => a.UserId == userId);
+        //    var removableTransactionId = monthTransaction
+        //        .Join(
+        //            suitedAssetsId,
+        //            t => t.AssetId,
+        //            a => a.Id,
+        //            (transaction, asset) => transaction.Id);
+        //    foreach (int id in removableTransactionId)
+        //    {
+        //        Transactions.Delete(id);
+        //    }
+        //}
 
         public object GetBalance(int userId)
         {
