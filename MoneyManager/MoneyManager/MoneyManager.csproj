@@ -10,6 +10,8 @@
     <Compile Remove="Migrations\20191015082218_unwantedColumnCleanup.Designer.cs" />
     <Compile Remove="Migrations\20191015101904_InitialCreate.cs" />
     <Compile Remove="Migrations\20191015101904_InitialCreate.Designer.cs" />
+    <Compile Remove="Migrations\20191015125543_AddColumnToAssets.cs" />
+    <Compile Remove="Migrations\20191015125543_AddColumnToAssets.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +25,10 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

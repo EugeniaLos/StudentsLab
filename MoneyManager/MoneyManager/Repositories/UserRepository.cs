@@ -19,5 +19,11 @@ namespace MoneyManager.Repositories
         {
             return context.Users.OrderBy(u => u.Name).Select(u => new { id = u.Id, Name = u.Name, Email = u.Email });
         }
+
+        public User GetUserByEmail(string email)
+        {
+            return context.Users.First(u => u.Email == email);
+        }
+
     }
 }
