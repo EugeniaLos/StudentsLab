@@ -8,9 +8,8 @@ namespace BusinessLayer
     {
         static void Main(string[] args)
         {
-            var businessLogic = new BusinessLogic(); 
-            businessLogic.DeleteCurrentMonthUsersTransaction(10);
-            foreach (var V in businessLogic.GetAssetsWithBalance(2))
+            var businessLogic = new BusinessLogic();
+            foreach (var V in businessLogic.GetOrderedTransactions(8))
             {
                 Console.WriteLine(V);
                 Console.WriteLine();

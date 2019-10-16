@@ -31,28 +31,13 @@ namespace MoneyManager
             }
         }
 
-        public UserRepository Users
-        {
-            get { return userRepository ?? (userRepository = new UserRepository(applicationContext)); }
-        }
+        public UserRepository Users => userRepository ?? (userRepository = new UserRepository(applicationContext));
 
-        public AssetRepository Assets
-        {
-            get { return assetRepository ?? (assetRepository = new AssetRepository(applicationContext)); }
-        }
+        public AssetRepository Assets => assetRepository ?? (assetRepository = new AssetRepository(applicationContext));
 
-        public CategoryRepository Categories
-        {
-            get { return categoryRepository ?? (categoryRepository = new CategoryRepository(applicationContext)); }
-        }
+        public CategoryRepository Categories => categoryRepository ?? (categoryRepository = new CategoryRepository(applicationContext));
 
-        public TransactionRepository Transactions
-        {
-            get
-            {
-                return transactionRepository ?? (transactionRepository = new TransactionRepository(applicationContext));
-            }
-        }
+        public TransactionRepository Transactions => transactionRepository ?? (transactionRepository = new TransactionRepository(applicationContext));
 
         public void Save()
         {

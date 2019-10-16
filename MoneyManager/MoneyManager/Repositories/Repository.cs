@@ -9,7 +9,7 @@ namespace MoneyManager
     {
         public ApplicationContext context;
 
-        public Repository(ApplicationContext context)
+        protected Repository(ApplicationContext context)
         {
             this.context = context;
         }

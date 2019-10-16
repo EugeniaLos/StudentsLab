@@ -15,13 +15,13 @@ namespace MoneyManager
 
         public static decimal NextDecimal(this Random rng)
         {
-            byte scale = (byte)rng.Next(29);
+            var scale = (byte) rng.Next(29);
             bool sign = rng.Next(2) == 1;
             return new decimal(rng.NextInt32(),
-                               rng.NextInt32(),
-                               rng.NextInt32(),
-                               sign,
-                               scale);
+                rng.NextInt32(),
+                rng.NextInt32(),
+                sign,
+                scale);
         }
     }
 }

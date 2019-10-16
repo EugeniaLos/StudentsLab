@@ -81,8 +81,8 @@ namespace MoneyManager
                         });
                     applicationContext.SaveChanges();
 
-                    Transaction[] transactions = new Transaction[1000];
-                    for(int i = 0; i <1000; i++)
+                    var transactions = new Transaction[1000];
+                    for(int i = 0; i < 1000; i++)
                     {
                         transactions[i] = new Transaction { Date = RandomDay(), Amount = (decimal)gen.Next(1, 110000), AssetId = gen.Next(1, 23), CategoryId = gen.Next(1, 15) };
                     }

@@ -100,9 +100,9 @@ namespace BusinessLayer
             }
         }
 
-        public IEnumerable<IEnumerable<object>> GetOrderedTransactions(int userid)
+        public IEnumerable<object> GetOrderedTransactions(int userid)
         {
-            yield return GetUsersTransactionId(userid).OrderByDescending(t => t.Date).Select(t => new
+            return GetUsersTransactionId(userid).OrderByDescending(t => t.Date).ThenBy(t => unitOfWork.Assets.Get(t.AssetId).Name).ThenBy(t => unitOfWork.Categories.Get(t.CategoryId).Name).Select(t => new
             {
                 Asset = unitOfWork.Assets.Get(t.AssetId).Name,
                 Category = unitOfWork.Categories.Get(t.CategoryId).Name,
@@ -110,22 +110,6 @@ namespace BusinessLayer
                 t.Date,
                 t.Comment
             });
-            yield return GetUsersTransactionId(userid).OrderBy(t => unitOfWork.Assets.Get(t.AssetId).Name).Select(t => new
-            {
-                Asset = unitOfWork.Assets.Get(t.AssetId).Name,
-                Category = unitOfWork.Categories.Get(t.CategoryId).Name,
-                t.Amount,
-                t.Date,
-                t.Comment
-            }); ;
-            yield return GetUsersTransactionId(userid).OrderBy(t => unitOfWork.Categories.Get(t.CategoryId).Name).Select(t => new
-            {
-                Asset = unitOfWork.Assets.Get(t.AssetId).Name,
-                Category = unitOfWork.Categories.Get(t.CategoryId).Name,
-                t.Amount,
-                t.Date,
-                t.Comment
-            }); ;
         }
 
         public IEnumerable<object> BalancePerPeriod(int userId, DateTime startDate, DateTime endDate)
@@ -226,6 +210,7 @@ namespace BusinessLayer
                         b = t.Id
                     }
                 );
+
             foreach (var id in userTransactionsId)
             {
                 yield return unitOfWork.Transactions.Get(id.b);
