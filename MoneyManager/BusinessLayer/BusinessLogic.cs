@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using BusinessLayer.DataModels;
 
 namespace BusinessLayer
 {
@@ -22,126 +23,184 @@ namespace BusinessLayer
 
         public void DeleteCurrentMonthUsersTransaction(int userId)
         {
-            var monthTransaction = unitOfWork.Transactions.CurrentMonth();
-            var suitedAssetsId = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId);
-            var removableTransactionId = monthTransaction
-                .Join(
-                    suitedAssetsId,
+            var removableTransaction = unitOfWork.Transactions.CurrentMonth()
+                .Join(unitOfWork.Assets.GetAll()
+                        .Where(a => a.UserId == userId),
                     t => t.AssetId,
                     a => a.Id,
-                    (transaction, asset) => transaction.Id);
-            foreach (int id in removableTransactionId)
+                    (transaction,
+                        asset) => transaction);
+
+            foreach (var transaction in removableTransaction)
             {
-                unitOfWork.Transactions.Delete(id);
+                unitOfWork.Transactions.Delete(transaction.Id);
             }
             unitOfWork.Save();
         }
 
-        public object GetBalance(int userId)
+        public UserBalance GetBalance(int userId)
         {
-            var incomeCategories = unitOfWork.Categories.GetAll().Where(c => c.Type == 1);
-            var expensesCategories = unitOfWork.Categories.GetAll().Where(c => c.Type == 0);
-            var transactions = GetUsersTransactionId(userId);
-            var incomeEnumerable = GetAmountByTransactionsAndCategories(transactions, incomeCategories);
-            var expensesEnumerable = GetAmountByTransactionsAndCategories(transactions, expensesCategories);
-            decimal balance = incomeEnumerable.Sum();
-            balance = expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses);
+            decimal balance = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId)
+                                  .Join(unitOfWork.Transactions.GetAll(), a => a.Id, t => t.AssetId,
+                                      (asset, transaction) => transaction)
+                                  .Join(unitOfWork.Categories.GetAll().Where(c => c.Type == 1), t => t.CategoryId,
+                                      c => c.Id,
+                                      (transaction, category) => transaction.Amount).Sum() - unitOfWork.Assets.GetAll()
+                                  .Where(a => a.UserId == userId).Join(unitOfWork.Transactions.GetAll(), a => a.Id,
+                                      t => t.AssetId, (asset, transaction) => transaction)
+                                  .Join(unitOfWork.Categories.GetAll().Where(c => c.Type == 0), t => t.CategoryId,
+                                      c => c.Id,
+                                      (transaction, category) => transaction.Amount).Sum();
             var user = unitOfWork.Users.Get(userId);
-            return new
+
+            return new UserBalance()
             {
-                balance,
-                user.Id,
-                user.Name,
-                user.Email
+                Balance = balance,
+                UserId = user.Id,
+                UserName = user.Name,
+                UserEmail = user.Email
             };
         }
 
-        public IEnumerable<object> GetAssetsWithBalance(int userId)
+        public IEnumerable<AssetBalance> GetAssetsWithBalance(int userId)
         {
-            var incomeCategories = unitOfWork.Categories.GetAll().Where(c => c.Type == 1);
-            var expensesCategories = unitOfWork.Categories.GetAll().Where(c => c.Type == 0);
-            var assets = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId);
-            Dictionary<Asset, IEnumerable<Transaction>> transactions = assets.ToDictionary(asset => asset,
-                asset => unitOfWork.Transactions.GetAll()
-                    .Where(t => t.AssetId == asset.Id));
-            Dictionary<Asset, IEnumerable<decimal>> plusBalance = transactions.Keys.ToDictionary(asset => asset,
-                asset => transactions[asset]
-                    .Join(incomeCategories,
-                        t => t.CategoryId,
-                        c => c.Id,
-                        (transaction,
-                            category) => transaction.Amount));
-            Dictionary<Asset, IEnumerable<decimal>> minusBalance = transactions.Keys.ToDictionary(asset => asset,
-                asset => transactions[asset]
-                    .Join(expensesCategories,
-                        t => t.CategoryId,
-                        c => c.Id,
-                        (transaction,
-                            category) => transaction.Amount));
-            Dictionary<Asset, decimal> assetBalance = plusBalance.Keys.ToDictionary(key => key,
-                key => plusBalance[key]
-                    .Sum());
-            foreach (var key in minusBalance.Keys)
-            {
-                foreach (var expenses in minusBalance[key])
-                {
-                    assetBalance[key] -= expenses;
-                }
-            }
+            var deb = unitOfWork.Assets.GetAll()
+                .Where(a => a.UserId == userId)
+                .Join(unitOfWork.Transactions.GetAll(),
+                    a => a.Id,
+                    t => t.AssetId,
+                    (asset, transaction) => transaction)
+                .Join(unitOfWork.Categories.GetAll()
+                        .Where(c => c.Type == 1),
+                    t => t.CategoryId,
+                    c => c.Id,
+                    (transaction, category) => transaction)
+                .GroupBy(t => t.AssetId);
 
-            foreach (var key in assetBalance.Keys)
-            {
-                yield return new
-                {
-                    key.Id,
-                    key.Name,
-                    sum = assetBalance[key]
-                };
-            }
+            var cred = unitOfWork.Assets.GetAll()
+                .Where(a => a.UserId == userId)
+                .Join(unitOfWork.Transactions.GetAll(),
+                    a => a.Id,
+                    t => t.AssetId,
+                    (asset, transaction) => transaction)
+                .Join(unitOfWork.Categories.GetAll()
+                        .Where(c => c.Type == 0),
+                    t => t.CategoryId,
+                    c => c.Id,
+                    (transaction, category) => transaction)
+                .GroupBy(t => t.AssetId);
+
+            return deb.AsEnumerable()
+                .Join(cred.AsEnumerable(),
+                    d => d.Key,
+                    c => c.Key,
+                    (d, c) => new AssetBalance
+                    {
+                        AssetId = d.Key,
+                        AssetName = unitOfWork.Assets.Get(d.Key).Name,
+                        Balance =
+                            d.AsEnumerable()
+                                .Select(d => d.Amount)
+                                .Sum() -
+                            c.AsEnumerable()
+                                .Select(c => c.Amount)
+                                .Sum()
+                    });
         }
 
-        public IEnumerable<object> GetOrderedTransactions(int userid)
+        public IEnumerable<OrderedTransactions> GetOrderedTransactions(int userid)
         {
-            return GetUsersTransactionId(userid).OrderByDescending(t => t.Date).ThenBy(t => unitOfWork.Assets.Get(t.AssetId).Name).ThenBy(t => unitOfWork.Categories.Get(t.CategoryId).Name).Select(t => new
-            {
-                Asset = unitOfWork.Assets.Get(t.AssetId).Name,
-                Category = unitOfWork.Categories.Get(t.CategoryId).Name,
-                t.Amount,
-                t.Date,
-                t.Comment
-            });
+            return GetUsersTransactionId(userid).OrderByDescending(t => t.Date)
+                .ThenBy(t => unitOfWork.Assets.Get(t.AssetId).Name)
+                .ThenBy(t => unitOfWork.Categories.Get(t.CategoryId).Name).Select(t => new OrderedTransactions
+                {
+                    AssetName = unitOfWork.Assets.Get(t.AssetId).Name,
+                    CategoryName = unitOfWork.Categories.Get(t.CategoryId).Name,
+                    Amount = t.Amount,
+                    Date = t.Date,
+                    Comment = t.Comment
+                });
         }
 
         public IEnumerable<object> BalancePerPeriod(int userId, DateTime startDate, DateTime endDate)
         {
-            var transactionsPerPeriod = GetUsersTransactionId(userId).Where(t => t.Date > startDate)
-                .Where(t => t.Date < endDate);
-            var incomeCategories = unitOfWork.Categories.GetAll().Where(c => c.Type == 1);
-            var expensesCategories = unitOfWork.Categories.GetAll().Where(c => c.Type == 0);
-            var transactionGroups = transactionsPerPeriod.OrderBy(t => t.Date).GroupBy(t => t.Date.Month);
-            foreach (var g in transactionGroups)
-            {
-                decimal balance = 0;
-                var incomeEnumerable = g
-                    .Join(
-                        incomeCategories,
-                        t => t.CategoryId,
-                        c => c.Id,
-                        (transaction, category) => transaction.Amount);
-                var expensesEnumerable = g
-                    .Join(
-                        expensesCategories,
-                        t => t.CategoryId,
-                        c => c.Id,
-                        (transaction, category) => transaction.Amount);
-                yield return new
-                {
-                    income = incomeEnumerable.Sum(),
-                    expenses = expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses),
-                    g.First().Date.Month,
-                };
+            //decimal income = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId)
+            //    .Join(unitOfWork.Transactions.GetAll().Where(t => t.Date > startDate)
+            //            .Where(t => t.Date < endDate), a => a.Id, t => t.AssetId,
+            //        (asset, transaction) => transaction)
+            //    .Join(unitOfWork.Categories.GetAll().Where(c => c.Type == 1), t => t.CategoryId,
+            //        c => c.Id,
+            //        (transaction, category) => transaction.Amount).Sum();
+            ////decimal expenses = unitOfWork.Assets.GetAll()
+            //    .Where(a => a.UserId == userId).Join(unitOfWork.Transactions.GetAll().Where(t => t.Date > startDate)
+            //            .Where(t => t.Date < endDate), a => a.Id,
+            //        t => t.AssetId, (asset, transaction) => transaction)
+            //    .Join(unitOfWork.Categories.GetAll().Where(c => c.Type == 0), t => t.CategoryId,
+            //        c => c.Id,
+            //        (transaction, category) => transaction.Amount).Sum();
+            //var user = unitOfWork.Users.Get(userId);
 
-            }
+            var income = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId).Join(unitOfWork.Transactions.GetAll()
+                .Where(t => t.Date > startDate)
+                .Where(t => t.Date < endDate), a => a.Id, t => t.AssetId, (asset, transaction) => transaction).Join(
+                unitOfWork.Categories.GetAll()
+                    .Where(c => c.Type == 1),
+                t => t.CategoryId,
+                c => c.Id,
+                (transaction, category) => transaction).OrderBy(t => t.Date).GroupBy(t => new { t.Date.Month, t.Date.Year });
+
+            var expenses = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId).Join(unitOfWork.Transactions.GetAll()
+                .Where(t => t.Date > startDate)
+                .Where(t => t.Date < endDate), a => a.Id, t => t.AssetId, (asset, transaction) => transaction).Join(
+                unitOfWork.Categories.GetAll()
+                    .Where(c => c.Type == 0),
+                t => t.CategoryId,
+                c => c.Id,
+                (transaction, category) => transaction).OrderBy(t => t.Date).GroupBy(t => new { t.Date.Month, t.Date.Year });
+
+            return income.AsEnumerable()
+                .Join(expenses.AsEnumerable(),
+                    i => i.Key,
+                    e => e.Key,
+                    (i, e) => new 
+                    {
+                        income = i.AsEnumerable()
+                        .Select(i => i.Amount)
+                        .Sum(),
+                        expenses = e.AsEnumerable()
+                            .Select(e => e.Amount)
+                            .Sum()
+                        
+                    });
+
+
+            //var transactionGroups = GetUsersTransactionId(userId).Where(t => t.Date > startDate)
+            //    .Where(t => t.Date < endDate).OrderBy(t => t.Date).GroupBy(t => t.Date.Month);
+            //var incomeCategories = unitOfWork.Categories.GetAll().Where(c => c.Type == 1);
+            //var expensesCategories = unitOfWork.Categories.GetAll().Where(c => c.Type == 0);
+            //foreach (var g in transactionGroups)
+            //{
+            //    decimal balance = 0;
+            //    var incomeEnumerable = g
+            //        .Join(
+            //            incomeCategories,
+            //            t => t.CategoryId,
+            //            c => c.Id,
+            //            (transaction, category) => transaction.Amount);
+            //    var expensesEnumerable = g
+            //        .Join(
+            //            expensesCategories,
+            //            t => t.CategoryId,
+            //            c => c.Id,
+            //            (transaction, category) => transaction.Amount);
+            //    yield return new
+            //    {
+            //        income = incomeEnumerable.Sum(),
+            //        expenses = expensesEnumerable.Aggregate(balance, (current, expenses) => current - expenses),
+            //        g.First().Date.Month,
+            //    };
+
+            //}
         }
 
         public IEnumerable<object> GetParentCategoriesAmount(int userId, bool income)
@@ -185,17 +244,6 @@ namespace BusinessLayer
                 }
             );
         }
-
-        private IEnumerable<decimal> GetAmountByTransactionsAndCategories(IEnumerable<Transaction> transactions, IEnumerable<Category> categories)
-        {
-            return transactions
-                .Join(
-                    categories,
-                    t => t.CategoryId,
-                    c => c.Id,
-                    (transaction, category) => transaction.Amount);
-        }
-
 
         private IEnumerable<Transaction> GetUsersTransactionId(int userId)
         {
