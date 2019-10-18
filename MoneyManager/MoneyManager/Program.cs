@@ -18,18 +18,6 @@ namespace MoneyManager
             string connectionString = config.GetConnectionString("DefaultConnection");
 
             var unitOfWork = new UnitOfWork(connectionString);
-
-
-
-            //DateTime d = new DateTime(2019, 8, 1);
-            //foreach (var obj in unitOfWork.GetParentCategoriesAmount(6, false))
-            //{
-
-            //    Console.WriteLine(obj);
-            //    Console.WriteLine();
-            //    Console.WriteLine();
-            //    Console.WriteLine();
-            //}
         }
     }
 }

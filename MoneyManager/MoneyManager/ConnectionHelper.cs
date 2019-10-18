@@ -17,6 +17,5 @@ namespace MoneyManager
             var config = builder.Build();
             return config.GetConnectionString("DefaultConnection");
         }
-        
     }
 }

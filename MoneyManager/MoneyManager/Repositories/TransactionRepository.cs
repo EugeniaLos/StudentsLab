@@ -11,11 +11,6 @@ namespace MoneyManager.Repositories
     {
         public TransactionRepository(ApplicationContext context) : base(context) { }
 
-        public Transaction Get(int id)
-        {
-            return context.Transactions.First(t => t.Id == id);
-        }
-
         public IEnumerable<Transaction> CurrentMonth()
         {
             return context.Transactions.Where(u => u.Date.Month == DateTime.Today.Month)

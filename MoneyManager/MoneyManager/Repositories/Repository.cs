@@ -35,5 +35,16 @@ namespace MoneyManager
                 context.Set<T>().Remove(item);
         }
 
+        public virtual void Delete(T item)
+        {
+            if (item != null)
+                context.Set<T>().Remove(item);
+        }
+
+        public T Get(int id)
+        {
+            return context.Set<T>().Find(id);
+        }
+
     }
 }

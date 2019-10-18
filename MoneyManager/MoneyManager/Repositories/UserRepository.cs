@@ -10,11 +10,6 @@ namespace MoneyManager.Repositories
     {
         public UserRepository(ApplicationContext context) : base(context) { }
 
-        public User Get(int id)
-        {
-            return context.Users.First(u => u.Id == id);
-        }
-
         public IEnumerable<object> GetSortedUsers()
         {
             return context.Users.OrderBy(u => u.Name).Select(u => new { id = u.Id, Name = u.Name, Email = u.Email });

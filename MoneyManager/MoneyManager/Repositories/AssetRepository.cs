@@ -9,10 +9,5 @@ namespace MoneyManager.Repositories
     public class AssetRepository : Repository<Asset>
     {
         public AssetRepository(ApplicationContext context) : base(context) { }
-
-        public Asset Get(int id)
-        {
-            return context.Assets.First(a => a.Id == id);
-        }
     }
 }

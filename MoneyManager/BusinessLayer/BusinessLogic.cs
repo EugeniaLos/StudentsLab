@@ -16,10 +16,7 @@ namespace BusinessLayer
             unitOfWork = new UnitOfWork(ConnectionHelper.GetConnectionString());
         }
 
-        public UnitOfWork UnitOfWork
-        {
-            get { return unitOfWork ?? (unitOfWork = new UnitOfWork(ConnectionHelper.GetConnectionString())); }
-        }
+        public UnitOfWork UnitOfWork => unitOfWork ??= new UnitOfWork(ConnectionHelper.GetConnectionString());
 
         public void DeleteCurrentMonthUsersTransaction(int userId)
         {
@@ -33,7 +30,7 @@ namespace BusinessLayer
 
             foreach (var transaction in removableTransaction)
             {
-                unitOfWork.Transactions.Delete(transaction.Id);
+                unitOfWork.Transactions.Delete(transaction);
             }
             unitOfWork.Save();
         }
@@ -159,46 +156,21 @@ namespace BusinessLayer
                     });
         }
 
-        public IEnumerable<object> GetParentCategoriesAmount(int userId, bool income)
+        public IEnumerable<CategoryAmount> GetParentCategoriesAmount(int userId, bool income)
         {
-            var parentCategoriesId = new List<int?>();
-            foreach (var c in unitOfWork.Categories.GetAll()) parentCategoriesId.Add(c.ParentId);
-
-            var categories = new List<Category>();
-            foreach (int? id in parentCategoriesId.Distinct())
+            int type = 0;
+            if (income)
             {
-                if (id != null)
-                {
-                    categories.Add(unitOfWork.Categories.Get((int)id));
-                }
-                else
-                {
-                    continue;
-                }
-
-                if (income)
-                {
-                    if (categories.Last().Type == 0) categories.Remove(categories.Last());
-                }
-                else
-                {
-                    if (categories.Last().Type == 1) categories.Remove(categories.Last());
-                }
+                type = 1;
             }
 
-            var monthCategory = unitOfWork.Transactions.GetAll().Where(t => t.Date.Month == DateTime.Today.Month)
-                .Select(t => unitOfWork.Categories.Get(t.CategoryId));
-
-            return categories.Join(
-                monthCategory.Distinct(),
-                c => c.Id,
-                t => t.Id,
-                (c, t) => new
-                {
-                    c.Name,
-                    Amount = categories.Count
-                }
-            );
+            return unitOfWork.Assets.GetAll().Where(a => a.UserId == userId).Join(
+                unitOfWork.Transactions.GetAll().Where(t => t.Date.Year == DateTime.Today.Year)
+                    .Where(t => t.Date.Month == DateTime.Today.Month), a => a.Id, t => t.AssetId,
+                (asset, transaction) => transaction).Join(unitOfWork.Categories.GetAll().Where(c => c.Type == type).Where(c => c.ParentId == null),
+                t => t.CategoryId, c => c.Id,
+                (transaction, category) => new CategoryAmount()
+                    {CategoryName = category.Name, Amount = transaction.Amount}).OrderByDescending(t => t.Amount).ThenBy(t => t.CategoryName);
         }
 
         private IEnumerable<Transaction> GetUsersTransactionId(int userId)
