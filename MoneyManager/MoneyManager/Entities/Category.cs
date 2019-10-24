@@ -17,8 +17,7 @@ namespace MoneyManager
         [Required]
         public int Type { get; set; }
 
-        public List<Transaction> transactions { get; set; }
-
+        public virtual List<Transaction> Transactions { get; set; }
 
         public int? ParentId { get; set; }
 

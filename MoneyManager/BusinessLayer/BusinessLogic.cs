@@ -20,13 +20,9 @@ namespace BusinessLayer
 
         public void DeleteCurrentMonthUsersTransaction(int userId)
         {
-            var removableTransaction = unitOfWork.Transactions.CurrentMonth()
-                .Join(unitOfWork.Assets.GetAll()
-                        .Where(a => a.UserId == userId),
-                    t => t.AssetId,
-                    a => a.Id,
-                    (transaction,
-                        asset) => transaction);
+            var removableTransaction = unitOfWork.Transactions.GetTransactions(userId)
+                .Where(u => u.Date.Month == DateTime.Today.Month)
+                .Where(u => u.Date.Year == DateTime.Today.Year);
 
             foreach (var transaction in removableTransaction)
             {
@@ -37,17 +33,11 @@ namespace BusinessLayer
 
         public UserBalance GetBalance(int userId)
         {
-            decimal balance = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId)
-                                  .Join(unitOfWork.Transactions.GetAll(), a => a.Id, t => t.AssetId,
-                                      (asset, transaction) => transaction)
-                                  .Join(unitOfWork.Categories.GetAll().Where(c => c.Type == 1), t => t.CategoryId,
-                                      c => c.Id,
-                                      (transaction, category) => transaction.Amount).Sum() - unitOfWork.Assets.GetAll()
-                                  .Where(a => a.UserId == userId).Join(unitOfWork.Transactions.GetAll(), a => a.Id,
-                                      t => t.AssetId, (asset, transaction) => transaction)
-                                  .Join(unitOfWork.Categories.GetAll().Where(c => c.Type == 0), t => t.CategoryId,
-                                      c => c.Id,
-                                      (transaction, category) => transaction.Amount).Sum();
+            decimal balance = unitOfWork.Transactions.GetTransactions(userId)
+                                  .Intersect(unitOfWork.Transactions.GetTransactionByType(1)).Select(t => t.Amount)
+                                  .Sum() - unitOfWork.Transactions.GetTransactions(userId)
+                                  .Intersect(unitOfWork.Transactions.GetTransactionByType(0)).Select(t => t.Amount)
+                                  .Sum();
             var user = unitOfWork.Users.Get(userId);
 
             return new UserBalance()
@@ -61,31 +51,13 @@ namespace BusinessLayer
 
         public IEnumerable<AssetBalance> GetAssetsWithBalance(int userId)
         {
-            var deb = unitOfWork.Assets.GetAll()
-                .Where(a => a.UserId == userId)
-                .Join(unitOfWork.Transactions.GetAll(),
-                    a => a.Id,
-                    t => t.AssetId,
-                    (asset, transaction) => transaction)
-                .Join(unitOfWork.Categories.GetAll()
-                        .Where(c => c.Type == 1),
-                    t => t.CategoryId,
-                    c => c.Id,
-                    (transaction, category) => transaction)
-                .GroupBy(t => t.AssetId);
+            var deb = unitOfWork.Transactions.GetTransactionsWithAsset(userId)
+                .Intersect(unitOfWork.Transactions.GetTransactionByType(1))
+                .GroupBy(t => t.Asset);
 
-            var cred = unitOfWork.Assets.GetAll()
-                .Where(a => a.UserId == userId)
-                .Join(unitOfWork.Transactions.GetAll(),
-                    a => a.Id,
-                    t => t.AssetId,
-                    (asset, transaction) => transaction)
-                .Join(unitOfWork.Categories.GetAll()
-                        .Where(c => c.Type == 0),
-                    t => t.CategoryId,
-                    c => c.Id,
-                    (transaction, category) => transaction)
-                .GroupBy(t => t.AssetId);
+            var cred = unitOfWork.Transactions.GetTransactionsWithAsset(userId)
+                .Intersect(unitOfWork.Transactions.GetTransactionByType(0))
+                .GroupBy(t => t.Asset);
 
             return deb.AsEnumerable()
                 .Join(cred.AsEnumerable(),
@@ -93,8 +65,8 @@ namespace BusinessLayer
                     c => c.Key,
                     (d, c) => new AssetBalance
                     {
-                        AssetId = d.Key,
-                        AssetName = unitOfWork.Assets.Get(d.Key).Name,
+                        AssetId = d.Key.Id,
+                        AssetName = d.Key.Name,
                         Balance =
                             d.AsEnumerable()
                                 .Select(d => d.Amount)
@@ -105,14 +77,14 @@ namespace BusinessLayer
                     });
         }
 
-        public IEnumerable<OrderedTransactions> GetOrderedTransactions(int userid)
+        public IEnumerable<OrderedTransactions> GetOrderedTransactions(int userId)
         {
-            return GetUsersTransactionId(userid).OrderByDescending(t => t.Date)
-                .ThenBy(t => unitOfWork.Assets.Get(t.AssetId).Name)
-                .ThenBy(t => unitOfWork.Categories.Get(t.CategoryId).Name).Select(t => new OrderedTransactions
+            return unitOfWork.Transactions.GetTransactionsWithAssetCategory(userId).OrderByDescending(t => t.Date)
+                .ThenBy(t => t.Asset.Name)
+                .ThenBy(t => t.Category.Name).Select(t => new OrderedTransactions
                 {
-                    AssetName = unitOfWork.Assets.Get(t.AssetId).Name,
-                    CategoryName = unitOfWork.Categories.Get(t.CategoryId).Name,
+                    AssetName = t.Asset.Name,
+                    CategoryName = t.Category.Name,
                     Amount = t.Amount,
                     Date = t.Date,
                     Comment = t.Comment
@@ -121,23 +93,13 @@ namespace BusinessLayer
 
         public IEnumerable<BalancePeriod> BalanceByMonth(int userId, DateTime startDate, DateTime endDate)
         {
-            var income = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId).Join(unitOfWork.Transactions.GetAll()
-                .Where(t => t.Date > startDate)
-                .Where(t => t.Date < endDate), a => a.Id, t => t.AssetId, (asset, transaction) => transaction).Join(
-                unitOfWork.Categories.GetAll()
-                    .Where(c => c.Type == 1),
-                t => t.CategoryId,
-                c => c.Id,
-                (transaction, category) => transaction).OrderBy(t => t.Date).GroupBy(t => new { t.Date.Month, t.Date.Year });
+            var income = unitOfWork.Transactions.GetTransactions(userId).Where(t => t.Date > startDate)
+                .Where(t => t.Date < endDate).Intersect(unitOfWork.Transactions.GetTransactionByType(1)).OrderBy(t => t.Date)
+                .GroupBy(t => new {t.Date.Month, t.Date.Year});
 
-            var expenses = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId).Join(unitOfWork.Transactions.GetAll()
-                .Where(t => t.Date > startDate)
-                .Where(t => t.Date < endDate), a => a.Id, t => t.AssetId, (asset, transaction) => transaction).Join(
-                unitOfWork.Categories.GetAll()
-                    .Where(c => c.Type == 0),
-                t => t.CategoryId,
-                c => c.Id,
-                (transaction, category) => transaction).OrderBy(t => t.Date).GroupBy(t => new { t.Date.Month, t.Date.Year });
+            var expenses = unitOfWork.Transactions.GetTransactions(userId).Where(t => t.Date > startDate)
+                .Where(t => t.Date < endDate).Intersect(unitOfWork.Transactions.GetTransactionByType(0)).OrderBy(t => t.Date)
+                .GroupBy(t => new {t.Date.Month, t.Date.Year});
 
             return income.AsEnumerable()
                 .Join(expenses.AsEnumerable(),
@@ -164,24 +126,12 @@ namespace BusinessLayer
                 type = 1;
             }
 
-            return unitOfWork.Assets.GetAll().Where(a => a.UserId == userId).Join(
-                unitOfWork.Transactions.GetAll().Where(t => t.Date.Year == DateTime.Today.Year)
-                    .Where(t => t.Date.Month == DateTime.Today.Month), a => a.Id, t => t.AssetId,
-                (asset, transaction) => transaction).Join(unitOfWork.Categories.GetAll().Where(c => c.Type == type).Where(c => c.ParentId == null),
-                t => t.CategoryId, c => c.Id,
-                (transaction, category) => new CategoryAmount()
-                    {CategoryName = category.Name, Amount = transaction.Amount}).OrderByDescending(t => t.Amount).ThenBy(t => t.CategoryName);
-        }
-
-        private IEnumerable<Transaction> GetUsersTransactionId(int userId)
-        {
-            var userAssets = unitOfWork.Assets.GetAll().Where(a => a.UserId == userId);
-            return unitOfWork.Transactions.GetAll()
-                .Join(
-                    userAssets,
-                    t => t.AssetId,
-                    a => a.Id,
-                    (transaction, asset) => transaction);
+            return unitOfWork.Transactions.GetTransactions(userId).Where(t => t.Date.Year == DateTime.Today.Year)
+                .Where(t => t.Date.Month == DateTime.Today.Month)
+                .Intersect(unitOfWork.Transactions.GetTransactionByTypeWithCategory(type)
+                    .Where(c => c.Category.ParentId == null))
+                .GroupBy(t => t.Category.Name).Select(g => new CategoryAmount
+                    {CategoryName = g.Key, Amount = g.Select(t => t.Amount).Sum()});
         }
     }
 }

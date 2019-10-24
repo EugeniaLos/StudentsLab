@@ -14,9 +14,9 @@ namespace MoneyManager
             this.context = context;
         }
 
-        public virtual IEnumerable<T> GetAll()
+        public virtual IQueryable<T> GetAll()
         {
-            return context.Set<T>().AsEnumerable();
+            return context.Set<T>().AsQueryable();
         }
 
         public virtual void Create(T item)

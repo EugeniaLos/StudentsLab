@@ -12,7 +12,7 @@ namespace MoneyManager
         [Required]
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public virtual Category Category { get; set; }
 
         [Required]
         [DataType("decimal(16 ,3")]
@@ -24,7 +24,7 @@ namespace MoneyManager
         [Required]
         public int AssetId { get; set; }
 
-        public Asset Asset { get; set; }
+        public virtual Asset Asset { get; set; }
 
         public string Comment { get; set; }
     }

@@ -25,9 +25,15 @@ namespace MoneyManager
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
                 entityType.Relational().TableName = entityType.DisplayName();
             base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
         }
     }
 }

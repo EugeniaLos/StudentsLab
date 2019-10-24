@@ -19,6 +19,6 @@ namespace MoneyManager
         [StringLength(64)]
         public string Email { get; set; }
 
-        public List<Asset> Assets { get; set; }
+        public virtual List<Asset> Assets { get; set; }
     }
 }

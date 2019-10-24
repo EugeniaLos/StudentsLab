@@ -9,11 +9,12 @@ namespace BusinessLayer
         static void Main(string[] args)
         {
             var businessLogic = new BusinessLogic();
-            var a = businessLogic.GetAssetsWithBalance(1);
-            foreach (var aa in a)
+
+            var s = businessLogic.GetParentCategoriesAmount(10, true);
+            foreach (var ss in s)
             {
-                Console.WriteLine(aa.Balance);
-                Console.WriteLine(aa.AssetId);
+                Console.Write(ss.Amount);
+                Console.Write(ss.CategoryName);
                 Console.WriteLine();
             }
         }
