@@ -4,7 +4,7 @@ using System.Dynamic;
 using System.Text;
 using MoneyManager;
 
-namespace BusinessLayer
+namespace MoneyManager.BusinessLayer
 {
     public class OrderedTransactions
     {

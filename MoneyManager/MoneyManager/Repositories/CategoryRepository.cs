@@ -1,10 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
+using MoneyManager.DataAccessLayer.Entities;
 
-namespace MoneyManager.Repositories
+namespace MoneyManager.DataAccessLayer.Repositories
 {
     public class CategoryRepository: Repository<Category>
     {

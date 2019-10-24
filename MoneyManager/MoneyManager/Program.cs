@@ -1,10 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
+﻿using System;
 using System.IO;
-using System.Net.WebSockets;
+using Microsoft.Extensions.Configuration;
 
-namespace MoneyManager
+namespace MoneyManager.DataAccessLayer
 {
     public class Program
     {

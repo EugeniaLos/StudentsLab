@@ -1,9 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using MoneyManager.DataAccessLayer.Entities;
 
-namespace MoneyManager
+namespace MoneyManager.DataAccessLayer
 {
     public class InitializerDB
     {

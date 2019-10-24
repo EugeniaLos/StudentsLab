@@ -6,11 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MoneyManager\MoneyManager.DataAccsessLayer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\MoneyManager\MoneyManager.DataAccessLayer.csproj" />
   </ItemGroup>
 
 </Project>

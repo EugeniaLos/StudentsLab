@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BusinessLayer.DataModels
+namespace MoneyManager.BusinessLayer.DataModels
 {
     public class AssetBalance
     {

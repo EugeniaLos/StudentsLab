@@ -1,20 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
+using MoneyManager.DataAccessLayer.Entities;
 
-namespace MoneyManager.Repositories
+namespace MoneyManager.DataAccessLayer.Repositories
 {
     public class AssetRepository : Repository<Asset>
     {
         public AssetRepository(ApplicationContext context) : base(context) { }
 
-        public IList<Asset> GetAssetsWithTransactions(int userId)
+        public IList<Asset> GetAssetsWithTransactionsAndCategory(int userId)
         {
             return GetAll()
                 .Where(x => x.UserId == userId)
-                .Include(x => x.Transactions)
+                .Include(x => x.Transactions).ThenInclude(t => t.Category)
                 .ToList();
         }
     }

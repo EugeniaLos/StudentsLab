@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
+using MoneyManager.DataAccessLayer.Entities;
 
-namespace MoneyManager.Repositories
+namespace MoneyManager.DataAccessLayer.Repositories
 {
     public class UserRepository: Repository<User>
     {
@@ -12,12 +12,15 @@ namespace MoneyManager.Repositories
 
         public IEnumerable<object> GetSortedUsers()
         {
-            return context.Users.OrderBy(u => u.Name).Select(u => new { id = u.Id, Name = u.Name, Email = u.Email });
+            return GetAll()
+                .OrderBy(u => u.Name)
+                .Select(u => new { id = u.Id, Name = u.Name, Email = u.Email });
         }
 
         public User GetUserByEmail(string email)
         {
-            return context.Users.First(u => u.Email == email);
+            return GetAll()
+                .First(u => u.Email == email);
         }
 
     }

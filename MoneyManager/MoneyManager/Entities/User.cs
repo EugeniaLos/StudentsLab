@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MoneyManager
+namespace MoneyManager.DataAccessLayer.Entities
 {
     public class User
     {

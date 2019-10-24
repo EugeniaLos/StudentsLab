@@ -1,20 +1,22 @@
 ﻿using System;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using MoneyManager.BusinessLayer.Services;
+using MoneyManager.DataAccessLayer;
+using MoneyManager.DataAccessLayer.Helpers;
 
-namespace BusinessLayer
+namespace MoneyManager.BusinessLayer
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var businessLogic = new BusinessLogic();
-
-            var s = businessLogic.GetParentCategoriesAmount(10, true);
+            var unitOfWork = new UnitOfWork(ConnectionHelper.GetConnectionString());
+            var assetService = new AssetService(unitOfWork);
+            var s = assetService.GetAssetsWithBalance(10);
             foreach (var ss in s)
             {
-                Console.Write(ss.Amount);
-                Console.Write(ss.CategoryName);
+                Console.Write(ss.Balance);
                 Console.WriteLine();
             }
         }
