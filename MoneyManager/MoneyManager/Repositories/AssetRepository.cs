@@ -13,7 +13,8 @@ namespace MoneyManager.DataAccessLayer.Repositories
         {
             return GetAll()
                 .Where(x => x.UserId == userId)
-                .Include(x => x.Transactions).ThenInclude(t => t.Category)
+                .Include(x => x.Transactions)
+                .ThenInclude(t => t.Category)
                 .ToList();
         }
     }

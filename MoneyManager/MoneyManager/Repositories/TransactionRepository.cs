@@ -49,8 +49,9 @@ namespace MoneyManager.DataAccessLayer.Repositories
         public List<Transaction> GetByUserIdAndType(int userId, int type)
         {
             return GetAll()
-                .Where(t => t.Category.Type == type &&
-                t.Asset.UserId == userId)
+                .Where(t =>
+                    t.Category.Type == type 
+                    && t.Asset.UserId == userId)
                 .ToList();
         }
 
@@ -58,7 +59,10 @@ namespace MoneyManager.DataAccessLayer.Repositories
         {
             return GetAll()
                 .Where(t =>
-                t.Asset.UserId == userId && t.Category.Type == type && t.Date >= startDate && t.Date <= endDate)
+                t.Asset.UserId == userId
+                && t.Category.Type == type
+                && t.Date >= startDate
+                && t.Date <= endDate)
                 .OrderBy(t => t.Date)
                 .ToList();
         }
