@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MoneyManager.BusinessLayer.DataModels;
 using MoneyManager.DataAccessLayer;
+using MoneyManager.DataAccessLayer.Repositories;
 
 namespace MoneyManager.BusinessLayer.Services
 {
@@ -14,6 +15,11 @@ namespace MoneyManager.BusinessLayer.Services
         public UserService(UnitOfWork unitOfWork)
         {
             this.unitOfWork = unitOfWork;
+        }
+
+        public List<UserInfo> GetSortedUsersInfo()
+        {
+            return unitOfWork.Users.GetSortedUsers().Select(u => new UserInfo() { Id = u.Id, Name = u.Name, Email = u.Email }).ToList();
         }
 
         public UserBalance GetBalance(int userId)

@@ -10,11 +10,11 @@ namespace MoneyManager.DataAccessLayer.Repositories
     {
         public UserRepository(ApplicationContext context) : base(context) { }
 
-        public IEnumerable<object> GetSortedUsers()
+        public List<User> GetSortedUsers()
         {
             return GetAll()
                 .OrderBy(u => u.Name)
-                .Select(u => new { id = u.Id, Name = u.Name, Email = u.Email });
+                .ToList();
         }
 
         public User GetUserByEmail(string email)

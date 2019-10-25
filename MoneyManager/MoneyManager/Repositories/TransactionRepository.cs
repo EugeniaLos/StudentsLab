@@ -14,13 +14,9 @@ namespace MoneyManager.DataAccessLayer.Repositories
         {
             DateTime startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
             DateTime endDate = DateTime.Today;
-            return GetAll()
-                .Where(t =>
-                t.Date >= startDate
-                && t.Date <= endDate
-                && t.Asset.UserId == userId);
+            return GetByDateRange(startDate, endDate)
+                .Where(t => t.Asset.UserId == userId);
         }
-
 
         public List<Transaction> GetOrderedWithAssetCategory(int userId)
         {
@@ -36,13 +32,13 @@ namespace MoneyManager.DataAccessLayer.Repositories
 
         public List<Transaction> GetByUserIdAndTypeWithParentCategory(int userId, int type)
         {
-            return GetAll()
+            DateTime startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            DateTime endDate = DateTime.Today;
+            return GetByDateRange(startDate, endDate)
                 .Include(t => t.Category)
-                .Where(t =>
-                t.Date.Year == DateTime.Today.Year
-                && t.Date.Month == DateTime.Today.Month
-                && t.Category.Type == type
-                && t.Asset.UserId == userId)
+                .Where(t => 
+                    t.Category.Type == type
+                    && t.Asset.UserId == userId)
                 .ToList();
         }
 
@@ -57,14 +53,19 @@ namespace MoneyManager.DataAccessLayer.Repositories
 
         public List<Transaction> GetByDateRangeAndTypeOrdered(int userId, int type, DateTime startDate, DateTime endDate)
         {
-            return GetAll()
+            return GetByDateRange(startDate, endDate)
                 .Where(t =>
-                t.Asset.UserId == userId
-                && t.Category.Type == type
-                && t.Date >= startDate
-                && t.Date <= endDate)
+                    t.Asset.UserId == userId
+                    && t.Category.Type == type)
                 .OrderBy(t => t.Date)
                 .ToList();
+        }
+
+        private IQueryable<Transaction> GetByDateRange(DateTime startDate, DateTime endDate)
+        {
+            return GetAll().Where(t =>
+                t.Date >= startDate
+                && t.Date <= endDate);
         }
     }
 }
