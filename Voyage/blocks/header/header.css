@@ -1,0 +1,20 @@
+
+.header__text-sea-walks{
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header__image{
+    display: flex;
+    width: 100%;
+    height: auto;
+}
+
+.header__logo{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
