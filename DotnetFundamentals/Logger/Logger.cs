@@ -12,26 +12,26 @@ namespace Logger
 {
     public class Logger: ILogger
     {
-        private Dictionary<string, List<ILogger>> dependencyOnLevel = new Dictionary<string, List<ILogger>>();
+        private readonly Dictionary<string, List<ILogger>> _dependencyOnLevel;
 
-        private static Logger loggerInstance;
+        private static Logger _loggerInstance;
         private static readonly object syncRoot = new object();
 
         public static Logger Instance
         {
             get
             {
-                if (loggerInstance == null)
+                if (_loggerInstance == null)
                 {
                     lock (syncRoot)
                     {
-                        if (loggerInstance == null)
+                        if (_loggerInstance == null)
                         {
-                            return loggerInstance = new Logger();
+                            return _loggerInstance = new Logger();
                         }
                     }
                 }
-                return loggerInstance;
+                return _loggerInstance;
             }
         }
 
@@ -45,6 +45,8 @@ namespace Logger
             var config = builder.Build();
 
             CreateDictionary(config);
+
+            _dependencyOnLevel = new Dictionary<string, List<ILogger>>();
         }
 
         public void Warning(string message)
@@ -64,9 +66,9 @@ namespace Logger
 
         public void Error(Exception ex)
         {
-            if (dependencyOnLevel.ContainsKey("Error"))
+            if (_dependencyOnLevel.ContainsKey("Error"))
             {
-                foreach (ILogger instance in dependencyOnLevel["Error"])
+                foreach (ILogger instance in _dependencyOnLevel["Error"])
                 {
                     instance.Error(ex);
                 }
@@ -80,8 +82,8 @@ namespace Logger
 
         private void CreateDictionary(IConfigurationRoot config)
         {
-            List<ILogger> Loggers = new List<ILogger>();
-            Dictionary<ILogger, string[]> LoggersMapping = new Dictionary<ILogger, string[]>();
+            List<ILogger> loggers = new List<ILogger>();
+            Dictionary<ILogger, string[]> loggersMapping = new Dictionary<ILogger, string[]>();
             var configuration = config.GetSection("Logging").Get<Dictionary<string, string[]>>();
             var type = typeof(ILogger);
             var types = AppDomain.CurrentDomain.GetAssemblies()
@@ -94,23 +96,23 @@ namespace Logger
                 {
                     if (logger == t.Name)
                     {
-                        Loggers.Add((ILogger)Activator.CreateInstance(t));
-                        LoggersMapping.Add(Loggers[Loggers.Count - 1], configuration[logger]);
+                        loggers.Add((ILogger)Activator.CreateInstance(t));
+                        loggersMapping.Add(loggers[loggers.Count - 1], configuration[logger]);
                     }
                 }
             }
 
-            foreach (ILogger instance in LoggersMapping.Keys)
+            foreach (ILogger instance in loggersMapping.Keys)
             {
-                foreach (string instanceLevel in LoggersMapping[instance])
+                foreach (string instanceLevel in loggersMapping[instance])
                 {
-                    if (dependencyOnLevel.ContainsKey(instanceLevel))
+                    if (_dependencyOnLevel.ContainsKey(instanceLevel))
                     {
-                        dependencyOnLevel[instanceLevel].Add(instance);
+                        _dependencyOnLevel[instanceLevel].Add(instance);
                     }
                     else
                     {
-                        dependencyOnLevel.Add(instanceLevel, new List<ILogger> { instance });
+                        _dependencyOnLevel.Add(instanceLevel, new List<ILogger> { instance });
                     }
                 }
             }
@@ -118,9 +120,9 @@ namespace Logger
 
         private void InvokeMethod(string level, string message)
         {
-            if (dependencyOnLevel.ContainsKey(level))
+            if (_dependencyOnLevel.ContainsKey(level))
             {
-                foreach (ILogger instance in dependencyOnLevel[level])
+                foreach (ILogger instance in _dependencyOnLevel[level])
                 {
                     Type t = instance.GetType();
                     MethodInfo method = t.GetMethod(level);
