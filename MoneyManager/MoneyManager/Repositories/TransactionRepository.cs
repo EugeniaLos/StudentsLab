@@ -12,9 +12,7 @@ namespace MoneyManager.DataAccessLayer.Repositories
 
         public IEnumerable<Transaction> CurrentMonth(int userId)
         {
-            DateTime startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            DateTime endDate = DateTime.Today;
-            return GetByDateRange(startDate, endDate)
+            return GetThisMonth()
                 .Where(t => t.Asset.UserId == userId);
         }
 
@@ -32,9 +30,7 @@ namespace MoneyManager.DataAccessLayer.Repositories
 
         public List<Transaction> GetByUserIdAndTypeWithParentCategory(int userId, int type)
         {
-            DateTime startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            DateTime endDate = DateTime.Today;
-            return GetByDateRange(startDate, endDate)
+            return GetThisMonth()
                 .Include(t => t.Category)
                 .Where(t => 
                     t.Category.Type == type
@@ -59,6 +55,13 @@ namespace MoneyManager.DataAccessLayer.Repositories
                     && t.Category.Type == type)
                 .OrderBy(t => t.Date)
                 .ToList();
+        }
+
+        private IQueryable<Transaction> GetThisMonth()
+        {
+            DateTime startDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+            DateTime endDate = DateTime.Today;
+            return GetByDateRange(startDate, endDate);
         }
 
         private IQueryable<Transaction> GetByDateRange(DateTime startDate, DateTime endDate)

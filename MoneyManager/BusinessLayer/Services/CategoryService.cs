@@ -18,16 +18,11 @@ namespace MoneyManager.BusinessLayer.Services
 
         public IEnumerable<CategoryAmount> GetParentCategoriesAmount(int userId, bool income)
         {
-            int type = 0;
-            if (income)
-            {
-                type = 1;
-            }
-
+            int type = income ? 1 : 0;
             return unitOfWork.Transactions.GetByUserIdAndTypeWithParentCategory(userId, type)
                 .GroupBy(t => t.Category.Name)
                 .Select(g => new CategoryAmount
-                    { CategoryName = g.Key, Amount = g.Select(t => t.Amount).Sum() });
+                    { CategoryName = g.Key, Amount = g.Sum(t => t.Amount) });
         }
     }
 }

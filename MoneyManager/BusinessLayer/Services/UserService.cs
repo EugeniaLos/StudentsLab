@@ -19,17 +19,26 @@ namespace MoneyManager.BusinessLayer.Services
 
         public List<UserInfo> GetSortedUsersInfo()
         {
-            return unitOfWork.Users.GetSortedUsers().Select(u => new UserInfo() { Id = u.Id, Name = u.Name, Email = u.Email }).ToList();
+            return unitOfWork.Users.GetSortedUsers()
+                .Select(u => new UserInfo()
+                {
+                    Id = u.Id,
+                    Name = u.Name,
+                    Email = u.Email
+                })
+                .ToList();
         }
 
         public UserBalance GetBalance(int userId)
         {
-            decimal balance = unitOfWork.Transactions.GetByUserIdAndType(userId, 1)
-                                  .Select(t => t.Amount)
-                                  .Sum() - unitOfWork.Transactions
-                                  .GetByUserIdAndType(userId, 0)
-                                  .Select(t => t.Amount)
-                                  .Sum();
+            decimal income = unitOfWork.Transactions.GetByUserIdAndType(userId, 1)
+                .Select(t => t.Amount)
+                .Sum();
+            decimal expenses = unitOfWork.Transactions
+                .GetByUserIdAndType(userId, 0)
+                .Select(t => t.Amount)
+                .Sum();
+            decimal balance = income - expenses;
             var user = unitOfWork.Users.Get(userId);
 
             return new UserBalance()
