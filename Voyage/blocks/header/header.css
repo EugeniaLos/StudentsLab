@@ -18,3 +18,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.header{
+    background-image: url(./sochi.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
