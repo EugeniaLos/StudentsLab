@@ -43,10 +43,8 @@ namespace Logger
              .AddJsonFile("appsettings.json");
 
             var config = builder.Build();
-
-            CreateDictionary(config);
-
             _dependencyOnLevel = new Dictionary<string, List<ILogger>>();
+            CreateDictionary(config);
         }
 
         public void Warning(string message)
@@ -120,21 +118,30 @@ namespace Logger
 
         private void InvokeMethod(string level, string message)
         {
+            List<ILogger> loggers = new List<ILogger>();
             if (_dependencyOnLevel.ContainsKey(level))
             {
                 foreach (ILogger instance in _dependencyOnLevel[level])
                 {
-                    Type t = instance.GetType();
-                    MethodInfo method = t.GetMethod(level);
-                    method.Invoke(instance, new object[] { message });
+                    loggers.Add(instance);
                 }
             }
             else
             {
                 var instance = new ConsoleLogger();
-                Type t = instance.GetType();
-                MethodInfo method = t.GetMethod(level);
-                method.Invoke(instance, new object[] { message });
+                loggers.Add(instance);
+            }
+            switch (level)
+            {
+                case "Warning":
+                    loggers.ForEach(l => l.Warning(message));
+                    break;
+                case "Info":
+                    loggers.ForEach(l => l.Info(message));
+                    break;
+                case "Error":
+                    loggers.ForEach(l => l.Error(message));
+                    break;
             }
         }
     }
