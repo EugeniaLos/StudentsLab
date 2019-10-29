@@ -103,7 +103,7 @@ namespace MoneyManager.DataAccessLayer
 
         }
 
-        DateTime RandomDay()
+        private DateTime RandomDay()
         {
             DateTime start = new DateTime(2019, 1, 1);
             int range = (DateTime.Today - start).Days;

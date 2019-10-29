@@ -20,7 +20,7 @@ namespace MoneyManager.DataAccessLayer.Repositories
         public User GetUserByEmail(string email)
         {
             return GetAll()
-                .First(u => u.Email == email);
+                .FirstOrDefault(u => u.Email == email);
         }
 
     }

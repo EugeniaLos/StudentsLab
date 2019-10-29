@@ -36,8 +36,7 @@ namespace MoneyManager.BusinessLayer.Services
                 .Sum();
             decimal expenses = unitOfWork.Transactions
                 .GetByUserIdAndType(userId, 0)
-                .Select(t => t.Amount)
-                .Sum();
+                .Sum(t => t.Amount);
             decimal balance = income - expenses;
             var user = unitOfWork.Users.Get(userId);
 
@@ -65,11 +64,9 @@ namespace MoneyManager.BusinessLayer.Services
                     (i, e) => new BalancePeriod()
                     {
                         Income = i
-                            .Select(i => i.Amount)
-                            .Sum(),
+                            .Sum(i => i.Amount),
                         Expenses = e
-                            .Select(e => e.Amount)
-                            .Sum(),
+                            .Sum(e => e.Amount),
                         Month = i.Key.Month,
                         Year = i.Key.Year
                     });
