@@ -29,11 +29,13 @@
     font-family: 'Roboto Slab', serif;
     color: #0d3351;
     font-size: 2.3vw;
+    
     margin: 0 0 0 0;
 }
 
 .header__text-black-sea {
     align-self: center;
+    text-align: center;
     font-family: 'Roboto Slab', serif;
     color: #0d3351;
     font-size: 5.7vw;
@@ -46,7 +48,7 @@
     width: 200px;
     align-self: center;
     margin-bottom: 200px;
-    margin-top: 40px;
+    margin-top: 30px;
     background-color: #33c7fd;
     border: none;
     color: ivory;
@@ -148,5 +150,18 @@
     .header__menu-item {
       visibility: hidden;
       display: none;
+    }
+    .header__text-sea-walks {
+      font-size: 17pt;
+    }
+    .header__text-black-sea {
+      font-size: 35pt;
+    }
+    .header__button {
+      margin-top: 40px;
+    }
+    .header__logo {
+      width: 70px;
+      margin-bottom: 15px;
     }
   }
