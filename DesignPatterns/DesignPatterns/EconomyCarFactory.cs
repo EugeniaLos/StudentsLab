@@ -9,7 +9,7 @@ using DesignPatterns.AbstractFactory.EquipmentTypes.SuspensionTypes;
 
 namespace DesignPatterns.AbstractFactory
 {
-    public class EconomyICarFactory : ICarFactory
+    public class EconomyCarFactory : ICarFactory
     {
         public IEngine GetEngine()
         {

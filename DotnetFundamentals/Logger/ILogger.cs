@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Logger
 {
-    interface ILogger
+    public interface ILogger
     {
         void Error(string message);
         void Error(Exception ex);
