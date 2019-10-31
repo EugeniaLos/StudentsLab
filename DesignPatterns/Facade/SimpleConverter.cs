@@ -9,17 +9,17 @@ namespace DesignPatterns.Facade
         public void Convert(string filename, string format)
         {
             VideoFile sourceFile = new VideoFile(filename);
-
+            Codec futureCodec;
             if (format == "mp4")
             {
-                Codec futureCodec = new MPEG4Codec();
-                VideoConverter.Convert(sourceFile, futureCodec);
+                futureCodec = new MPEG4Codec();
             }
             else
             {
-                Codec futureCodec = new OGGCodec();
-                VideoConverter.Convert(sourceFile, futureCodec);
+                futureCodec = new OGGCodec();
             }
+            VideoConverter.Convert(sourceFile, futureCodec);
         }
     }
 }
+

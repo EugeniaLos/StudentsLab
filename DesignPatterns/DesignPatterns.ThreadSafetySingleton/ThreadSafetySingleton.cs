@@ -24,7 +24,7 @@ namespace DesignPatterns.ThreadSafetySingleton
                     {
                         if (_instance == null)
                         {
-                            return new ThreadSafetySingleton();
+                            return _instance = new ThreadSafetySingleton();
                         } 
                     }
                 }
