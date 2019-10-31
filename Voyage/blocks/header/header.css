@@ -1,27 +1,149 @@
 
-.header__text-sea-walks{
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.header__image{
-    display: flex;
-    width: 100%;
-    height: auto;
-}
-
-.header__logo{
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .header{
+
+    position: absolute;
+    width: 100%;
+    min-height: 650px;
+
     background-image: url(./sochi.jpg);
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center center;
     background-size: cover;
 }
+
+.header__content-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 15% 0 15%;
+    margin: 0 20px 0 0;
+}
+
+.header__logo {
+    max-width: 88px;
+    align-self: center;
+    margin: -40px 0 0 0;
+}
+
+.header__text-sea-walks {
+    align-self: center;
+    font-family: 'Roboto Slab', serif;
+    color: #0d3351;
+    font-size: 2.3vw;
+    margin: 0 0 0 0;
+}
+
+.header__text-black-sea {
+    align-self: center;
+    font-family: 'Roboto Slab', serif;
+    color: #0d3351;
+    font-size: 5.7vw;
+    margin: 0 0 0 0;
+}
+
+.header__button {
+    margin: 30px 470px 150px 470px;
+    background-color: #33c7fd;
+    border: none;
+    color: ivory;
+    padding: 15px 32px;
+}
+
+.header__upper-header {
+    display: flex;
+}
+
+.header__menu-container {
+    display: flex;
+    justify-content: flex-end;
+    font-family: 'Open Sans', sans-serif;
+    color: #0d3351;
+    font-size: 15px;
+    margin-top: 20px; 
+}
+
+.header__menu-item {
+    margin-left: 50px;
+}
+
+
+
+
+
+.header__dropdown-menu {
+    width: 22px;
+    height: 16px;
+    padding: 30px 550px 0 0;
+    cursor: pointer;
+}
+
+.header__dropdown {
+    position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #0d3351;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+  .dropdown-content a {
+    color: ivory;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block; 
+  }
+
+  .dropdown-content a:hover {
+      background-color: #092337;
+    }
+
+  .header__dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+
+
+/* .header__currency{
+    display: inline;
+} */
+
+.header__support-text {
+    margin-top: 0;
+    font-size: 11px;
+}
+
+.header__support-number {
+    padding-top: 10px;
+    margin-bottom: 0;
+    font-weight: bolder;
+}
+
+.header_with-logo {
+    display: flex;
+}
+
+.header__currency-logo {
+    fill: currentColor;
+    margin: -48px 5px 0 0;
+    padding: 0 0 0 0;
+    width: 13px; 
+  }
+
+  .header__person-logo {
+    fill: currentColor;
+    margin: -48px 5px 0 0;
+    padding: 0 0 0 0;
+    width: 16px;
+    min-width: 16px;  
+  }
+
+  /* @media screen and (max-width: 600px) {
+    .header__menu-container {
+      visibility: hidden;
+      display: none;
+    }
+  } */

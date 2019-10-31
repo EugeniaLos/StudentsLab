@@ -5,31 +5,74 @@
     <title>Морские прогулки по Черному морю</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" href="main.css" />
+    <link rel="stylesheet" href="demo-files/demo.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab&display=swap" rel="stylesheet">
   </head>
   <body>
+      <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+        <symbol id="icon-rouble" viewBox="0 0 20 28">
+        <title>rouble</title>
+        <path d="M16.297 8.828c0-2.094-1.484-3.5-3.687-3.5h-5v7h5c2.203 0 3.687-1.406 3.687-3.5zM20 8.828c0 4.016-2.906 6.828-7.078 6.828h-5.313v1.844h7.891c0.281 0 0.5 0.219 0.5 0.5v2c0 0.281-0.219 0.5-0.5 0.5h-7.891v3c0 0.281-0.219 0.5-0.5 0.5h-2.609c-0.281 0-0.5-0.219-0.5-0.5v-3h-3.5c-0.281 0-0.5-0.219-0.5-0.5v-2c0-0.281 0.219-0.5 0.5-0.5h3.5v-1.844h-3.5c-0.281 0-0.5-0.219-0.5-0.5v-2.328c0-0.281 0.219-0.5 0.5-0.5h3.5v-9.828c0-0.281 0.219-0.5 0.5-0.5h8.422c4.172 0 7.078 2.812 7.078 6.828z"></path>
+        </symbol>
+        <symbol id="icon-user" viewBox="0 0 28 28">
+        <title>user</title>
+        <path d="M15.75 19.321v-1.443c1.928-1.086 3.5-3.795 3.5-6.503 0-4.349 0-7.875-5.25-7.875s-5.25 3.526-5.25 7.875c0 2.709 1.572 5.417 3.5 6.503v1.443c-5.936 0.485-10.5 3.402-10.5 6.929h24.5c0-3.526-4.564-6.443-10.5-6.929z"></path>
+        </symbol>
+        </defs>
+        </svg>
+
     <header class="header">
-      <div class="settings">
-        <div class="cabinet">
-          <div class="header__person-logo"></div>
-          <div class="header__cabinet-text">Личный кабинет</div>
+      <div class="header__content-container">
+        <div class="header__upper-header">
+          <div class="header__dropdown">
+              <img class="header__dropdown-menu" src="./blocks/header/menu.png" alt="menu"/>
+              <div class="dropdown-content">
+                  <a href="#">Популярные маршруты</a>
+                  <a href="#">Расписание рейсов</a>
+                  <a href="#">Забронированные рейсы</a>
+                  <a href="#">Входи для партнеров</a>
+                  <a href="#">О компании</a>
+                  <a href="#">Забронированные рейсы</a>
+                </div>
+            </div>
+        <div class="header__menu-container">
+          
+          <div class="header__menu-item">
+            <div class="header__cabinet header_with-logo">
+              <svg class="header__person-logo">
+                <use xlink:href="#icon-user"></use>
+              </svg>
+              <p class="header__cabinet-text">Личный кабинет</p>
+            </div>
+          </div>
+          <div class="header__menu-item">
+            <div class="header__currency header_with-logo">
+              <svg class="header__currency-logo">
+                <use xlink:href="#icon-rouble"></use>
+              </svg>
+              <p class="header__currency-text">Рубль</p>
+            </div>
+          </div>
+          <div class="header__menu-item">
+            <div class="header__language">
+              <p class="header__language-text">Ru</p>
+            </div>
+          </div>
         </div>
-        <div class="currency">
-          <div class="header__currency-logo"></div>
-          <div class="header__currency-text">Рубль</div>
+          <div class="header__menu-item">
+            <div class="header__support">
+              <p class="header__support-number">8 800 500-61-05</p>
+              <p class="header__support-text">Круглосуточная поддержка</p>
+            </div>
+          </div>
         </div>
-        <div class="language">
-          <div class="header__language-text">Ru</div>
-        </div>
-        <div class="support">
-          <div class="header__support-number">8 800 500-61-05</div>
-          <div class="header__support-text">Круглосуточная поддержка</div>
-        </div>
+        <!--<img class="header__image" src="./blocks/header/sochi.jpg" alt="Сочи"/>-->
+        <img class="header__logo" src="./blocks/header/logo.png" alt="Логотип"/>
+        <h3 class="header__text-sea-walks">Морские прогулки</h3>
+        <h1 class="header__text-black-sea">ПО ЧЁРНОМУ МОРЮ</h1>
+        <button class="header__button">Выбрать круиз</button>
       </div>
-      <!--<img class="header__image" src="./blocks/header/sochi.jpg" alt="Сочи"/>-->
-      <img class="header__logo" src="./blocks/header/logo.png" alt="Логотип"/>
-      <h3 class="header__text-sea-walks">Морские прогулки</h3>
-      <h1 class="header__text-black-sea">По черному морю</h1>
-      <button class="header__button">Выбрать круиз</button>
     </header>
     <section class="cruise" >
 
