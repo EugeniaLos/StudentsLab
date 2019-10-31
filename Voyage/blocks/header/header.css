@@ -3,7 +3,7 @@
 
     position: absolute;
     width: 100%;
-    min-height: 650px;
+    /* min-height: 650px; */
 
     background-image: url(./sochi.jpg);
     background-repeat: no-repeat;
@@ -41,15 +41,21 @@
 }
 
 .header__button {
-    margin: 30px 470px 150px 470px;
+    
+    height: 45px;
+    width: 200px;
+    align-self: center;
+    margin-bottom: 200px;
+    margin-top: 40px;
     background-color: #33c7fd;
     border: none;
     color: ivory;
-    padding: 15px 32px;
+    
 }
 
 .header__upper-header {
     display: flex;
+    justify-content: flex-end;
 }
 
 .header__menu-container {
@@ -63,36 +69,39 @@
 
 .header__menu-item {
     margin-left: 50px;
+    
 }
-
-
-
-
 
 .header__dropdown-menu {
     width: 22px;
     height: 16px;
-    padding: 30px 550px 0 0;
+    margin: 30px 0 0 0;
     cursor: pointer;
 }
 
 .header__dropdown {
+  margin-top: 8px;
     position: relative;
   display: inline-block;
+  margin-right: auto;
 }
 
 .dropdown-content {
+  padding: 70px 0px 30px 30px;
+    font-family: 'Roboto Slab', serif;
     display: none;
     position: absolute;
     background-color: #0d3351;
-    min-width: 160px;
+    width: 370px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
   }
 
   .dropdown-content a {
     color: ivory;
-    padding: 12px 16px;
+    margin-right: 130px;
+    margin-left: 20px;
+    margin-bottom: 30px;
     text-decoration: none;
     display: block; 
   }
@@ -104,12 +113,6 @@
   .header__dropdown:hover .dropdown-content {
     display: block;
   }
-
-
-
-/* .header__currency{
-    display: inline;
-} */
 
 .header__support-text {
     margin-top: 0;
@@ -135,15 +138,15 @@
 
   .header__person-logo {
     fill: currentColor;
-    margin: -48px 5px 0 0;
+    margin: -49px 5px 0 0;
     padding: 0 0 0 0;
     width: 16px;
     min-width: 16px;  
   }
 
-  /* @media screen and (max-width: 600px) {
-    .header__menu-container {
+  @media screen and (max-width: 880px) {
+    .header__menu-item {
       visibility: hidden;
       display: none;
     }
-  } */
+  }
