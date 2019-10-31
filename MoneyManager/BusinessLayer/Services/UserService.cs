@@ -32,8 +32,7 @@ namespace MoneyManager.BusinessLayer.Services
         public UserBalance GetBalance(int userId)
         {
             decimal income = unitOfWork.Transactions.GetByUserIdAndType(userId, 1)
-                .Select(t => t.Amount)
-                .Sum();
+                .Sum(t => t.Amount);
             decimal expenses = unitOfWork.Transactions
                 .GetByUserIdAndType(userId, 0)
                 .Sum(t => t.Amount);

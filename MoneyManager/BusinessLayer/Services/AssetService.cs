@@ -24,12 +24,10 @@ namespace MoneyManager.BusinessLayer.Services
                     AssetId = a.Id, AssetName = a.Name,
                     Balance = a.Transactions
                                   .Where(t => t.Category.Type == 1)
-                                  .Select(t => t.Amount)
-                                  .Sum() -
+                                  .Sum(t => t.Amount) -
                               a.Transactions
                                   .Where(t => t.Category.Type == 0)
-                                  .Select(t => t.Amount)
-                                  .Sum()
+                                  .Sum(t => t.Amount)
                 });
         }
     }
