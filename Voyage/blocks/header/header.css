@@ -13,7 +13,8 @@
     display: flex;
     flex-direction: column;
     padding: 0 15% 0 15%;
-    margin: 0 20px 0 0;
+    margin: 0 0 0 0;
+    color: #0d3351;
 }
 
 .header__logo {
@@ -153,7 +154,8 @@
       font-size: 17pt;
     }
     .header__text-black-sea {
-      font-size: 35pt;
+      line-height: 50px;
+      font-size: 39pt;
     }
     .header__button {
       margin-top: 40px;
