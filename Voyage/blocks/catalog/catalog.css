@@ -31,4 +31,23 @@
     .catalog__text-sort {
         margin-bottom: 33px;
     }
+    .item__image-lighthouse {
+        content: url(./tabletsrc/lighthouse.jpg);
+    }
+    .item__image-sochi {
+        content: url(./tabletsrc/sochi.jpg);
+    }
+    .item__image-beach {
+        content: url(./tabletsrc/beach.jpg);
+    }
+    .item__image-novorossiysk {
+        content: url(./tabletsrc/novorossiysk.jpg);
+    }
+    .item__image-lighthouse {
+        content: url(./tabletsrc/lighthouse.jpg);
+    }
+    .item__sea {
+        visibility: hidden;
+        display: none;
+    }
   }
