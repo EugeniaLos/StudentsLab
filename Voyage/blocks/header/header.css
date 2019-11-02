@@ -20,7 +20,7 @@
 .header__logo {
     max-width: 88px;
     align-self: center;
-    margin: -40px 0 0 0;
+    margin: -40px 1px 0 0;
 }
 
 .header__text-sea-walks {
@@ -38,16 +38,16 @@
     font-family: 'Roboto Slab', serif;
     color: #0d3351;
     font-size: 5.7vw;
-    margin: 0 0 0 0;
+    margin: 22px 0 0 0;
 }
 
 .header__button {
-    
+    font-size: 12pt;
     height: 45px;
     width: 200px;
     align-self: center;
     margin-bottom: 200px;
-    margin-top: 30px;
+    margin-top: 32px;
     background-color: #33c7fd;
     border: none;
     color: ivory;
@@ -70,18 +70,22 @@
 
 .header__menu-item {
     margin-left: 50px;
-    
+    font-family: 'Open Sans', sans-serif;
+}
+
+.header__text {
+  padding-top: 15px;
 }
 
 .header__dropdown-menu {
     width: 22px;
     height: 16px;
-    margin: 30px 0 0 0;
+    margin: 32px 0 0 16px;
     cursor: pointer;
 }
 
 .header__dropdown {
-  margin-top: 8px;
+  
     position: relative;
   display: inline-block;
   margin-right: auto;

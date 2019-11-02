@@ -1,28 +1,59 @@
 .catalog {
     background-color: #f3f3f3;
-    padding: 6% 16% 3% 16%;
+    padding: 6.4% 15.9% 3% 15.9%;
     color: #0d3351;
+    
+}
+
+.catalog__items-container {
+    display: flex;
+    flex-wrap: wrap;
+    
+   flex-direction: column;
+   font-size: 0;
+   height: 1200px;
+    
 }
 
 .catalog__text-cruises {
     text-align: center;
     font-family: 'Roboto Slab', serif;
     font-size: 2.3vw;
-    margin-bottom: -3px;
     margin-top: 0;
 }
 
 .catalog__text-sort {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
-    margin-top: -3px;
-    margin-bottom: 40px;
+    font-size: 11pt;
+    margin-bottom: 20px;
 }
 
 .item__image {
-    width: 25.8vw;
+    width: 32.8vw;
     height: auto;
 }
+
+.item__text-container {
+    background-color: white;
+    
+    padding-top: 21px;
+    width: 32.8vw;
+    height: 190px;
+    line-height: 30px;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 28px;
+}
+
+.item__cruise-name {
+    font-size: 15pt;
+    color: #00a2dd;
+    padding-left: 34px;
+    font-family: 'Roboto Slab', serif;
+    
+}
+
+
 
 @media screen and (max-width: 1330px) {
     .catalog { 
@@ -30,6 +61,16 @@
     }
     .catalog__text-sort {
         margin-bottom: 33px;
+    }
+    .catalog__items-container {
+        height: 1040px
+    }
+    .item__image {
+        width: 26.1vw;
+        height: auto;
+    }
+    .item__text-container {
+        width: 26.1vw;
     }
     .item__image-lighthouse {
         content: url(./tabletsrc/lighthouse.jpg);

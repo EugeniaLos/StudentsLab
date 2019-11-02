@@ -49,7 +49,7 @@
               <svg class="header__person-logo">
                 <use xlink:href="#icon-user"></use>
               </svg>
-              <p class="header__cabinet-text">Личный кабинет</p>
+              <p class="header__cabinet-text header__text">Личный кабинет</p>
             </div>
           </div>
           <div class="header__menu-item">
@@ -57,17 +57,17 @@
               <svg class="header__currency-logo">
                 <use xlink:href="#icon-rouble"></use>
               </svg>
-              <p class="header__currency-text">Рубль</p>
+              <p class="header__currency-text header__text">Рубль</p>
             </div>
           </div>
           <div class="header__menu-item">
             <div class="header__language">
-              <p class="header__language-text">Ru</p>
+              <p class="header__language-text header__text">Ru</p>
             </div>
           </div>
         </div>
         <div class="header__menu-item">
-          <div class="header__support">
+          <div class="header__support header__text">
             <p class="header__support-number">8 800 500-61-05</p>
             <p class="header__support-text">Круглосуточная поддержка</p>
           </div>
@@ -88,19 +88,34 @@
       <div class="item">
         <img class="item__image-lighthouse item__image--label-blue item__image" src="./blocks/catalog/desktopsrc/lighthouse.jpg" />
         <div class="item__text-container">
-          <p class="item__cruise-name">Морской круиз в Анапу</p>
+          <p class="item__cruise-name"><b>Морской круиз в Анапу</b></p>
           <p class="item__route"><b>Маршрут:</b> Сочи-Лазаревское-Геленджик-Анапа</p>
           <p class="item__route"><b>Продолжительность:</b> 10 ч. 0 мин.</p>
           <p class="item__price"><b>49 000 руб.</b></p>
         </div>
       </div>
-
+      
+      <div class="item">
+          <img class="item__image-novorossiysk item__image--label-none item__image" src="./blocks/catalog/desktopsrc/novorossiysk.jpg" />
+          <div class="item__text-container">
+            
+              <p class="item__cruise-name">Морской круиз в Новороссийск</p>
+              <div class="text-container__general-info">
+              <p class="item__route"><b>Маршрут:</b> Сочи-Геленджик-Новороссийск-Геленджик-Сочи</p>
+              <p class="item__route"><b>Продолжительность:</b> 13 ч. 0 мин.</p>
+            </div>
+              <p class="item__price"><b>14 800 руб.</b></p>
+          </div>
+        </div>
+      <div class="catalog__small-elements-container">
       <div class="item">
         <img class="item__image-sochi item__image--label-blue item__image" src="./blocks/catalog/desktopsrc/sochi.jpg" />
         <div class="item__text-container">
             <p class="item__cruise-name">Обзорная морская прогулка с экскурсией</p>
+            <div class="text-container__general-info">
             <p class="item__route"><b>Маршрут:</b> Сочи-Адлер-Сочи (без высадки)</p>
             <p class="item__route"><b>Продолжительность:</b> 1 ч. 0 мин.</p>
+          </div>
             <p class="item__price"><b>5 000 руб.</b><s>15000 руб.</s></p>
         </div>
       </div>
@@ -109,31 +124,29 @@
         <img class="item__image-beach item__image--label-red item__image" src="./blocks/catalog/desktopsrc/beach.jpg" />
         <div class="item__text-container">
             <p class="item__cruise-name">Морская прогулка в Геленджик</p>
+            <div class="text-container__general-info">
             <p class="item__route"><b>Маршрут:</b> Сочи-Туапсе-Геленджик</p>
             <p class="item__route"><b>Продолжительность:</b> 12 ч. 30 мин.</p>
+          </div>
             <p class="item__price"><b>7 000 руб.</b><s>10000 руб.</s></p>
         </div>
       </div>
-
-      <div class="item">
-        <img class="item__image-novorossiysk item__image--label-none item__image" src="./blocks/catalog/desktopsrc/novorossiysk.jpg" />
-        <div class="item__text-container">
-            <p class="item__cruise-name">Морской круиз в Новороссийск</p>
-            <p class="item__route"><b>Маршрут:</b> Сочи-Геленджик-Новороссийск-Геленджик-Сочи</p>
-            <p class="item__route"><b>Продолжительность:</b> 13 ч. 0 мин.</p>
-            <p class="item__price"><b>14 800 руб.</b></p>
-        </div>
-      </div>
+    </div>
+    
 
       <div class="item item__sea">
         <img class="item__image-sea item__image--label-none item__image" src="./blocks/catalog/desktopsrc/sea.jpg" />
         <div class="item__text-container">
-            <p class="item__cruise-name">Морская прогулка в Абрау-Дюрсо</p>
+            <p class="item__cruise-name ">Морская прогулка в Абрау-Дюрсо</p>
+            <div class="text-container__general-info"></div>
             <p class="item__route"><b>Маршрут:</b> Сочи-Абрау-Дюрсо</p>
             <p class="item__route"><b>Продолжительность:</b> 11 ч. 0 мин.</p>
+          </div>
             <p class="item__price"><b>14 800 руб.</b></p>
         </div>
       </div>
+
+      
 
     </div>
     <button class="catalog__button">Больше круизов</button>
