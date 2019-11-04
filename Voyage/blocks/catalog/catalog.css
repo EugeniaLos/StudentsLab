@@ -2,16 +2,18 @@
     background-color: #f3f3f3;
     padding: 6.4% 15.9% 3% 15.9%;
     color: #0d3351;
-    
+    display: flex;
+    flex-direction: column;
 }
 
 .catalog__items-container {
     display: flex;
     flex-wrap: wrap;
-    
+    justify-content: flex-start;
+    align-content: space-between;
    flex-direction: column;
    font-size: 0;
-   height: 1200px;
+   height: 1072px;
     
 }
 
@@ -26,7 +28,7 @@
     text-align: center;
     font-family: 'Open Sans', sans-serif;
     font-size: 11pt;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .item__image {
@@ -34,15 +36,16 @@
     height: auto;
 }
 
+
 .item__text-container {
     background-color: white;
     
     padding-top: 21px;
     width: 32.8vw;
-    height: 190px;
+    height: 169px;
     line-height: 30px;
     font-family: 'Open Sans', sans-serif;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
 }
 
 .item__cruise-name {
@@ -50,20 +53,50 @@
     color: #00a2dd;
     padding-left: 34px;
     font-family: 'Roboto Slab', serif;
-    
 }
 
+.text-container__general-info {
+    font-size: 11.5pt;
+    padding-left: 34px;
+}
 
+.text-container__general-info b {
+    font-weight: bold;
+}
+
+.item__price {
+    margin-top: 10px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 20pt;
+    padding-left: 38px;
+}
+
+.item__price s{
+    font-size: 13pt;
+    margin-left: 60px;
+    color: gray;
+}
+
+.catalog__button {
+    font-size: 11.5pt;
+    height: 45px;
+    width: 200px;
+    margin-top: 9px;
+    align-self: center;
+    background-color: #33c7fd;
+    border: none;
+    color: ivory; 
+}
 
 @media screen and (max-width: 1330px) {
     .catalog { 
-        padding: 3.5% 22.4% 3% 22.4%;
+        padding: 4.1% 22.4% 3% 22.4%;
     }
     .catalog__text-sort {
         margin-bottom: 33px;
     }
     .catalog__items-container {
-        height: 1040px
+        height: 1070px
     }
     .item__image {
         width: 26.1vw;
@@ -71,6 +104,24 @@
     }
     .item__text-container {
         width: 26.1vw;
+        height: 215px;
+        position: relative;
+        margin-bottom: 25px;
+    }
+    .item__cruise-name {
+        line-height: 22px;
+        margin-top: 4px;
+    }
+    .text-container__general-info {
+        line-height: 22px;
+        margin-top: 8px;
+    }
+    .item__price {
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        position: absolute;
+        bottom: 38px;
+        left: 38px;
     }
     .item__image-lighthouse {
         content: url(./tabletsrc/lighthouse.jpg);
@@ -91,4 +142,36 @@
         visibility: hidden;
         display: none;
     }
+  }
+
+  @media screen and (max-width: 320px) {
+    .catalog__items-container {
+        display: initial;
+    }
+    .item__image {
+        width: 290px;
+        height: auto;
+    }
+    .item__text-container {
+        width: 290px;
+        height: 215px;
+        margin-bottom: 20px;
+    }
+    .catalog {
+        padding: 47px 15px 0 15px;
+    }
+    .catalog__text-cruises {
+        font-size: 16.5pt;
+    }
+    .item__price{
+        bottom: 38px;
+        left: 38px;
+    }
+    .item__cruise-name{
+        padding-left: 20px;
+    }
+    .text-container__general-info {
+        padding-left: 20px;
+    }
+
   }

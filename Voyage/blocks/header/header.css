@@ -135,18 +135,36 @@
 }
 
 .header__currency-logo {
-    fill: currentColor;
+    fill: #33c7fd;
     margin: -48px 5px 0 0;
     padding: 0 0 0 0;
     width: 13px; 
   }
 
   .header__person-logo {
-    fill: currentColor;
+    fill: #33c7fd;
     margin: -49px 5px 0 0;
     padding: 0 0 0 0;
     width: 16px;
     min-width: 16px;  
+  }
+
+  @media screen and (max-width: 1330px) {
+    .header__content-container {
+      padding: 0 21% 0 21%;
+    }
+    .header__text-black-sea {
+      font-size: 5.3vw;
+      margin: 0 0 0 0;
+    }
+    .header__logo {
+      content: url(./tablet/logo.png);
+      margin-top: 20px;
+    }
+    .header__button {
+      margin-top: 0px;
+      margin-bottom: 210px;
+    }
   }
 
   @media screen and (max-width: 880px) {
@@ -167,5 +185,30 @@
     .header__logo {
       width: 70px;
       margin-bottom: 15px;
+    }
+  }
+
+  @media screen and (max-width: 320px) {
+    .header {
+      height: 582px;
+    }
+    .header__dropdown {
+      margin-right: 217px;
+      margin-top: -5px;
+    }
+    .header__logo {
+      position: absolute;
+      margin: 25px 0 0 0;
+    }
+    .header__text-sea-walks {
+      margin-top: 60px;
+      font-size: 14.5pt;
+    }
+    .header__text-black-sea{
+      font-size: 36pt;
+      margin-top: 13px;
+    }
+    .header__button {
+      margin-top: 33px;
     }
   }
