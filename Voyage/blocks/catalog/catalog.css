@@ -160,9 +160,13 @@
     }
   }
 
-  @media screen and (max-width: 320px) {
+  @media screen and (max-width: 769px) {
     .catalog__items-container {
-        display: initial;
+        display: flex;
+        justify-content: center;
+        align-self: center;
+        height: 100%;
+        align-content: center;
     }
     .item__image {
         width: 290px;
@@ -176,16 +180,20 @@
     .catalog {
         padding: 47px 15px 0 15px;
     }
+    
     .catalog__text-cruises {
         font-size: 16.5pt;
     }
-    .item__price{
+
+    .item__price {
         bottom: 38px;
         left: 38px;
     }
-    .item__cruise-name{
+
+    .item__cruise-name {
         padding-left: 20px;
     }
+
     .text-container__general-info {
         padding-left: 20px;
     }
