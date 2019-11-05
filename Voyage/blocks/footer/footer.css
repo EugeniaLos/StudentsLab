@@ -1,0 +1,43 @@
+.footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: initial;
+}
+.footer__items-container {
+    width: 1140px;
+    display: flex;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    padding-top: 28px;
+}
+
+.info-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.keep-in-touch {
+    display: flex;
+    flex-direction: column;
+    margin-left: 140px;
+}
+.keep-in-touch__icon {
+    fill: #0d3351;
+    width: 25px; 
+  }
+
+
+.info-titles {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+}
+
+.info-titles__phone-number {
+    font-weight: bold;
+}
+
+.info-titles__support-text {
+    font-size: 13px;
+}
