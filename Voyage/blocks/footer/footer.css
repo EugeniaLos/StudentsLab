@@ -51,3 +51,18 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+@media screen and (max-width: 769px) {
+    .info-links {
+        visibility: hidden;
+        display: none;
+    }
+    .footer__items-container {
+        flex-direction: column;
+        
+    }
+    .info-titles {
+        margin-left: initial;
+        align-self: center;
+    }
+}
