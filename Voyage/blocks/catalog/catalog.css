@@ -149,6 +149,9 @@
         width: 345px;
         height: auto;
     }
+    .flag {
+        margin-left: 210px;
+    }
     .item__text-container {
         width: 345px;
         height: 215px;
@@ -211,6 +214,10 @@
         width: 290px;
         height: auto;
     }
+    .flag {
+    margin-left: 180px;
+    }
+
     .item__text-container {
         width: 290px;
         height: 215px;
