@@ -33,11 +33,45 @@
     margin-bottom: 40px;
 }
 
+.item {
+    position: relative;
+}
+
 .item__image {
     width: 555px;
     height: auto;
+
 }
 
+
+.flag{ 
+    text-align: center;
+    color: white;
+    position: absolute;
+    height: 70px;
+    width: 0px;
+    border-bottom: 39px solid transparent;
+    margin-left: 410px;
+    margin-top: -5px;
+}
+
+.flag--blue {
+    border-left: 45px solid #33c7fd;
+    border-right: 45px solid #33c7fd;
+}
+
+.flag--red {
+    border-left: 45px solid #f20542;
+    border-right: 45px solid #f20542;
+}
+
+.flag__text {
+    color: white;
+    margin-left: -30px;
+    margin-top: 20px;
+    position: absolute;
+    font-size: 14.4pt;
+}
 
 .item__text-container {
     background-color: white;
