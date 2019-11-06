@@ -168,6 +168,11 @@
         height: 100%;
         align-content: center;
     }
+
+    .catalog__button {
+        margin-bottom: 30PX;
+    }
+
     .item__image {
         width: 290px;
         height: auto;
@@ -188,6 +193,10 @@
     .item__price {
         bottom: 38px;
         left: 38px;
+    }
+
+    .item__price s {
+        margin-left: 5px;
     }
 
     .item__cruise-name {
