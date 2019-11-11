@@ -168,11 +168,16 @@ a {
   .popup-sea-container__image-container {
     display: flex;
     width: 360px;
-    height: 300px;
+    height: 305px;
     flex-direction: column;
     justify-content: space-between;
-    flex-flow: wrap;
   }
+
+   .popup-sea-container__small-image-wrapper {
+      display: flex;
+      justify-content: space-between;
+  } 
+  
 
   .popup-sea-container__text {
       width: 360px;
