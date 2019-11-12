@@ -5,6 +5,7 @@
     width: initial;
     height: 130px;
 }
+
 .footer__items-container {
     width: 1140px;
     display: flex;
@@ -26,6 +27,7 @@
     align-content: flex-end;
 
 }
+
 .keep-in-touch__icon {
     fill: #0d3351;
     width: 30px;
@@ -33,7 +35,6 @@
     margin-right: 8px;
     margin-top: 4px
   }
-
 
 .info-titles {
     display: flex;
@@ -72,6 +73,7 @@
         visibility: hidden;
         display: none;
     }
+    
     .footer__items-container {
         flex-direction: column;
         width: 250px;

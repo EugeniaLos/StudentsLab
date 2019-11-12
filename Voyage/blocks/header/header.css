@@ -1,8 +1,6 @@
 
-.header{
+.header {
     width: 100%;
-    /* min-height: 650px; */
-
     background-image: url(./sochi.jpg);
     background-repeat: no-repeat;
     background-position: center center;
@@ -13,6 +11,7 @@
     display: flex;
     flex-direction: column;
     width: 1140px;
+    height: 647px;
     margin: auto;
     color: #0d3351;
 }
@@ -38,7 +37,7 @@
     font-family: 'Roboto Slab', serif;
     color: #0d3351;
     font-size: 5.7vw;
-    margin: 22px 0 0 0;
+    margin: 22px 0 32px 0;
 }
 
 .header__button {
@@ -46,12 +45,9 @@
     height: 45px;
     width: 200px;
     align-self: center;
-    margin-bottom: 200px;
-    margin-top: 32px;
     background-color: #33c7fd;
     border: none;
-    color: ivory;
-    
+    color: ivory;   
 }
 
 .header__upper-header {
@@ -150,43 +146,22 @@
   }
 
   @media screen and (max-width: 1330px) {
+
     .header__content-container {
       width: 720px;
+      height: 600px;
     } 
+
     .header__text-black-sea {
       font-size: 5.2vw;
       margin: 0 0 0 0;
     }
+
     .header__logo {
       content: url(./tablet/logo.png);
       margin-top: 20px;
     }
-    .header__button {
-      margin-top: 0px;
-      margin-bottom: 210px;
-    }
   }
-
-  /* @media screen and (max-width: 1025px) {
-    .header__menu-item {
-      visibility: hidden;
-      display: none;
-    }
-    .header__text-sea-walks {
-      font-size: 17pt;
-    }
-    .header__text-black-sea {
-      line-height: 50px;
-      font-size: 39pt;
-    }
-    .header__button {
-      margin-top: 40px;
-    }
-    .header__logo {
-      width: 70px;
-      margin-bottom: 15px;
-    }
-  } */
 
   @media screen and (max-width: 769px) {
 
@@ -202,23 +177,26 @@
     .header {
       height: 582px;
     }
+
     .header__dropdown {
-      margin-right: 217px;
+      margin-right: 257px;
       margin-top: -5px;
     }
+
     .header__logo {
       position: absolute;
       margin: 25px 0 0 0;
     }
+
     .header__text-sea-walks {
       margin-top: 60px;
       font-size: 14.5pt;
     }
+
     .header__text-black-sea{
       font-size: 36pt;
       margin-top: 13px;
-    }
-    .header__button {
-      margin-top: 33px;
+      line-height: 50px;
+      margin-bottom: 30px;
     }
   }

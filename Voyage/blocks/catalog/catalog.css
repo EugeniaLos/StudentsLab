@@ -1,7 +1,3 @@
-a {
-    text-decoration: none;
-    color: inherit;
-}
 .catalog {
     background-color: #f3f3f3;
     color: #0d3351;
@@ -47,8 +43,7 @@ a {
 
 }
 
-
-.flag{ 
+.flag { 
     text-align: center;
     color: white;
     position: absolute;
@@ -111,22 +106,21 @@ a {
     padding-left: 4px;
 }
 
-.price s{
+.price s {
     font-size: 13pt;
     margin-left: 60px;
     color: gray;
 }
 
 .catalog__button {
-    font-size: 11.5pt;
-    height: 45px;
-    width: 200px;
     margin-top: 9px;
     align-self: center;
-    background-color: #33c7fd;
-    border: none;
-    color: ivory; 
     margin-bottom: 60px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 .popup-sea__container {
@@ -178,7 +172,6 @@ a {
       justify-content: space-between;
   } 
   
-
   .popup-sea-container__text {
       width: 360px;
   }
@@ -201,16 +194,17 @@ a {
   }
 
   .popup-sea-container__button {
+    margin-top: 9px;
+  }
+
+  .button {
     font-size: 11.5pt;
     height: 45px;
     width: 200px;
-    margin-top: 9px;
     background-color: #33c7fd;
     border: none;
     color: ivory;
   }
-
-  
 
 .keep-in-touch-icon {
     fill: #0d3351;
@@ -221,38 +215,47 @@ a {
     .catalog { 
         padding-top: 52px;
     }
+
     .catalog__text-cruises {
         font-size: 2.1vw;
 
     }
+
     .catalog__text-sort {
         margin-bottom: 33px;
     }
+
     .catalog__items-container {
         height: 1070px;
         width: 720px;
     }
+
     .item__image {
         width: 345px;
         height: auto;
     }
+
     .flag {
         margin-left: 215px;
     }
+
     .item__text-container {
         width: 311px;
         height: 215px;
         position: relative;
         margin-bottom: 25px;
     }
+
     .item__cruise-name {
         line-height: 22px;
         margin-top: 4px;
     }
+
     .general-info {
         line-height: 22px;
         margin-top: 8px;
     }
+
     .price {
         margin: 0 0 0 0;
         padding: 0 0 0 0;
@@ -260,24 +263,31 @@ a {
         bottom: 38px;
         left: 38px;
     }
+
     .catalog__button {
         margin-top: 4px;
     }
+
     .item__image-lighthouse {
         content: url(./tabletsrc/lighthouse.jpg);
     }
+
     .item__image-sochi {
         content: url(./tabletsrc/sochi.jpg);
     }
+
     .item__image-beach {
         content: url(./tabletsrc/beach.jpg);
     }
+
     .item__image-novorossiysk {
         content: url(./tabletsrc/novorossiysk.jpg);
     }
+
     .item__image-lighthouse {
         content: url(./tabletsrc/lighthouse.jpg);
     }
+
     .item__sea {
         visibility: hidden;
         display: none;
@@ -312,6 +322,7 @@ a {
         margin-bottom: 20px;
         padding-left: 5px;    
     }
+
     .catalog {
         padding: 47px 15px 0 15px;
     }
@@ -336,5 +347,4 @@ a {
     .general-info {
         padding-left: 20px;
     }
-
   }
