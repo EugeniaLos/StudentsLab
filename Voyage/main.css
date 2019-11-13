@@ -1,7 +1,0 @@
-@import "./blocks/header/header.css";
-@import "./blocks/catalog/catalog.css";
-@import "./blocks/footer/footer.css";
-
-body{
-    margin: 0;
-}

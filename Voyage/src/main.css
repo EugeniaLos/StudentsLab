@@ -1,0 +1,7 @@
+@import "./header/header.css";
+@import "./catalog/catalog.css";
+@import "./footer/footer.css";
+
+body{
+    margin: 0;
+}
