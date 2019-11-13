@@ -1,7 +1,8 @@
 @import "./header/header.css";
 @import "./catalog/catalog.css";
 @import "./footer/footer.css";
+@import "./common/button.css";
 
-body{
+body {
     margin: 0;
 }

@@ -1,7 +1,7 @@
 
 .header {
     width: 100%;
-    background-image: url(../../img/sochiBackground.jpg);
+    background-image: url(../img/sochiBackground.jpg);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -41,13 +41,7 @@
 }
 
 .header__button {
-    font-size: 12pt;
-    height: 45px;
-    width: 200px;
-    align-self: center;
-    background-color: #33c7fd;
-    border: none;
-    color: ivory;   
+    align-self: center;  
 }
 
 .header__upper-header {
@@ -155,11 +149,6 @@
     .header__text-black-sea {
       font-size: 5.2vw;
       margin: 0 0 0 0;
-    }
-
-    .header__logo {
-      content: url(./tablet/logo.png);
-      margin-top: 20px;
     }
   }
 

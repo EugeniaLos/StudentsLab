@@ -64,7 +64,7 @@
     <div class="header__content-container">
       <div class="header__upper-header">
         <div class="header__dropdown">
-          <img class="header__dropdown-menu" src="./blocks/header/menu.png" alt="menu" />
+          <img class="header__dropdown-menu" src="./img/menu.png" alt="menu" />
           <div class="dropdown-content">
             <a href="#">Популярные маршруты</a>
             <a href="#">Расписание рейсов</a>
@@ -104,10 +104,14 @@
           </div>
         </div>
       </div>
-      <img class="header__logo" src="./blocks/header/logo.png" alt="Логотип" />
+      <img class="header__logo" srcset="./img/tabletLogo.png 70w,
+                                        ./img/logo.png 88w"
+                                sizes="(max-width: 1330px) 70px,
+                                       88px "
+                                src="./img/logo.png" alt="Логотип" />
       <h3 class="header__text-sea-walks">Морские прогулки</h3>
       <h1 class="header__text-black-sea">ПО ЧЁРНОМУ МОРЮ</h1>
-      <button class="header__button">Выбрать круиз</button>
+      <button class="header__button button">Выбрать круиз</button>
     </div>
   </header>
 
@@ -120,8 +124,11 @@
           <div class="flag flag--blue">
             <p class="flag__text">Хит продаж</p>
           </div>
-        <img class="item__image-lighthouse  item__image"
-          src="./blocks/catalog/desktopsrc/lighthouse.jpg" />
+        <img class="item__image-lighthouse  item__image" srcset="./img/tabletLighthouse.jpg 555w,
+                                                                 ./img/descLighthouse.jpg 555w"
+                                                         sizes="(max-width: 1330px) 311px
+                                                                521px"
+                                                         src="./img/descLighthouse.jpg"/>
         <div class="item__text-container">
           <p class="item__cruise-name cruise-name"><b>Морской круиз в Анапу</b></p>
           <div class="general-info">
@@ -134,7 +141,11 @@
 
       <div class="item">
         <img class="item__image-novorossiysk item__image--label-none item__image"
-          src="./blocks/catalog/desktopsrc/novorossiysk.jpg" />
+              srcset="./img/tabletNovorossiysk.jpg 555w,
+                      ./img/descNovorossiysk.jpg 555w"
+              sizes="(max-width: 1330px) 311px
+                      521px"
+              src="./img/descNovorossiysk.jpg" />
         <div class="item__text-container">
 
           <p class="item__cruise-name cruise-name">Морской круиз в Новороссийск</p>
@@ -151,7 +162,11 @@
                 <p class="flag__text">Акция</p>
               </div>
           <img class="item__image-sochi item__image--label-blue item__image"
-            src="./blocks/catalog/desktopsrc/sochi.jpg" />
+              srcset="./img/tabletSochi.jpg 555w,
+                      ./img/descSochi.jpg 555w"
+              sizes="(max-width: 1330px) 311px
+                      521px"
+              src="./img/descSochi.jpg" />
             
           <div class="item__text-container">
             <p class="item__cruise-name cruise-name">Обзорная морская прогулка с экскурсией</p>
@@ -168,7 +183,11 @@
                 <p class="flag__text">Скидка 10%</p>
               </div>
           <img class="item__image-beach item__image--label-red item__image"
-            src="./blocks/catalog/desktopsrc/beach.jpg" />
+              srcset="./img/tabletBeach.jpg 555w,
+                        ./img/descBeach.jpg 555w"
+              sizes="(max-width: 1330px) 345px
+                    555px"
+              src="./img/descBeach.jpg"/>
           <div class="item__text-container">
             <p class="item__cruise-name cruise-name">Морская прогулка в Геленджик</p>
             <div class="general-info">
@@ -181,7 +200,7 @@
       </div>
 
       <a id="sea" class="item item__sea" href="#popup-sea">
-        <img class="item__image-sea item__image--label-none item__image" src="./blocks/catalog/desktopsrc/sea.jpg" />
+        <img class="item__image-sea item__image--label-none item__image" src="./img/descSea.jpg" />
         <div class="item__text-container">
           <p class="item__cruise-name cruise-name">Морская прогулка в Абрау-Дюрсо</p>
           <div class="general-info">
@@ -197,12 +216,12 @@
           <a class="popup-sea-container__close" href="#sea">&times;</a>
           <div class="popup-sea-container__wraper">
               <div class="popup-sea-container__image-container">
-                  <img class="popup-sea-container__image" src="./blocks/catalog/popup/sea.jpg" alt="sea">
+                  <img class="popup-sea-container__image" src="./img/popSea.jpg" alt="sea">
                   <div class="popup-sea-container__small-image-wrapper">
-                    <img class="popup-sea-container-image" src="./blocks/catalog/popup/img1.jpg">
-                    <img class="popup-sea-container-image" src="./blocks/catalog/popup/img2.jpg">
-                    <img class="popup-sea-container-image" src="./blocks/catalog/popup/img3.jpg">
-                    <img class="popup-sea-container-image" src="./blocks/catalog/popup/img4.jpg">
+                    <img class="popup-sea-container-image" src="./img/popImg1.jpg">
+                    <img class="popup-sea-container-image" src="./img/popImg2.jpg">
+                    <img class="popup-sea-container-image" src="./img/popImg3.jpg">
+                    <img class="popup-sea-container-image" src="./img/popImg4.jpg">
                   </div>
                 </div>
             <div class="popup-sea-container__text">

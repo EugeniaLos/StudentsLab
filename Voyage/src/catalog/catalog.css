@@ -197,15 +197,6 @@ a {
     margin-top: 9px;
   }
 
-  .button {
-    font-size: 11.5pt;
-    height: 45px;
-    width: 200px;
-    background-color: #33c7fd;
-    border: none;
-    color: ivory;
-  }
-
 .keep-in-touch-icon {
     fill: #0d3351;
     width: 25px; 
@@ -266,26 +257,6 @@ a {
 
     .catalog__button {
         margin-top: 4px;
-    }
-
-    .item__image-lighthouse {
-        content: url(./tabletsrc/lighthouse.jpg);
-    }
-
-    .item__image-sochi {
-        content: url(./tabletsrc/sochi.jpg);
-    }
-
-    .item__image-beach {
-        content: url(./tabletsrc/beach.jpg);
-    }
-
-    .item__image-novorossiysk {
-        content: url(./tabletsrc/novorossiysk.jpg);
-    }
-
-    .item__image-lighthouse {
-        content: url(./tabletsrc/lighthouse.jpg);
     }
 
     .item__sea {
