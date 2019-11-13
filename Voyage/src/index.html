@@ -63,7 +63,7 @@
   <header class="header">
     <div class="header__content-container">
       <div class="header__upper-header">
-        <div class="header__dropdown">
+        <nav class="header__dropdown">
           <img class="header__dropdown-menu" src="./img/menu.png" alt="menu" />
           <div class="dropdown-content">
             <a href="#">Популярные маршруты</a>
@@ -73,7 +73,7 @@
             <a href="#">О компании</a>
             <a href="#">Забронированные рейсы</a>
           </div>
-        </div>
+        </nav>
         <div class="header__menu-container">
           <div class="header__menu-item">
             <div class="header__cabinet header_with-logo">
@@ -120,13 +120,13 @@
     <h4 class="catalog__text-sort">Сортировать круизы по цене</h4>
     <div class="catalog__items-container">
 
-      <div class="item">
+      <article class="item">
           <div class="flag flag--blue">
             <p class="flag__text">Хит продаж</p>
           </div>
         <img class="item__image-lighthouse  item__image" srcset="./img/tabletLighthouse.jpg 345w,
                                                                  ./img/descLighthouse.jpg 555w"
-                                                         sizes="(max-width: 1330px) 311px
+                                                         sizes="(max-width: 1330px) 311px,
                                                                 521px"
                                                          src="./img/descLighthouse.jpg"/>
         <div class="item__text-container">
@@ -137,13 +137,13 @@
           </div>
           <p class="price"><b>49 000 руб.</b></p>
         </div>
-      </div>
+      </article>
 
-      <div class="item">
+      <article class="item">
         <img class="item__image-novorossiysk item__image--label-none item__image"
               srcset="./img/tabletNovorossiysk.jpg 345w,
                       ./img/descNovorossiysk.jpg 555w"
-              sizes="(max-width: 1330px) 311px
+              sizes="(max-width: 1330px) 311px,
                       521px"
               src="./img/descNovorossiysk.jpg" />
         <div class="item__text-container">
@@ -155,16 +155,16 @@
           </div>
           <p class="price"><b>14 800 руб.</b></p>
         </div>
-      </div>
+      </article>
       <div class="catalog__small-elements-container">
-        <div class="item">
+        <article class="item">
             <div class="flag flag--red">
                 <p class="flag__text">Акция</p>
               </div>
           <img class="item__image-sochi item__image--label-blue item__image"
               srcset="./img/tabletSochi.jpg 345w,
                       ./img/descSochi.jpg 555w"
-              sizes="(max-width: 1330px) 311px
+              sizes="(max-width: 1330px) 311px,
                       521px"
               src="./img/descSochi.jpg" />
             
@@ -176,9 +176,9 @@
             </div>
             <p class="price"><b>5 000 руб.</b><s>15000 руб.</s></p>
           </div>
-        </div>
+        </article>
 
-        <div class="item">
+        <article class="item">
             <div class="flag flag--red">
                 <p class="flag__text">Скидка 10%</p>
               </div>
@@ -196,7 +196,7 @@
             </div>
             <p class="price"><b>7 000 руб.</b><s>10000 руб.</s></p>
           </div>
-        </div>
+        </article>
       </div>
 
       <a id="sea" class="item item__sea" href="#popup-sea">
