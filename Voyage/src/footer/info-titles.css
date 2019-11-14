@@ -1,0 +1,20 @@
+.info-titles {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+}
+
+.info-titles__phone-number {
+  font-weight: bold;
+}
+
+.info-titles__support-text {
+  font-size: 13px;
+}
+
+@media screen and (max-width: 769px) {
+  .info-titles {
+    margin-left: initial;
+    align-items: center;
+  }
+}

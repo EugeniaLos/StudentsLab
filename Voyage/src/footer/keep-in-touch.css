@@ -1,0 +1,27 @@
+.keep-in-touch {
+  display: flex;
+  flex-direction: column;
+  margin-left: 140px;
+  align-content: flex-end;
+}
+
+.keep-in-touch__icon {
+  fill: #0d3351;
+  width: 25px;
+  height: 30px;
+  margin-right: 8px;
+  margin-top: 4px
+}
+
+@media screen and (max-width: 1330px) {
+  .keep-in-touch {
+    margin-left: 70px;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .keep-in-touch {
+    margin: 0 0 0 0;
+    align-items: center;
+  }
+}

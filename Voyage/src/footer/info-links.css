@@ -1,0 +1,17 @@
+.info-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-links__link {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 769px) {
+  .info-links {
+    visibility: hidden;
+    display: none;
+  }
+}
