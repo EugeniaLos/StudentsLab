@@ -6,3 +6,7 @@
     border: none;
     color: ivory;
   }
+
+  .button--center {
+    align-self: center;
+  }

@@ -2,6 +2,8 @@
 @import "./catalog/catalog.css";
 @import "./footer/footer.css";
 @import "./common/button.css";
+@import "./header/svg-logo.css";
+@import "./header/dropdown.css";
 
 body {
     margin: 0;

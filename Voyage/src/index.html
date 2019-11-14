@@ -45,39 +45,40 @@
         </path>
       </symbol>
       <symbol id="icon-rouble" viewBox="0 0 20 28">
-        <symbol id="icon-rouble" viewBox="0 0 20 28">
-          <title>rouble</title>
-          <path
-            d="M16.297 8.828c0-2.094-1.484-3.5-3.687-3.5h-5v7h5c2.203 0 3.687-1.406 3.687-3.5zM20 8.828c0 4.016-2.906 6.828-7.078 6.828h-5.313v1.844h7.891c0.281 0 0.5 0.219 0.5 0.5v2c0 0.281-0.219 0.5-0.5 0.5h-7.891v3c0 0.281-0.219 0.5-0.5 0.5h-2.609c-0.281 0-0.5-0.219-0.5-0.5v-3h-3.5c-0.281 0-0.5-0.219-0.5-0.5v-2c0-0.281 0.219-0.5 0.5-0.5h3.5v-1.844h-3.5c-0.281 0-0.5-0.219-0.5-0.5v-2.328c0-0.281 0.219-0.5 0.5-0.5h3.5v-9.828c0-0.281 0.219-0.5 0.5-0.5h8.422c4.172 0 7.078 2.812 7.078 6.828z">
-          </path>
-        </symbol>
-        <symbol id="icon-user" viewBox="0 0 28 28">
-          <title>user</title>
-          <path
-            d="M15.75 19.321v-1.443c1.928-1.086 3.5-3.795 3.5-6.503 0-4.349 0-7.875-5.25-7.875s-5.25 3.526-5.25 7.875c0 2.709 1.572 5.417 3.5 6.503v1.443c-5.936 0.485-10.5 3.402-10.5 6.929h24.5c0-3.526-4.564-6.443-10.5-6.929z">
-          </path>
-        </symbol>
+        <title>rouble</title>
+        <path
+          d="M16.297 8.828c0-2.094-1.484-3.5-3.687-3.5h-5v7h5c2.203 0 3.687-1.406 3.687-3.5zM20 8.828c0 4.016-2.906 6.828-7.078 6.828h-5.313v1.844h7.891c0.281 0 0.5 0.219 0.5 0.5v2c0 0.281-0.219 0.5-0.5 0.5h-7.891v3c0 0.281-0.219 0.5-0.5 0.5h-2.609c-0.281 0-0.5-0.219-0.5-0.5v-3h-3.5c-0.281 0-0.5-0.219-0.5-0.5v-2c0-0.281 0.219-0.5 0.5-0.5h3.5v-1.844h-3.5c-0.281 0-0.5-0.219-0.5-0.5v-2.328c0-0.281 0.219-0.5 0.5-0.5h3.5v-9.828c0-0.281 0.219-0.5 0.5-0.5h8.422c4.172 0 7.078 2.812 7.078 6.828z">
+        </path>
+      </symbol>
+      <symbol id="icon-user" viewBox="0 0 28 28">
+        <title>user</title>
+        <path
+          d="M15.75 19.321v-1.443c1.928-1.086 3.5-3.795 3.5-6.503 0-4.349 0-7.875-5.25-7.875s-5.25 3.526-5.25 7.875c0 2.709 1.572 5.417 3.5 6.503v1.443c-5.936 0.485-10.5 3.402-10.5 6.929h24.5c0-3.526-4.564-6.443-10.5-6.929z">
+        </path>
+      </symbol>
     </defs>
   </svg>
 
   <header class="header">
     <div class="header__content-container">
       <div class="header__upper-header">
-        <nav class="header__dropdown">
-          <img class="header__dropdown-menu" src="./img/menu.png" alt="menu" />
-          <div class="dropdown-content">
-            <a href="#">Популярные маршруты</a>
-            <a href="#">Расписание рейсов</a>
-            <a href="#">Забронированные рейсы</a>
-            <a href="#">Вход для партнеров</a>
-            <a href="#">О компании</a>
-            <a href="#">Забронированные рейсы</a>
-          </div>
-        </nav>
+        <div class="header__nav-wrapper">
+          <nav class="dropdown">
+            <img class="dropdown__menu" src="./img/menu.png" alt="menu" />
+            <div class="dropdown__content">
+              <a class="dropdown__contetnt-links" href="#">Популярные маршруты</a>
+              <a class="dropdown__contetnt-links" href="#">Расписание рейсов</a>
+              <a class="dropdown__contetnt-links" href="#">Забронированные рейсы</a>
+              <a class="dropdown__contetnt-links" href="#">Вход для партнеров</a>
+              <a class="dropdown__contetnt-links" href="#">О компании</a>
+              <a class="dropdown__contetnt-links" href="#">Забронированные рейсы</a>
+            </div>
+          </nav>
+        </div>
         <div class="header__menu-container">
           <div class="header__menu-item">
             <div class="header__cabinet header_with-logo">
-              <svg class="header__person-logo">
+              <svg class="header__svg-logo svg-logo">
                 <use xlink:href="#icon-user"></use>
               </svg>
               <p class="header__cabinet-text header__text">Личный кабинет</p>
@@ -85,7 +86,7 @@
           </div>
           <div class="header__menu-item">
             <div class="header__currency header_with-logo">
-              <svg class="header__currency-logo">
+              <svg class="header__svg-logo svg-logo">
                 <use xlink:href="#icon-rouble"></use>
               </svg>
               <p class="header__currency-text header__text">Рубль</p>
@@ -105,13 +106,11 @@
         </div>
       </div>
       <img class="header__logo" srcset="./img/tabletLogo.png 70w,
-                                        ./img/logo.png 88w"
-                                sizes="(max-width: 1330px) 70px,
-                                       88px "
-                                src="./img/logo.png" alt="Логотип" />
+                                        ./img/logo.png 88w" sizes="(max-width: 1330px) 70px,
+                                       88px " src="./img/logo.png" alt="Логотип" />
       <h3 class="header__text-sea-walks">Морские прогулки</h3>
       <h1 class="header__text-black-sea">ПО ЧЁРНОМУ МОРЮ</h1>
-      <button class="header__button button">Выбрать круиз</button>
+      <button class="button">Выбрать круиз</button>
     </div>
   </header>
 
@@ -121,14 +120,12 @@
     <div class="catalog__items-container">
 
       <article class="item">
-          <div class="flag flag--blue">
-            <p class="flag__text">Хит продаж</p>
-          </div>
+        <div class="flag flag--blue">
+          <p class="flag__text">Хит продаж</p>
+        </div>
         <img class="item__image-lighthouse  item__image" srcset="./img/tabletLighthouse.jpg 345w,
-                                                                 ./img/descLighthouse.jpg 555w"
-                                                         sizes="(max-width: 1330px) 311px,
-                                                                521px"
-                                                         src="./img/descLighthouse.jpg"/>
+                                                                 ./img/descLighthouse.jpg 555w" sizes="(max-width: 1330px) 311px,
+                                                                521px" src="./img/descLighthouse.jpg" />
         <div class="item__text-container">
           <p class="item__cruise-name cruise-name"><b>Морской круиз в Анапу</b></p>
           <div class="general-info">
@@ -140,12 +137,9 @@
       </article>
 
       <article class="item">
-        <img class="item__image-novorossiysk item__image--label-none item__image"
-              srcset="./img/tabletNovorossiysk.jpg 345w,
-                      ./img/descNovorossiysk.jpg 555w"
-              sizes="(max-width: 1330px) 311px,
-                      521px"
-              src="./img/descNovorossiysk.jpg" />
+        <img class="item__image-novorossiysk item__image--label-none item__image" srcset="./img/tabletNovorossiysk.jpg 345w,
+                      ./img/descNovorossiysk.jpg 555w" sizes="(max-width: 1330px) 311px,
+                      521px" src="./img/descNovorossiysk.jpg" />
         <div class="item__text-container">
 
           <p class="item__cruise-name cruise-name">Морской круиз в Новороссийск</p>
@@ -158,16 +152,13 @@
       </article>
       <div class="catalog__small-elements-container">
         <article class="item">
-            <div class="flag flag--red">
-                <p class="flag__text">Акция</p>
-              </div>
-          <img class="item__image-sochi item__image--label-blue item__image"
-              srcset="./img/tabletSochi.jpg 345w,
-                      ./img/descSochi.jpg 555w"
-              sizes="(max-width: 1330px) 311px,
-                      521px"
-              src="./img/descSochi.jpg" />
-            
+          <div class="flag flag--red">
+            <p class="flag__text">Акция</p>
+          </div>
+          <img class="item__image-sochi item__image--label-blue item__image" srcset="./img/tabletSochi.jpg 345w,
+                      ./img/descSochi.jpg 555w" sizes="(max-width: 1330px) 311px,
+                      521px" src="./img/descSochi.jpg" />
+
           <div class="item__text-container">
             <p class="item__cruise-name cruise-name">Обзорная морская прогулка с экскурсией</p>
             <div class="general-info">
@@ -179,15 +170,12 @@
         </article>
 
         <article class="item">
-            <div class="flag flag--red">
-                <p class="flag__text">Скидка 10%</p>
-              </div>
-          <img class="item__image-beach item__image--label-red item__image"
-              srcset="./img/tabletBeach.jpg 345w,
-                        ./img/descBeach.jpg 555w"
-              sizes="(max-width: 1330px) 345px,
-                    555px"
-              src="./img/descBeach.jpg"/>
+          <div class="flag flag--red">
+            <p class="flag__text">Скидка 10%</p>
+          </div>
+          <img class="item__image-beach item__image--label-red item__image" srcset="./img/tabletBeach.jpg 345w,
+                        ./img/descBeach.jpg 555w" sizes="(max-width: 1330px) 345px,
+                    555px" src="./img/descBeach.jpg" />
           <div class="item__text-container">
             <p class="item__cruise-name cruise-name">Морская прогулка в Геленджик</p>
             <div class="general-info">
@@ -215,25 +203,27 @@
         <div class="popup-sea-container__content">
           <a class="popup-sea-container__close" href="#sea">&times;</a>
           <div class="popup-sea-container__wraper">
-              <div class="popup-sea-container__image-container">
-                  <img class="popup-sea-container__image" src="./img/popSea.jpg" alt="sea">
-                  <div class="popup-sea-container__small-image-wrapper">
-                    <img class="popup-sea-container-image" src="./img/popImg1.jpg">
-                    <img class="popup-sea-container-image" src="./img/popImg2.jpg">
-                    <img class="popup-sea-container-image" src="./img/popImg3.jpg">
-                    <img class="popup-sea-container-image" src="./img/popImg4.jpg">
-                  </div>
-                </div>
+            <div class="popup-sea-container__image-container">
+              <img class="popup-sea-container__image" src="./img/popSea.jpg" alt="sea">
+              <div class="popup-sea-container__small-image-wrapper">
+                <img class="popup-sea-container-image" src="./img/popImg1.jpg">
+                <img class="popup-sea-container-image" src="./img/popImg2.jpg">
+                <img class="popup-sea-container-image" src="./img/popImg3.jpg">
+                <img class="popup-sea-container-image" src="./img/popImg4.jpg">
+              </div>
+            </div>
             <div class="popup-sea-container__text">
               <h5 class="popup-sea-container__cruise-name cruise-name">Морская прогулка в Абрау-Дюрсо</h5>
               <div class="general-info">
                 <p class="popup-sea-container__route"><b>Маршрут:</b> Сочи-Абрау-Дюрсо</p>
                 <p class="popup-sea-container__route"><b>Продолжительность:</b> 11 ч. 0 мин.</p>
-                <p class="popup-sea-container__route"><b>Расписание:</b><br>Отправление из Сочи: ежедневно в 10:00, 11:40,
+                <p class="popup-sea-container__route"><b>Расписание:</b><br>Отправление из Сочи: ежедневно в 10:00,
+                  11:40,
                   13:20,
                   15:00, 16:40<br>
                   Отправление из Абрау-Дюрсо: ежедневно в 12:25б 14:05б 17:25б 19:05<br>
-                  Продолжительность: 11 часов 0 мин., из которых 10 часов - морская прогулка (туда и обратно), от 1 часа 30
+                  Продолжительность: 11 часов 0 мин., из которых 10 часов - морская прогулка (туда и обратно), от 1 часа
+                  30
                   мин.
                   - свободное время в Ласточкином гнезде<br>
                   Причал отправления/прибытия: набережная Ленина, причал №8, теплоход "Азов"</p>
@@ -241,7 +231,7 @@
                 <button class="popup-sea-container__button button">Бронирование</button>
               </div>
             </div>
-            
+
           </div>
         </div>
 
@@ -251,39 +241,39 @@
   </main>
 
 
-      <footer class="footer">
-        <div class="footer__items-container">
-        <div class="info-links">
-          <a class="info-links__link" href="#">Вход для партнеров</a>
-          <a class="info-links__link" href="#">О компании</a>
-          <a class="info-links__link" href="#">Контакты</a>
-        </div>
-      
-        <div class="keep-in-touch">
-          <p class="keep-in-touch__text">Будь на связи</p>
-          <div class="keep-in-touch__icons">
-            <svg class="keep-in-touch__icon">
-              <use xlink:href="#icon-vk1"></use>
-            </svg>
-            <svg class="keep-in-touch__icon">
-              <use xlink:href="#icon-odnoklassniki-square"></use>
-            </svg>
-           <svg class="keep-in-touch__icon">
-              <use xlink:href="#icon-youtube-square"></use>
-            </svg>
-            <svg class="keep-in-touch__icon">
-              <use xlink:href="#icon-instagram"></use>
-            </svg>
-          </div>
-        </div>
+  <footer class="footer">
+    <div class="footer__items-container">
+      <div class="info-links">
+        <a class="info-links__link" href="#">Вход для партнеров</a>
+        <a class="info-links__link" href="#">О компании</a>
+        <a class="info-links__link" href="#">Контакты</a>
+      </div>
 
-        <div class="info-titles">
-          <p class="info-titles__phone-number">8 800 500-61-05</p>
-          <p class="info-titles__support-text">Круглосуточная поддержка</p>
-          <p class="info-titles__brand">&#169 2016 ООО "Городские Круизы"</p>
+      <div class="keep-in-touch">
+        <p class="keep-in-touch__text">Будь на связи</p>
+        <div class="keep-in-touch__icons">
+          <svg class="keep-in-touch__icon">
+            <use xlink:href="#icon-vk1"></use>
+          </svg>
+          <svg class="keep-in-touch__icon">
+            <use xlink:href="#icon-odnoklassniki-square"></use>
+          </svg>
+          <svg class="keep-in-touch__icon">
+            <use xlink:href="#icon-youtube-square"></use>
+          </svg>
+          <svg class="keep-in-touch__icon">
+            <use xlink:href="#icon-instagram"></use>
+          </svg>
         </div>
       </div>
-      </footer>
+
+      <div class="info-titles">
+        <p class="info-titles__phone-number">8 800 500-61-05</p>
+        <p class="info-titles__support-text">Круглосуточная поддержка</p>
+        <p class="info-titles__brand">&#169 2016 ООО "Городские Круизы"</p>
+      </div>
+    </div>
+  </footer>
 </body>
 
 </html>
