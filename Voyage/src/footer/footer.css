@@ -1,13 +1,11 @@
 .footer {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    width: initial;
+    max-width: 1920px;
     height: 130px;
 }
 
 .footer__items-container {
     width: 1140px;
+    margin: auto;
     display: flex;
     font-family: 'Open Sans', sans-serif;
     font-size: 15px;
@@ -30,7 +28,7 @@
 
 .keep-in-touch__icon {
     fill: #0d3351;
-    width: 30px;
+    width: 25px;
     height: 30px;
     margin-right: 8px;
     margin-top: 4px

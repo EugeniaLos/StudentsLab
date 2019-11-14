@@ -1,0 +1,16 @@
+.general-info {
+  font-size: 15px;
+  line-height: 30px;
+  font-family: 'Open Sans', sans-serif;
+}
+  
+.general-info b {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1330px) {
+
+  .general-info {
+    line-height: 22px;
+  }
+}

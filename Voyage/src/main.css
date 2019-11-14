@@ -4,6 +4,11 @@
 @import "./common/button.css";
 @import "./header/svg-logo.css";
 @import "./header/dropdown.css";
+@import "./catalog/price.css";
+@import "./catalog/general-info.css";
+@import "./catalog/popup-sea.css";
+@import "./catalog/cruise-name.css";
+@import "./catalog/item.css";
 
 body {
     margin: 0;

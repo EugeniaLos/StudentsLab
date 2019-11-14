@@ -77,7 +77,7 @@
         </div>
         <div class="header__menu-container">
           <div class="header__menu-item">
-            <div class="header__cabinet header_with-logo">
+            <div class="header__cabinet header--with-logo">
               <svg class="header__svg-logo svg-logo">
                 <use xlink:href="#icon-user"></use>
               </svg>
@@ -85,7 +85,7 @@
             </div>
           </div>
           <div class="header__menu-item">
-            <div class="header__currency header_with-logo">
+            <div class="header__currency header--with-logo">
               <svg class="header__svg-logo svg-logo">
                 <use xlink:href="#icon-rouble"></use>
               </svg>
@@ -118,16 +118,15 @@
     <h2 class="catalog__text-cruises">Каталог круизов</h2>
     <h4 class="catalog__text-sort">Сортировать круизы по цене</h4>
     <div class="catalog__items-container">
-
       <article class="item">
-        <div class="flag flag--blue">
-          <p class="flag__text">Хит продаж</p>
+        <div class="item__flag item__flag--blue">
+          <p class="item__flag-text">Хит продаж</p>
         </div>
         <img class="item__image-lighthouse  item__image" srcset="./img/tabletLighthouse.jpg 345w,
                                                                  ./img/descLighthouse.jpg 555w" sizes="(max-width: 1330px) 311px,
                                                                 521px" src="./img/descLighthouse.jpg" />
         <div class="item__text-container">
-          <p class="item__cruise-name cruise-name"><b>Морской круиз в Анапу</b></p>
+          <p class="cruise-name"><b>Морской круиз в Анапу</b></p>
           <div class="general-info">
             <p class="item__route"><b>Маршрут:</b> Сочи-Лазаревское-Геленджик-Анапа</p>
             <p class="item__route"><b>Продолжительность:</b> 10 ч. 0 мин.</p>
@@ -135,14 +134,13 @@
           <p class="price"><b>49 000 руб.</b></p>
         </div>
       </article>
-
       <article class="item">
         <img class="item__image-novorossiysk item__image--label-none item__image" srcset="./img/tabletNovorossiysk.jpg 345w,
                       ./img/descNovorossiysk.jpg 555w" sizes="(max-width: 1330px) 311px,
                       521px" src="./img/descNovorossiysk.jpg" />
         <div class="item__text-container">
 
-          <p class="item__cruise-name cruise-name">Морской круиз в Новороссийск</p>
+          <p class="cruise-name">Морской круиз в Новороссийск</p>
           <div class="general-info">
             <p class="item__route"><b>Маршрут:</b> Сочи-Геленджик-Новороссийск-Геленджик-Сочи</p>
             <p class="item__route"><b>Продолжительность:</b> 13 ч. 0 мин.</p>
@@ -152,32 +150,31 @@
       </article>
       <div class="catalog__small-elements-container">
         <article class="item">
-          <div class="flag flag--red">
-            <p class="flag__text">Акция</p>
+          <div class="item__flag item__flag--red">
+            <p class="item__flag-text">Акция</p>
           </div>
           <img class="item__image-sochi item__image--label-blue item__image" srcset="./img/tabletSochi.jpg 345w,
                       ./img/descSochi.jpg 555w" sizes="(max-width: 1330px) 311px,
                       521px" src="./img/descSochi.jpg" />
 
           <div class="item__text-container">
-            <p class="item__cruise-name cruise-name">Обзорная морская прогулка с экскурсией</p>
+            <p class="cruise-name">Обзорная морская прогулка с экскурсией</p>
             <div class="general-info">
-              <p class="item__route"><b>Маршрут:</b> Сочи-Адлер-Сочи (без высадки)</p>
-              <p class="item__route"><b>Продолжительность:</b> 1 ч. 0 мин.</p>
+              <p class="general-info__route"><b>Маршрут:</b> Сочи-Адлер-Сочи (без высадки)</p>
+              <p class="general-info__route"><b>Продолжительность:</b> 1 ч. 0 мин.</p>
             </div>
             <p class="price"><b>5 000 руб.</b><s>15000 руб.</s></p>
           </div>
         </article>
-
         <article class="item">
-          <div class="flag flag--red">
-            <p class="flag__text">Скидка 10%</p>
+          <div class="item__flag item__flag--red">
+            <p class="item__flag-text">Скидка 10%</p>
           </div>
           <img class="item__image-beach item__image--label-red item__image" srcset="./img/tabletBeach.jpg 345w,
                         ./img/descBeach.jpg 555w" sizes="(max-width: 1330px) 345px,
                     555px" src="./img/descBeach.jpg" />
           <div class="item__text-container">
-            <p class="item__cruise-name cruise-name">Морская прогулка в Геленджик</p>
+            <p class="cruise-name">Морская прогулка в Геленджик</p>
             <div class="general-info">
               <p class="item__route"><b>Маршрут:</b> Сочи-Туапсе-Геленджик</p>
               <p class="item__route"><b>Продолжительность:</b> 12 ч. 30 мин.</p>
@@ -186,19 +183,18 @@
           </div>
         </article>
       </div>
-
-      <a id="sea" class="item item__sea" href="#popup-sea">
+      <a id="sea" class="item item--removable item--clickable" href="#popup-sea">
         <img class="item__image-sea item__image--label-none item__image" src="./img/descSea.jpg" />
         <div class="item__text-container">
-          <p class="item__cruise-name cruise-name">Морская прогулка в Абрау-Дюрсо</p>
+          <p class="cruise-name">Морская прогулка в Абрау-Дюрсо</p>
           <div class="general-info">
-            <p class="item__route"><b>Маршрут:</b> Сочи-Абрау-Дюрсо</p>
-            <p class="item__route"><b>Продолжительность:</b> 11 ч. 0 мин.</p>
+            <p class="general-info__route"><b>Маршрут:</b> Сочи-Абрау-Дюрсо</p>
+            <p class="general-info__route"><b>Продолжительность:</b> 11 ч. 0 мин.</p>
           </div>
+
           <p class="price"><b>14 800 руб.</b></p>
         </div>
       </a>
-
       <div id="popup-sea" class="popup-sea__container">
         <div class="popup-sea-container__content">
           <a class="popup-sea-container__close" href="#sea">&times;</a>
@@ -213,11 +209,11 @@
               </div>
             </div>
             <div class="popup-sea-container__text">
-              <h5 class="popup-sea-container__cruise-name cruise-name">Морская прогулка в Абрау-Дюрсо</h5>
+              <h5 class="cruise-name">Морская прогулка в Абрау-Дюрсо</h5>
               <div class="general-info">
-                <p class="popup-sea-container__route"><b>Маршрут:</b> Сочи-Абрау-Дюрсо</p>
-                <p class="popup-sea-container__route"><b>Продолжительность:</b> 11 ч. 0 мин.</p>
-                <p class="popup-sea-container__route"><b>Расписание:</b><br>Отправление из Сочи: ежедневно в 10:00,
+                <p class="general-info__route"><b>Маршрут:</b> Сочи-Абрау-Дюрсо</p>
+                <p class="general-info__route"><b>Продолжительность:</b> 11 ч. 0 мин.</p>
+                <p class="general-info__route"><b>Расписание:</b><br>Отправление из Сочи: ежедневно в 10:00,
                   11:40,
                   13:20,
                   15:00, 16:40<br>
@@ -231,15 +227,12 @@
                 <button class="popup-sea-container__button button">Бронирование</button>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
-    <button class="catalog__button button">Больше круизов</button>
+    <button class="button">Больше круизов</button>
   </main>
-
 
   <footer class="footer">
     <div class="footer__items-container">
@@ -248,7 +241,6 @@
         <a class="info-links__link" href="#">О компании</a>
         <a class="info-links__link" href="#">Контакты</a>
       </div>
-
       <div class="keep-in-touch">
         <p class="keep-in-touch__text">Будь на связи</p>
         <div class="keep-in-touch__icons">
@@ -266,7 +258,6 @@
           </svg>
         </div>
       </div>
-
       <div class="info-titles">
         <p class="info-titles__phone-number">8 800 500-61-05</p>
         <p class="info-titles__support-text">Круглосуточная поддержка</p>

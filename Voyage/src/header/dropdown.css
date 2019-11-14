@@ -30,3 +30,10 @@
 .dropdown:hover .dropdown__content {
   display: block;
 }
+
+@media screen and (max-width: 769px) {
+
+  .dropdown__content {
+    width: 225px;
+  }
+}

@@ -1,12 +1,7 @@
 .button {
-    font-size: 11.5pt;
-    height: 45px;
-    width: 200px;
+    font-size: 15px;
+    padding: 14px 48px;
     background-color: #33c7fd;
     border: none;
     color: ivory;
-  }
-
-  .button--center {
-    align-self: center;
   }
