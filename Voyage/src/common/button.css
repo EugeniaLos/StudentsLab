@@ -1,7 +1,20 @@
 .button {
-    font-size: 15px;
-    padding: 14px 48px;
-    background-color: #33c7fd;
-    border: none;
-    color: ivory;
-  }
+  font-size: 15px;
+  padding: 14px 48px;
+  background-color: #33c7fd;
+  border: none;
+  color: ivory;
+}
+
+.button:hover {
+  background-color: #00bafd;
+}
+
+.button:focus {
+  box-shadow: 0px 8px 16px 0px #151a1b69;
+  outline-color: #069fd6
+}
+
+.button:active {
+  background-color: #1b7799;
+}

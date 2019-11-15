@@ -21,7 +21,7 @@
 
 @media screen and (max-width: 769px) {
   .keep-in-touch {
-    margin: 0 0 0 0;
+    margin: 0;
     align-items: center;
   }
 }

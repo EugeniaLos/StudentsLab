@@ -16,9 +16,7 @@
   
 .dropdown__contetnt-links {
   color: ivory;
-  margin-right: 130px;
-  margin-left: 20px;
-  margin-bottom: 30px;
+  margin: 0 130px 30px 20px;
   text-decoration: none;
   display: block; 
 }
