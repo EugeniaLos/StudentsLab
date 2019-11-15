@@ -12,7 +12,7 @@
 
 .button:focus {
   box-shadow: 0px 8px 16px 0px #151a1b69;
-  outline-color: #069fd6
+  outline-color: #069fd6;
 }
 
 .button:active {
