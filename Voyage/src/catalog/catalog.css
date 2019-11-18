@@ -21,19 +21,18 @@
 }
 
 .catalog__text-cruises {
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   font-size: 39px;
 }
 
 .catalog__text-sort {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 15px;
   margin-bottom: 42px;
 }
 
 @media screen and (max-width: 1330px) {
-
-  .catalog { 
+  .catalog {
     padding-top: 52px;
     height: 1269px;
   }
@@ -54,12 +53,11 @@
 }
 
 @media screen and (max-width: 769px) {
-
   .catalog {
     padding: 47px 15px 0 15px;
     height: 2100px;
   }
- 
+
   .catalog__text-cruises {
     font-size: 16.5pt;
   }

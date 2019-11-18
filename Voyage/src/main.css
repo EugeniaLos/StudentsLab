@@ -1,4 +1,4 @@
-@import "./header/header.css";
+/* @import "./header/header.css"; */
 @import "./catalog/catalog.css";
 @import "./footer/footer.css";
 @import "./common/button.css";
@@ -14,5 +14,5 @@
 @import "./footer/info-titles.css";
 
 body {
-    margin: 0;
+  margin: 0;
 }

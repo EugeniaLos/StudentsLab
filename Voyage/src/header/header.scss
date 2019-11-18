@@ -1,4 +1,7 @@
-.header {
+$major-font: "Roboto Slab", serif;
+$minor-font: "Open Sans", sans-serif;
+
+@use .header {
   max-width: 1920px;
   height: 647px;
   background-image: url(../img/sochiBackground.jpg);
