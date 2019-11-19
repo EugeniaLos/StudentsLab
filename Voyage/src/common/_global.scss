@@ -9,3 +9,8 @@ $baby-blue: #00bafd;
 $dark-blue: #0d3351;
 $beige: #f3f3f3;
 $red: #f20542;
+
+%flex-with-centric-content {
+  display: flex;
+  align-items: center;
+}

@@ -1,11 +1,10 @@
 @use "../common/global" as *;
 
 .catalog {
+  @extend %flex-with-centric-content;
   background-color: $beige;
   color: $dark-blue;
-  display: flex;
   flex-direction: column;
-  align-items: center;
   max-width: 1920px;
   height: 1303px;
   padding-top: 105px;
