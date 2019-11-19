@@ -1,0 +1,22 @@
+@use "../common/global" as *;
+
+.button {
+  font-size: 15px;
+  padding: 14px 48px;
+  background-color: $blue;
+  border: none;
+  color: ivory;
+
+  :hover {
+    background-color: $baby-blue;
+  }
+
+  :focus {
+    box-shadow: 0px 8px 16px 0px black;
+    outline-color: $baby-blue;
+  }
+
+  :active {
+    background-color: $dark-blue;
+  }
+}

@@ -1,33 +1,33 @@
+@use "../common/global" as *;
+
 .price {
-    margin-top: 10px;
-    font-family: 'Roboto Slab', serif;
-    font-size: 32px;
-    padding-left: 4px;
-  }
-  
+  margin-top: 10px;
+  font-family: $major-font;
+  font-size: 32px;
+  padding-left: 4px;
+}
+
 .price s {
   font-size: 18px;
   margin-left: 37px;
   color: gray;
 }
 
-@media screen and (max-width: 1330px) {
-
+@media screen and (max-width: $breakpoint-tablet) {
   .price {
     padding-left: 0;
     position: absolute;
     bottom: 38px;
     left: 38px;
-  }  
+  }
 }
 
-@media screen and (max-width: 769px) {
-
+@media screen and (max-width: $breakpoint-mobile) {
   .price {
     bottom: 38px;
     left: 20px;
   }
-    
+
   .price s {
     margin-left: 5px;
   }

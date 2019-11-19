@@ -1,7 +1,6 @@
-$major-font: "Roboto Slab", serif;
-$minor-font: "Open Sans", sans-serif;
+@use "../common/global" as *;
 
-@use .header {
+.header {
   max-width: 1920px;
   height: 647px;
   background-image: url(../img/sochiBackground.jpg);
@@ -16,8 +15,8 @@ $minor-font: "Open Sans", sans-serif;
   width: 1140px;
   height: 100%;
   margin: auto;
-  color: #0d3351;
-  font-family: "Roboto Slab", serif;
+  color: $dark-blue;
+  font-family: $major-font;
 }
 
 .header__upper-header {
@@ -39,7 +38,7 @@ $minor-font: "Open Sans", sans-serif;
 
 .header__menu-item {
   margin-left: 50px;
-  font-family: "Open Sans", sans-serif;
+  font-family: $minor-font;
 }
 
 .header--with-logo {
@@ -69,7 +68,7 @@ $minor-font: "Open Sans", sans-serif;
   margin-bottom: 34px;
 }
 
-@media screen and (max-width: 1330px) {
+@media screen and (max-width: $breakpoint-tablet) {
   .header {
     height: 600px;
   }
@@ -92,7 +91,7 @@ $minor-font: "Open Sans", sans-serif;
   }
 }
 
-@media screen and (max-width: 769px) {
+@media screen and (max-width: $breakpoint-mobile) {
   .header {
     height: 582px;
   }

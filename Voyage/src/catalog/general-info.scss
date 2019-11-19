@@ -1,15 +1,16 @@
+@use "../common/global" as *;
+
 .general-info {
   font-size: 15px;
   line-height: 30px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: $minor-font;
 }
-  
+
 .general-info b {
   font-weight: bold;
 }
 
-@media screen and (max-width: 1330px) {
-
+@media screen and (max-width: $breakpoint-tablet) {
   .general-info {
     line-height: 22px;
   }

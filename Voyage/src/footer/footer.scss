@@ -1,3 +1,5 @@
+@use "../common/global" as *;
+
 .footer {
   max-width: 1920px;
   height: 130px;
@@ -7,20 +9,19 @@
   width: 1140px;
   margin: auto;
   display: flex;
-  font-family: 'Open Sans', sans-serif;
+  font-family: $minor-font;
   font-size: 15px;
   padding-top: 28px;
   line-height: 25px;
 }
 
-@media screen and (max-width: 1330px) {
+@media screen and (max-width: $breakpoint-tablet) {
   .footer__items-container {
-    width: 720px;      
+    width: 720px;
   }
 }
 
-
-@media screen and (max-width: 769px) {
+@media screen and (max-width: $breakpoint-mobile) {
   .footer__items-container {
     flex-direction: column;
     width: 250px;
