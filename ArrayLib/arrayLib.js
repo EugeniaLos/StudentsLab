@@ -1,5 +1,6 @@
 let arrayLib = {
   arr: ["abba", "aaa", "aaaaaa"],
+  memo: {},
   take(arr, n) {
     let isChained = false;
     if (n == undefined) {
@@ -123,6 +124,16 @@ let arrayLib = {
   },
   value() {
     return arrayLib.arr;
+  },
+  sum(a, b) {
+    let value;
+    if (a + " " + b in arrayLib.memo) {
+      value = arrayLib.memo[a + " " + b];
+    } else {
+      value = a + b;
+      arrayLib.memo[a + " " + b] = value;
+    }
+    return value;
   }
 };
 
