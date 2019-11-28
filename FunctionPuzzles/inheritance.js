@@ -42,7 +42,7 @@ class ShapeStore {
   }
   RectanglePerimeter() {
     let sum = 0;
-    for (let shape in this.container) {
+    for (let shape of this.container) {
       if (shape instanceof Rectangle) {
         sum += shape.perimeter();
       }
@@ -51,7 +51,7 @@ class ShapeStore {
   }
   SquareArea() {
     let sum = 0;
-    for (let shape in this.container) {
+    for (let shape of this.container) {
       if (shape instanceof Square) {
         sum += shape.area();
       }
