@@ -1,9 +1,14 @@
-@use "../common/global" as *;
+@use "../common/globalVariables" as *;
 
 .info-titles {
   display: flex;
   flex-direction: column;
   margin-left: auto;
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    margin-left: initial;
+    align-items: center;
+  }
 }
 
 .info-titles__phone-number {
@@ -12,11 +17,4 @@
 
 .info-titles__support-text {
   font-size: 13px;
-}
-
-@media screen and (max-width: $breakpoint-mobile) {
-  .info-titles {
-    margin-left: initial;
-    align-items: center;
-  }
 }

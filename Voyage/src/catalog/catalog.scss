@@ -1,4 +1,5 @@
-@use "../common/global" as *;
+@use "../common/globalVariables" as *;
+@use "../common/globalExtends" as *;
 
 .catalog {
   @extend %flex-with-centric-content;
@@ -8,6 +9,16 @@
   max-width: 1920px;
   height: 1303px;
   padding-top: 105px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    padding-top: 52px;
+    height: 1269px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    padding: 47px 15px 0 15px;
+    height: 2100px;
+  }
 }
 
 .catalog__items-container {
@@ -19,52 +30,38 @@
   height: 1072px;
   width: 1140px;
   margin-bottom: 10px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    height: 1070px;
+    width: 720px;
+    margin-bottom: 0;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 290px;
+    height: 1944px;
+  }
 }
 
 .catalog__text-cruises {
   font-family: $major-font;
   font-size: 39px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    font-size: 29px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    font-size: 16.5pt;
+  }
 }
 
 .catalog__text-sort {
   font-family: $minor-font;
   font-size: 15px;
   margin-bottom: 42px;
-}
 
-@media screen and (max-width: $breakpoint-tablet) {
-  .catalog {
-    padding-top: 52px;
-    height: 1269px;
-  }
-
-  .catalog__text-cruises {
-    font-size: 29px;
-  }
-
-  .catalog__text-sort {
+  @media screen and (max-width: $breakpoint-tablet) {
     margin-bottom: 33px;
-  }
-
-  .catalog__items-container {
-    height: 1070px;
-    width: 720px;
-    margin-bottom: 0;
-  }
-}
-
-@media screen and (max-width: $breakpoint-mobile) {
-  .catalog {
-    padding: 47px 15px 0 15px;
-    height: 2100px;
-  }
-
-  .catalog__text-cruises {
-    font-size: 16.5pt;
-  }
-
-  .catalog__items-container {
-    width: 290px;
-    height: 1944px;
   }
 }

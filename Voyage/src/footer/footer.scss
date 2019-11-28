@@ -1,4 +1,4 @@
-@use "../common/global" as *;
+@use "../common/globalVariables" as *;
 
 .footer {
   max-width: 1920px;
@@ -13,16 +13,12 @@
   font-size: 15px;
   padding-top: 28px;
   line-height: 25px;
-}
 
-@media screen and (max-width: $breakpoint-tablet) {
-  .footer__items-container {
+  @media screen and (max-width: $breakpoint-tablet) {
     width: 720px;
   }
-}
 
-@media screen and (max-width: $breakpoint-mobile) {
-  .footer__items-container {
+  @media screen and (max-width: $breakpoint-mobile) {
     flex-direction: column;
     width: 250px;
     align-items: center;

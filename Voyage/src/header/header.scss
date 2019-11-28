@@ -1,4 +1,5 @@
-@use "../common/global" as *;
+@use "../common/globalVariables" as *;
+@use "../common/globalExtends" as *;
 
 .header {
   max-width: 1920px;
@@ -6,6 +7,14 @@
   background-image: url(../img/sochiBackground.jpg);
   background-position: center center;
   background-size: cover;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    height: 600px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    height: 582px;
+  }
 }
 
 .header__content-container {
@@ -16,6 +25,14 @@
   margin: auto;
   color: $dark-blue;
   font-family: $major-font;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    width: 720px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 270px;
+  }
 }
 
 .header__upper-header {
@@ -23,6 +40,14 @@
   width: 100%;
   margin-top: 28px;
   margin-bottom: 20px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    margin-bottom: 77px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    margin-bottom: 55px;
+  }
 }
 
 .header__nav-wrapper {
@@ -37,6 +62,11 @@
 .header__menu-item {
   margin-left: 50px;
   font-family: $minor-font;
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    visibility: hidden;
+    display: none;
+  }
 }
 
 .header--with-logo {
@@ -56,67 +86,36 @@
   font-weight: bolder;
 }
 
+.header__logo {
+  @media screen and (max-width: $breakpoint-mobile) {
+    position: absolute;
+    top: 25px;
+  }
+}
+
 .header__text-sea-walks {
   font-size: 39px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    font-size: 28px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    font-size: 22px;
+  }
 }
 
 .header__text-black-sea {
   font-size: 96px;
   margin-top: 19px;
   margin-bottom: 34px;
-}
 
-@media screen and (max-width: $breakpoint-tablet) {
-  .header {
-    height: 600px;
-  }
-
-  .header__content-container {
-    width: 720px;
-  }
-
-  .header__upper-header {
-    margin-bottom: 77px;
-  }
-
-  .header__text-sea-walks {
-    font-size: 28px;
-  }
-
-  .header__text-black-sea {
+  @media screen and (max-width: $breakpoint-tablet) {
     font-size: 69px;
     margin: 0;
   }
-}
 
-@media screen and (max-width: $breakpoint-mobile) {
-  .header {
-    height: 582px;
-  }
-
-  .header__content-container {
-    width: 270px;
-  }
-
-  .header__upper-header {
-    margin-bottom: 55px;
-  }
-
-  .header__menu-item {
-    visibility: hidden;
-    display: none;
-  }
-
-  .header__logo {
-    position: absolute;
-    top: 25px;
-  }
-
-  .header__text-sea-walks {
-    font-size: 22px;
-  }
-
-  .header__text-black-sea {
+  @media screen and (max-width: $breakpoint-mobile) {
     text-align: center;
     font-size: 48px;
     margin-top: 13px;

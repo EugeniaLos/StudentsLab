@@ -1,7 +1,12 @@
-@use "../common/global" as *;
+@use "../common/globalVariables" as *;
 
 .cruise-name {
   font-size: 20px;
   color: $baby-blue;
   font-family: $major-font;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    line-height: 22px;
+    margin-top: 4px;
+  }
 }

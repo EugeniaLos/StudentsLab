@@ -1,12 +1,30 @@
-@use "../common/global" as *;
+@use "../common/globalVariables" as *;
 
 .item {
   position: relative;
   margin-bottom: 20px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    margin-bottom: 27px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    margin-bottom: 0;
+  }
 }
 
 .item__image {
   width: 555px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    width: 345px;
+    height: auto;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 290px;
+    height: auto;
+  }
 }
 
 .item__flag {
@@ -17,6 +35,14 @@
   border-bottom: 20px solid transparent;
   left: 420px;
   top: -7px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    left: 215px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    left: 180px;
+  }
 }
 
 .item__flag--blue {
@@ -44,6 +70,18 @@
   height: 169px;
   line-height: 30px;
   font-family: $minor-font;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    width: 311px;
+    height: 215px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    width: 285px;
+    height: 215px;
+    margin-bottom: 20px;
+    padding-left: 5px;
+  }
 }
 
 .item--clickable {
@@ -51,54 +89,13 @@
   color: inherit;
 }
 
-@media screen and (max-width: $breakpoint-tablet) {
-  .item {
-    margin-bottom: 27px;
-  }
-
-  .item__image {
-    width: 345px;
-    height: auto;
-  }
-
-  .item__flag {
-    left: 215px;
-  }
-
-  .item__text-container {
-    width: 311px;
-    height: 215px;
-  }
-
-  .item__cruise-name {
-    line-height: 22px;
-    margin-top: 4px;
-  }
-
-  .item--removable {
-    visibility: hidden;
-    display: none;
-  }
+.bold {
+  font-weight: bold;
 }
 
-@media screen and (max-width: $breakpoint-mobile) {
-  .item {
-    margin-bottom: 0;
-  }
-
-  .item__image {
-    width: 290px;
-    height: auto;
-  }
-
-  .item__flag {
-    left: 180px;
-  }
-
-  .item__text-container {
-    width: 285px;
-    height: 215px;
-    margin-bottom: 20px;
-    padding-left: 5px;
+.item--removable {
+  @media screen and (max-width: $breakpoint-tablet) {
+    visibility: hidden;
+    display: none;
   }
 }
