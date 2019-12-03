@@ -1,0 +1,25 @@
+@use "../common/globalVariables" as *;
+
+.keep-in-touch {
+  display: flex;
+  flex-direction: column;
+  margin-left: 140px;
+  align-content: flex-end;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    margin-left: 70px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    margin: 0;
+    align-items: center;
+  }
+}
+
+.keep-in-touch__icon {
+  fill: $dark-blue;
+  width: 25px;
+  height: 30px;
+  margin-right: 8px;
+  margin-top: 4px;
+}

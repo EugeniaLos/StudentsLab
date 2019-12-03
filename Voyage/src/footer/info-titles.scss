@@ -1,0 +1,20 @@
+@use "../common/globalVariables" as *;
+
+.info-titles {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    margin-left: initial;
+    align-items: center;
+  }
+}
+
+.info-titles__phone-number {
+  font-weight: bold;
+}
+
+.info-titles__support-text {
+  font-size: 13px;
+}

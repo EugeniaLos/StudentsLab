@@ -1,0 +1,31 @@
+@use "../common/globalVariables" as *;
+
+.price {
+  margin-top: 10px;
+  font-family: $major-font;
+  font-size: 32px;
+  padding-left: 4px;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    padding-left: 0;
+    position: absolute;
+    bottom: 38px;
+    left: 38px;
+  }
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    top: 389px;
+    left: 20px;
+  }
+}
+
+.price__crossed {
+  font-size: 18px;
+  margin-left: 37px;
+  color: gray;
+  text-decoration: line-through;
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    margin-left: 5px;
+  }
+}

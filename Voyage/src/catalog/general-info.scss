@@ -1,0 +1,11 @@
+@use "../common/globalVariables" as *;
+
+.general-info {
+  font-size: 15px;
+  line-height: 30px;
+  font-family: $minor-font;
+
+  @media screen and (max-width: $breakpoint-tablet) {
+    line-height: 22px;
+  }
+}

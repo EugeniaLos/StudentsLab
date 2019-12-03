@@ -1,0 +1,15 @@
+import "./normalize.scss";
+import "./header/header.scss";
+import "./catalog/catalog.scss";
+import "./footer/footer.scss";
+import "./common/button.scss";
+import "./header/svg-logo.scss";
+import "./header/dropdown.scss";
+import "./catalog/price.scss";
+import "./catalog/general-info.scss";
+import "./catalog/popup-sea.scss";
+import "./catalog/cruise-name.scss";
+import "./catalog/item.scss";
+import "./footer/info-links.scss";
+import "./footer/keep-in-touch.scss";
+import "./footer/info-titles.scss";

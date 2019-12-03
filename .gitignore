@@ -135,3 +135,5 @@ DotnetFundamentals/.vs
 DotnetFundamentals/CsvEnumerable/.vs
 DotnetFundamentals/Logger/.vs
 MoneyManager/.vs
+Voyage/src/node_modules
+Voyage/src/dist

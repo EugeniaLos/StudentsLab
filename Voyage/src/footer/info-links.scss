@@ -1,0 +1,17 @@
+@use "../common/globalVariables" as *;
+
+.info-links {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: $breakpoint-mobile) {
+    visibility: hidden;
+    display: none;
+  }
+}
+
+.info-links__link {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
