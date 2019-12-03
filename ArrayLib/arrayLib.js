@@ -1,130 +1,110 @@
 let arrayLib = {
-  arr: ["abba", "aaa", "aaaaaa"],
+  func: [],
+  arr: [],
   memo: {},
   take(arr, n) {
-    let isChained = false;
-    if (n == undefined) {
+    if (n === undefined) {
       n = arr;
-      isChained = true;
-    } else {
-      arrayLib.arr = arr;
+      this.func.push({ function: this.take, parameters: [this.arr, n] });
+      return this;
     }
     let output = [];
     for (let i = 0; i < n; i++) {
-      output.push(arrayLib.arr[i]);
+      output.push(arr[i]);
     }
     arrayLib.arr = output;
-    if (isChained) {
-      return this;
-    } else {
-      return arrayLib.arr;
-    }
+    return output;
   },
   skip(arr, n) {
-    let isChained = false;
-    if (n == undefined) {
+    if (n === undefined) {
       n = arr;
-      isChained = true;
-    } else {
-      arrayLib.arr = arr;
+      this.func.push({ function: this.skip, parameters: [this.arr, n] });
+      return this;
     }
     let output = [];
-    for (let i = n; i < arrayLib.arr.length; i++) {
-      output.push(arrayLib.arr[i]);
+    for (let i = n; i < arr.length; i++) {
+      output.push(arr[i]);
     }
-    arrayLib.arr = output;
-    if (isChained) {
-      return this;
-    } else {
-      return arrayLib.arr;
-    }
+    this.arr = output;
+    return output;
   },
   map(arr, callback) {
-    let isChained = false;
-    if (callback == undefined) {
+    if (callback === undefined) {
       callback = arr;
-      isChained = true;
-    } else {
-      arrayLib.arr = arr;
+      this.func.push({
+        function: this.map,
+        parameters: [this.arr, callback]
+      });
+      return this;
     }
     let output = [];
-    for (let i = 0; i < arrayLib.arr.length; i++) {
-      output[i] = callback(arrayLib.arr[i]);
+    for (let i = 0; i < arr.length; i++) {
+      output[i] = callback(arr[i]);
     }
-    arrayLib.arr = output;
-    if (isChained) {
-      return this;
-    } else {
-      return arrayLib.arr;
-    }
+    this.arr = output;
+    return output;
   },
   reduce(arr, callback, initialValue) {
-    let isChained = false;
-    if (initialValue == undefined) {
+    if (initialValue === undefined) {
       initialValue = callback;
       callback = arr;
-      isChained = true;
-    } else {
-      arrayLib.arr = arr;
+      this.func.push({
+        function: this.reduce,
+        parameters: [this.arr, callback, initialValue]
+      });
+      return this;
     }
     let secondArgument = initialValue;
-    for (let i = 0; i < arrayLib.arr.length; i++) {
-      secondArgument = callback(arrayLib.arr[i], secondArgument);
+    for (let i = 0; i < arr.length; i++) {
+      secondArgument = callback(arr[i], secondArgument);
     }
-    arrayLib.arr = secondArgument;
-    if (isChained) {
-      return this;
-    } else {
-      return arrayLib.arr;
-    }
+    this.arr = secondArgument;
+    return secondArgument;
   },
   filter(arr, callback) {
-    let isChained = false;
-    if (callback == undefined) {
+    if (callback === undefined) {
       callback = arr;
-      isChained = true;
-    } else {
-      arrayLib.arr = arr;
+      this.func.push({
+        function: this.filter,
+        parameters: [this.arr, callback]
+      });
+      return this;
     }
     let output = [];
-    for (let i = 0; i < arrayLib.arr.length; i++) {
-      if (callback(arrayLib.arr[i])) {
-        output.push(arrayLib.arr[i]);
+    for (let i = 0; i < arr.length; i++) {
+      if (callback(arr[i])) {
+        output.push(arr[i]);
       }
     }
-    arrayLib.arr = output;
-    if (isChained) {
-      return this;
-    } else {
-      return arrayLib.arr;
-    }
+    this.arr = output;
+    return output;
   },
   foreach(arr, callback) {
-    let isChained = false;
-    if (callback == undefined) {
-      isChained = true;
+    if (callback === undefined) {
       callback = arr;
-    } else {
-      arrayLib.arr = arr;
-    }
-    for (let i = 0; i < arrayLib.arr.length; i++) {
-      if (arrayLib.arr[i] != null) {
-        callback(arrayLib.arr[i]);
-      }
-    }
-    if (isChained) {
+      this.func.push({
+        function: this.foreach,
+        parameters: [this.arr, callback]
+      });
       return this;
-    } else {
-      return arrayLib.arr;
+    }
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] != null) {
+        callback(arr[i]);
+      }
     }
   },
   chain(arr) {
-    arrayLib.arr = arr;
+    this.arr = arr;
     return this;
   },
   value() {
+    for (let obj of arrayLib.func) {
+      obj.function.apply(this, obj.parameters);
+    }
     return arrayLib.arr;
   },
+
   sum(a, b) {
     let value;
     if (a + " " + b in arrayLib.memo) {
@@ -136,5 +116,12 @@ let arrayLib = {
     return value;
   }
 };
+
+arrayLib
+  .chain([13, 22, 4, 2, 5, 12])
+  .map(a => a * 2)
+  .filter(a => a < 10)
+  .take(1)
+  .value();
 
 module.exports = arrayLib;
