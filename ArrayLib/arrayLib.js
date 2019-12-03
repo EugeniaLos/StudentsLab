@@ -1,31 +1,37 @@
 let arrayLib = {
   func: [],
-  arr: [],
+  innerArr: [],
   memo: {},
   take(arr, n) {
     if (n === undefined) {
       n = arr;
-      this.func.push({ function: this.take, parameters: [this.arr, n] });
+      this.func.push({
+        function: this.take,
+        parameters: [n]
+      });
       return this;
     }
     let output = [];
     for (let i = 0; i < n; i++) {
       output.push(arr[i]);
     }
-    arrayLib.arr = output;
+    arrayLib.innerArr = output;
     return output;
   },
   skip(arr, n) {
     if (n === undefined) {
       n = arr;
-      this.func.push({ function: this.skip, parameters: [this.arr, n] });
+      this.func.push({
+        function: this.skip,
+        parameters: [n]
+      });
       return this;
     }
     let output = [];
     for (let i = n; i < arr.length; i++) {
       output.push(arr[i]);
     }
-    this.arr = output;
+    arrayLib.innerArr = output;
     return output;
   },
   map(arr, callback) {
@@ -33,7 +39,7 @@ let arrayLib = {
       callback = arr;
       this.func.push({
         function: this.map,
-        parameters: [this.arr, callback]
+        parameters: [callback]
       });
       return this;
     }
@@ -41,7 +47,7 @@ let arrayLib = {
     for (let i = 0; i < arr.length; i++) {
       output[i] = callback(arr[i]);
     }
-    this.arr = output;
+    arrayLib.innerArr = output;
     return output;
   },
   reduce(arr, callback, initialValue) {
@@ -50,7 +56,7 @@ let arrayLib = {
       callback = arr;
       this.func.push({
         function: this.reduce,
-        parameters: [this.arr, callback, initialValue]
+        parameters: [callback, initialValue]
       });
       return this;
     }
@@ -58,7 +64,7 @@ let arrayLib = {
     for (let i = 0; i < arr.length; i++) {
       secondArgument = callback(arr[i], secondArgument);
     }
-    this.arr = secondArgument;
+    arrayLib.innerArr = secondArgument;
     return secondArgument;
   },
   filter(arr, callback) {
@@ -66,7 +72,7 @@ let arrayLib = {
       callback = arr;
       this.func.push({
         function: this.filter,
-        parameters: [this.arr, callback]
+        parameters: [callback]
       });
       return this;
     }
@@ -76,7 +82,7 @@ let arrayLib = {
         output.push(arr[i]);
       }
     }
-    this.arr = output;
+    arrayLib.innerArr = output;
     return output;
   },
   foreach(arr, callback) {
@@ -84,7 +90,7 @@ let arrayLib = {
       callback = arr;
       this.func.push({
         function: this.foreach,
-        parameters: [this.arr, callback]
+        parameters: [callback]
       });
       return this;
     }
@@ -95,14 +101,14 @@ let arrayLib = {
     }
   },
   chain(arr) {
-    this.arr = arr;
+    this.innerArr = arr;
     return this;
   },
   value() {
     for (let obj of arrayLib.func) {
-      obj.function.apply(this, obj.parameters);
+      obj.function.call(this, arrayLib.innerArr, ...obj.parameters);
     }
-    return arrayLib.arr;
+    return arrayLib.innerArr;
   },
 
   sum(a, b) {
