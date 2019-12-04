@@ -15,7 +15,7 @@ let arrayLib = {
     for (let i = 0; i < n; i++) {
       output.push(arr[i]);
     }
-    arrayLib.innerArr = output;
+    this.innerArr = output;
     return output;
   },
   skip(arr, n) {
@@ -31,7 +31,7 @@ let arrayLib = {
     for (let i = n; i < arr.length; i++) {
       output.push(arr[i]);
     }
-    arrayLib.innerArr = output;
+    this.innerArr = output;
     return output;
   },
   map(arr, callback) {
@@ -47,7 +47,7 @@ let arrayLib = {
     for (let i = 0; i < arr.length; i++) {
       output[i] = callback(arr[i]);
     }
-    arrayLib.innerArr = output;
+    this.innerArr = output;
     return output;
   },
   reduce(arr, callback, initialValue) {
@@ -64,7 +64,7 @@ let arrayLib = {
     for (let i = 0; i < arr.length; i++) {
       secondArgument = callback(arr[i], secondArgument);
     }
-    arrayLib.innerArr = secondArgument;
+    this.innerArr = secondArgument;
     return secondArgument;
   },
   filter(arr, callback) {
@@ -82,7 +82,7 @@ let arrayLib = {
         output.push(arr[i]);
       }
     }
-    arrayLib.innerArr = output;
+    this.innerArr = output;
     return output;
   },
   foreach(arr, callback) {
@@ -105,19 +105,19 @@ let arrayLib = {
     return this;
   },
   value() {
-    for (let obj of arrayLib.func) {
-      obj.function.call(this, arrayLib.innerArr, ...obj.parameters);
+    for (let obj of this.func) {
+      obj.function.call(this, this.innerArr, ...obj.parameters);
     }
-    return arrayLib.innerArr;
+    return this.innerArr;
   },
 
   sum(a, b) {
     let value;
-    if (a + " " + b in arrayLib.memo) {
-      value = arrayLib.memo[a + " " + b];
+    if (a + " " + b in this.memo) {
+      value = this.memo[a + " " + b];
     } else {
       value = a + b;
-      arrayLib.memo[a + " " + b] = value;
+      this.memo[a + " " + b] = value;
     }
     return value;
   }
