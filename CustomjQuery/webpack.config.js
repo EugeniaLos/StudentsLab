@@ -9,5 +9,13 @@ module.exports = {
   watch: true,
   watchOptions: {
     ignored: /node_modules/
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"]
+      }
+    ]
   }
 };

@@ -1,6 +1,7 @@
-import { addClass } from "./CustomjQuery";
+import "./index.css";
+import { addClass, removeClass, append } from "./CustomjQuery";
 
-alert(addClass);
+let elem = document.body.firstElementChild;
+addClass.call(elem, "blue line");
 
-let elem = document.body;
-addClass.call(elem, "fff", "ghfht");
+append.call(elem, " I am blue", " and underlined");
