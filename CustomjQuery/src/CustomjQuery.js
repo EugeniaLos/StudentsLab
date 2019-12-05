@@ -77,11 +77,8 @@ export class Elements {
 
   empty() {
     for (let element of this.elementsStorage) {
-      let children = element.childNodes;
-      console.log(children);
-      for (let child of children) {
-        console.log("child: ", child);
-        element.removeChild(child);
+      while (element.firstChild) {
+        element.removeChild(element.firstChild);
       }
     }
   }
@@ -106,30 +103,15 @@ export function remove(selector) {
   }
 }
 
-// export function $(element) {
-//   return document.querySelectorAll(element);
-// }
+export function $(element) {
+  return document.querySelectorAll(element);
+}
 
-// export function addClass(classNames) {
-//   for (let element of this) {
-//     let classNamesArr = classNames.split(" ");
-//     for (let className of classNamesArr) {
-//       element.classList.add(className);
-//     }
-//   }
-// }
-
-// export function removeClass(classNames) {
-//   let classNamesArr = classNames.split(" ");
-//   for (let className of classNamesArr) {
-//     this.classList.remove(className);
-//   }
-// }
-
-// export function append(...content) {
-//   for (let contentUnit of content) {
-//     this.textContent += contentUnit;
-//   }
-// }
-
-// customJquery(".block").addClass("block-red");
+export function addClass(classNames) {
+  for (let element of this) {
+    let classNamesArr = classNames.split(" ");
+    for (let className of classNamesArr) {
+      element.classList.add(className);
+    }
+  }
+}
