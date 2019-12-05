@@ -1,7 +1,6 @@
 import "./index.css";
-import { addClass, removeClass, append } from "./CustomjQuery";
+import { Elements, remove } from "./CustomjQuery";
 
-let elem = document.body.firstElementChild;
-addClass.call(elem, "blue line");
+let e = new Elements(".t");
 
-append.call(elem, " I am blue", " and underlined");
+e.click(() => alert("It works!"));

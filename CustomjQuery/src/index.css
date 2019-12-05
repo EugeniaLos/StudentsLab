@@ -1,6 +1,9 @@
 .blue {
   background-color: lightskyblue;
 }
+.main {
+  color: pink;
+}
 
 .line {
   text-decoration-line: underline;
