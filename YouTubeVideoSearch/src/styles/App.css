@@ -1,4 +1,10 @@
-h1 {
-  color: #27aedb;
+body {
+  background-color: aliceblue;
+}
+
+#root {
   text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
