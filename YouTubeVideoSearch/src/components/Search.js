@@ -9,14 +9,14 @@ class Search extends Component {
 
   render() {
     // const { fetchYoutubeVideo } = this.props;
-    console.log(this.state.searchText);
+    //console.log(this.state.searchText);
 
     return (
       <input
         className="search"
         type="text"
         placeholder="Search"
-        onBlur={this.onBlur}
+        //onBlur={this.onBlur}
         value={this.state.searchText}
       ></input>
     );

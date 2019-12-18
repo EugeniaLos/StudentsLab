@@ -6,6 +6,7 @@
     "node": true,
     "es6": true
   },
+  "ignorePatterns": ["dist/", "node_modules/"],
   "rules": {
     "linebreak-style": 0,
     "react/prefer-stateless-function": [
