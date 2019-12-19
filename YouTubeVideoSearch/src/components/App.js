@@ -1,13 +1,11 @@
 import React, { Component } from "react";
-import Search from "./Search";
+import Search from "../containers/SearchContainer";
 
 class App extends Component {
   render() {
-    return (
-      <React.Fragment>
-        <Search />
-      </React.Fragment>
-    );
+    console.log("app");
+
+    return <Search />;
   }
 }
 

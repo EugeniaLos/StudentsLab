@@ -1,16 +1,34 @@
 const initialState = {
-  video: null,
-  searchText: "fff"
+  videos: [],
+  searchText: "Marzia"
 };
 
-export const searchReducer = (state = initialState, { type, payload }) => {
+const searchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case "FETCH_VIDEO_SUCCESS": {
-      const { video } = payload;
+    case "FETCH_NEXT_VIDEO_SUCCESS": {
+      const { videos } = payload;
 
       return {
         ...state,
-        video
+        videos: [...state.videos, ...videos]
+      };
+    }
+
+    case "FETCH_VIDEO_SUCCESS": {
+      const { videos } = payload;
+
+      return {
+        ...state,
+        videos
+      };
+    }
+
+    case "CHANGE_SEARCH_TEXT": {
+      const { searchText } = payload;
+
+      return {
+        ...state,
+        searchText
       };
     }
 
@@ -18,3 +36,5 @@ export const searchReducer = (state = initialState, { type, payload }) => {
       return state;
   }
 };
+
+export default searchReducer;

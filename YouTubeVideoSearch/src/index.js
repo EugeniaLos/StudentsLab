@@ -1,16 +1,38 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+
+import searchReducer from "./reducers/search";
+
 import App from "./components/App";
-import "./styles/App.css";
-import "./styles/search.scss";
-import { fetchYoutubeVideo } from "./service/service";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+// import { fetchYoutubeVideo } from "./service/service";
 
-async function as() {
-  const searchResult = await fetchYoutubeVideo("javascript");
-  let searchResultJson = await searchResult.json();
-  console.log("fetch json", searchResultJson);
-}
+import "./styles/App.scss";
+import "./styles/search-form.scss";
+import "./styles/video-info.scss";
 
-as();
+const store = createStore(
+  searchReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);
+
+// async function as() {
+//   const searchResult = await fetchYoutubeVideo("лсп");
+//   let searchResultJson = await searchResult.json();
+//   console.log("fetch json", searchResultJson);
+// }
+
+// as();

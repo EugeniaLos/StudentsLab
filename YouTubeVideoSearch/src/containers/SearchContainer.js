@@ -1,14 +1,34 @@
-import { connect } from "redux";
+import { connect } from "react-redux";
 import Search from "../components/Search";
 
-import { fetchVideo } from "../actions/actions";
+import { fetchVideo, changeSearchText } from "../actions/actions";
 
 const mapStateToProps = state => ({
-  searchText: state.search.searchText
+  searchText: state.searchText,
+  videos: state.videos
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchYoutubeVideo: searchText => fetchVideo(searchText)
+  fetchYoutubeVideo: searchText => dispatch(fetchVideo(searchText)),
+  setSearchText: searchText => dispatch(changeSearchText(searchText))
 });
 
-connect(mapStateToprops, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Search);
+{
+  /* <Search searchText={state.searchText} fetchYoutubeVideo={searchText => dispatch(fetchVideo(searchText))}></Search>
+
+
+const connect(mapStateToProps, mapDispatchToProps) => {
+    const newprops = {};
+    mapStateToProps.forEach(stateElem => props.push(stateElem))
+
+
+    return newprops, () 
+}
+
+const connectedFoo = connect(mapStateToProps, mapDispatchToProps); // return props
+
+connectedFoo(Search); // props --> search component's props
+
+<Search searchText={newProps.searchText} /> */
+}
