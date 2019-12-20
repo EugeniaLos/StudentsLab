@@ -5,15 +5,6 @@ const initialState = {
 
 const searchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case "FETCH_NEXT_VIDEO_SUCCESS": {
-      const { videos } = payload;
-
-      return {
-        ...state,
-        videos: [...state.videos, ...videos]
-      };
-    }
-
     case "FETCH_VIDEO_SUCCESS": {
       const { videos } = payload;
 

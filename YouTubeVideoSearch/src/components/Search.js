@@ -12,13 +12,7 @@ class Search extends Component {
     this.props.fetchYoutubeVideo(this.props.searchText);
   };
 
-  // renderVideoContainer(){
-  //   return()
-  // }
-
   render() {
-    // const { fetchYoutubeVideo } = this.props;
-
     return (
       <div>
         <form className="search-form" onSubmit={this.fetchYoutubeVideo}>
@@ -38,6 +32,9 @@ class Search extends Component {
           <VideoInfo video={this.props.videos[2]} />
           <VideoInfo video={this.props.videos[3]} />
           <VideoInfo video={this.props.videos[4]} />
+          <VideoInfo video={this.props.videos[5]} />
+          <VideoInfo video={this.props.videos[6]} />
+          <VideoInfo video={this.props.videos[7]} />
         </div>
       </div>
     );
