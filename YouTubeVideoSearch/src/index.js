@@ -16,6 +16,7 @@ import App from "./components/App";
 import "./styles/App.scss";
 import "./styles/search-form.scss";
 import "./styles/video-info.scss";
+import "./styles/videos-container.scss";
 
 const store = createStore(
   searchReducer,

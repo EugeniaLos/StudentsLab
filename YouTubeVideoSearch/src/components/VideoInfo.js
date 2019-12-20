@@ -5,9 +5,15 @@ function VideoInfo(prop) {
   if (video != undefined) {
     let link = "https://youtube.com/watch?v=" + video.id;
     return (
-      <a href={link}>
-        <img src={video.thumbnails.url} className="video-info__img"></img>
-      </a>
+      <div className="video-info">
+        <a href={link}>
+          <img src={video.thumbnails.url} className="video-info__img"></img>
+          <div className="video-info__text-container">
+            <h4 className="video-info__title">{video.title}</h4>
+            <div className="video-info__description">{video.description}</div>
+          </div>
+        </a>
+      </div>
     );
   }
   return null;

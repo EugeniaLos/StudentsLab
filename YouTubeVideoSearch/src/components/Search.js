@@ -20,22 +20,26 @@ class Search extends Component {
     // const { fetchYoutubeVideo } = this.props;
 
     return (
-      <form className="search-form" onSubmit={this.fetchYoutubeVideo}>
-        <input
-          className="search-form__input-field"
-          type="text"
-          placeholder="Search"
-          onChange={this.onChange}
-        ></input>
-        <button className="search-form__button" type="submit">
-          Go!
-        </button>
-        <VideoInfo video={this.props.videos[0]} />
-        <VideoInfo video={this.props.videos[1]} />
-        <VideoInfo video={this.props.videos[2]} />
-        <VideoInfo video={this.props.videos[3]} />
-        <VideoInfo video={this.props.videos[4]} />
-      </form>
+      <div>
+        <form className="search-form" onSubmit={this.fetchYoutubeVideo}>
+          <input
+            className="search-form__input-field"
+            type="text"
+            placeholder="Search"
+            onChange={this.onChange}
+          ></input>
+          <button className="search-form__button" type="submit">
+            Go!
+          </button>
+        </form>
+        <div className="videos-container">
+          <VideoInfo video={this.props.videos[0]} />
+          <VideoInfo video={this.props.videos[1]} />
+          <VideoInfo video={this.props.videos[2]} />
+          <VideoInfo video={this.props.videos[3]} />
+          <VideoInfo video={this.props.videos[4]} />
+        </div>
+      </div>
     );
   }
 }

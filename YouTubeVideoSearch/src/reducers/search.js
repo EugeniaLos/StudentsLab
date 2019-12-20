@@ -1,6 +1,6 @@
 const initialState = {
   videos: [],
-  searchText: "Marzia"
+  searchText: ""
 };
 
 const searchReducer = (state = initialState, { type, payload }) => {
