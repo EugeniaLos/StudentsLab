@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import VideoInfo from "./VideoInfo";
+import "../styles/search-form.scss";
+import "./styles/videos-container.scss";
 
 class Search extends Component {
   onChange = evt => {

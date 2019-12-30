@@ -1,9 +1,10 @@
 import React from "react";
+import "../styles/video-info.scss";
 
 function VideoInfo(prop) {
-  let video = prop.video;
-  if (video != undefined) {
-    let link = "https://youtube.com/watch?v=" + video.id;
+  const video = prop.video;
+  if (video) {
+    const link = `https://youtube.com/watch?v=${video.id}`;
     return (
       <div className="video-info">
         <a href={link} className="video-info__link">

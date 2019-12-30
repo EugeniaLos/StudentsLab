@@ -2,16 +2,17 @@ import { fetchYoutubeVideo } from "../service/service";
 
 export const fetchVideo = searchText => async dispatch => {
   const searchResult = await fetchYoutubeVideo(searchText);
-  let searchResultJson = await searchResult.json();
-  let videos = [];
+  const searchResultJson = await searchResult.json();
+  const videos = [];
   if (searchResultJson.items) {
-    let items = searchResultJson.items;
+    const items = searchResultJson.items;
     items.forEach(function(item) {
-      let video = {};
-      video.id = item.id.videoId;
-      video.title = item.snippet.title;
-      video.description = item.snippet.description;
-      video.thumbnails = item.snippet.thumbnails.high;
+      const video = {
+        id: item.id.videoId,
+        title: item.snippet.title,
+        description: item.snippet.description,
+        thumbnails: item.snippet.thumbnails.high
+      };
       videos.push(video);
     });
   }
