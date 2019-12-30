@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import VideoInfo from "./VideoInfo";
 import "../styles/search-form.scss";
-import "./styles/videos-container.scss";
+import "../styles/videos-container.scss";
 
 class Search extends Component {
   onChange = evt => {
@@ -29,14 +29,9 @@ class Search extends Component {
           </button>
         </form>
         <div className="videos-container">
-          <VideoInfo video={this.props.videos[0]} />
-          <VideoInfo video={this.props.videos[1]} />
-          <VideoInfo video={this.props.videos[2]} />
-          <VideoInfo video={this.props.videos[3]} />
-          <VideoInfo video={this.props.videos[4]} />
-          <VideoInfo video={this.props.videos[5]} />
-          <VideoInfo video={this.props.videos[6]} />
-          <VideoInfo video={this.props.videos[7]} />
+          {this.props.videos.map(video => (
+            <VideoInfo video={video} key={video.id} />
+          ))}
         </div>
       </div>
     );
