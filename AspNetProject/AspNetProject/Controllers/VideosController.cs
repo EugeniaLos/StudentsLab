@@ -10,33 +10,25 @@ using YoutubeInterfaceLayer;
 
 namespace AspNetProject.Controllers
 {
+    [Route("Video")]
     [ApiController]
-    [Route("[controller]")]
-    public class VideoController : ControllerBase
+    public class VideosController : ControllerBase
     {
-
-        private readonly ILogger<VideoController> _logger;
+        private readonly ILogger<VideosController> _logger;
 
         private readonly IConfiguration _configuration;
 
-        public VideoController(ILogger<VideoController> logger, IConfiguration configuration ) {
+        public VideosController(ILogger<VideosController> logger, IConfiguration configuration)
+        {
             _logger = logger;
             _configuration = configuration;
         }
 
-        [HttpGet]
-        public string Get()
-        {
-            return "There is no search filters";
-        }
-
-        [HttpGet("{searchString}")]
-        public string Get(string searchString)
+        [HttpGet("{searchString}/{count}")]
+        public string Get(string searchString, int count)
         {
             YoutubeLayer youtube = new YoutubeLayer(_configuration);
-            return youtube.Get(searchString);
+            return youtube.GetExplicitNumber(searchString, count);
         }
-
-        
     }
 }
