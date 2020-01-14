@@ -15,15 +15,15 @@ namespace YoutubeInterfaceLayer
 
         public string Get(string searchString)
         {
-            return ConnectToWebClient(searchString);
+            return GetYoutubeVideoResponse(searchString);
         }
 
         public string GetExplicitNumber(string searchString, int count)
         {
-            return ConnectToWebClient(searchString, count);
+            return GetYoutubeVideoResponse(searchString, count);
         }
 
-        private string ConnectToWebClient(string searchString, int count = 5)
+        private string GetYoutubeVideoResponse(string searchString, int count = 5)
         {
             string key = _configuration.GetSection("YoutubeApiKey").Value;
             string confDownloadString = _configuration.GetSection("DownloadString").Value;
