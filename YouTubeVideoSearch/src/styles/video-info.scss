@@ -1,0 +1,29 @@
+.video-info {
+  margin-bottom: 70px;
+  width: 480px;
+  background-color: #d3e3f1;
+
+  &:hover {
+    box-shadow: 0px 8px 16px 0px black;
+  }
+}
+
+.video-info__text-container {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
+}
+
+.video-info__title {
+  font-size: 22px;
+}
+
+.video-info__description {
+  font-size: 17px;
+}
+
+.video-info__link {
+  text-decoration: none;
+}
