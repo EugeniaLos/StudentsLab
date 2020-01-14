@@ -17,11 +17,11 @@ namespace AspNetProject.Controllers
 
         private readonly ILogger<VideoController> _logger;
 
-        private readonly IConfiguration _configuration;
+        private readonly YoutubeService _youtube;
 
-        public VideoController(ILogger<VideoController> logger, IConfiguration configuration ) {
+        public VideoController(ILogger<VideoController> logger, YoutubeService youtube ) {
             _logger = logger;
-            _configuration = configuration;
+            _youtube = youtube;
         }
 
         [HttpGet]
@@ -33,8 +33,7 @@ namespace AspNetProject.Controllers
         [HttpGet("{searchString}")]
         public string Get(string searchString)
         {
-            YoutubeLayer youtube = new YoutubeLayer(_configuration);
-            return youtube.Get(searchString);
+            return _youtube.Get(searchString);
         }
 
         

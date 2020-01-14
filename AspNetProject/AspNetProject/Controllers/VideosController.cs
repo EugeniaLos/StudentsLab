@@ -16,19 +16,18 @@ namespace AspNetProject.Controllers
     {
         private readonly ILogger<VideosController> _logger;
 
-        private readonly IConfiguration _configuration;
+        private readonly YoutubeService _youtube;
 
-        public VideosController(ILogger<VideosController> logger, IConfiguration configuration)
+        public VideosController(ILogger<VideosController> logger, YoutubeService youtube)
         {
             _logger = logger;
-            _configuration = configuration;
+            _youtube = youtube;
         }
 
         [HttpGet("{searchString}/{count}")]
         public string Get(string searchString, int count)
         {
-            YoutubeLayer youtube = new YoutubeLayer(_configuration);
-            return youtube.GetExplicitNumber(searchString, count);
+            return _youtube.GetExplicitNumber(searchString, count);
         }
     }
 }

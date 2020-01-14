@@ -4,11 +4,11 @@ using System.Net;
 
 namespace YoutubeInterfaceLayer
 {
-    public class YoutubeLayer
+    public class YoutubeService
     {
         private readonly IConfiguration _configuration;
 
-        public YoutubeLayer(IConfiguration configuration)
+        public YoutubeService(IConfiguration configuration)
         {
             _configuration = configuration;
         }
