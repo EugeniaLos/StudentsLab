@@ -26,11 +26,10 @@ namespace YoutubeInterfaceLayer
         private string GetYoutubeVideoResponse(string searchString, int count = 5)
         {
             string key = _configuration.GetSection("YoutubeApiKey").Value;
-            string confDownloadString = _configuration.GetSection("DownloadString").Value;
+            string urlFormat = _configuration.GetSection("DownloadString").Value;
             WebClient client = new WebClient();
-            string downloadString = String.Format(confDownloadString, count, key, searchString);
-            string reply = client.DownloadString(downloadString);
-            return reply;
+            string downloadString = String.Format(urlFormat, count, key, searchString);
+            return client.DownloadString(downloadString);
         }
     }
 }

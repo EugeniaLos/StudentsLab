@@ -35,7 +35,5 @@ namespace AspNetProject.Controllers
         {
             return _youtube.Get(searchString);
         }
-
-        
     }
 }
